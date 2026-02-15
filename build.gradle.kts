@@ -5,6 +5,7 @@ plugins {
     id("io.kotest") version "6.1.3"
     `java-library`
     id("maven-publish")
+    id("java-test-fixtures")
     id("com.github.ben-manes.versions") version "0.53.0"
 }
 
@@ -14,8 +15,16 @@ repositories {
 
 dependencies {
     val versionKtor = "3.4.0"
-    implementation("io.ktor:ktor-client-core:$versionKtor")
-    implementation("io.ktor:ktor-client-cio:$versionKtor")
+    listOf(
+        "client-core",
+        "client-apache", // other JVM engines had some (socket) issues: java, cio (maybe jetty, okhttp too)
+        "client-logging",
+        "client-content-negotiation",
+        "serialization-kotlinx-json",
+    ).forEach {
+        implementation("io.ktor:ktor-$it:$versionKtor")
+    }
+    implementation("org.jsoup:jsoup:1.21.2")
 
     implementation("io.github.oshai:kotlin-logging-jvm:7.0.14")
     runtimeOnly("ch.qos.logback:logback-classic:1.5.31")
@@ -43,7 +52,7 @@ publishing {
             from(components["java"])
             groupId = "com.github.seepick"
             artifactId = project.name
-            version = project.findProperty("version")?.toString()  ?: error("version not specified!")
+            version = project.findProperty("version")?.toString() ?: error("version not specified!")
             pom {
                 name.set(project.name)
                 description.set("You gonna like this")
