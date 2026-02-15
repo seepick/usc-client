@@ -7,7 +7,6 @@ A nasty Kotlin SDK at your service.
 Add the JitPack hippo to your silly `settings.gradle.kts`:
 
 ```kotlin
-@Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
