@@ -1,11 +1,11 @@
-package seepick.localsportsclub.api.venue
+package com.github.seepick.uscclient.venue
 
+import com.github.seepick.uscclient.readTestResponse
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
 import io.ktor.http.Url
-import seepick.localsportsclub.readTestResponse
 
 class VenueDetailsParserTest : DescribeSpec() {
     init {

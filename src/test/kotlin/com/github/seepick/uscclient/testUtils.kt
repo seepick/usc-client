@@ -1,4 +1,4 @@
-package seepick.localsportsclub.api
+package com.github.seepick.uscclient
 
 import io.kotest.matchers.maps.shouldContain
 import io.kotest.matchers.shouldBe
@@ -10,9 +10,9 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.http.Headers
 import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
-import kotlinx.serialization.encodeToString
-import seepick.localsportsclub.serializerLenient
-import seepick.localsportsclub.toFlatMap
+import io.ktor.util.StringValues
+import io.ktor.util.toMap
+import kotlinx.serialization.json.Json
 
 inline fun <reified T> buildMockClient(expectedUrl: String, phpSessionId: PhpSessionId, responsePayload: T) =
     HttpClient(MockEngine { request ->
@@ -31,3 +31,20 @@ inline fun <reified T> buildMockClient(expectedUrl: String, phpSessionId: PhpSes
             json(serializerLenient)
         }
     }
+
+inline fun <reified T> readTestResponse(fileName: String, folder: String = "/response/"): T {
+    val fileContent = readFromClasspath("$folder$fileName")
+    return if (T::class == String::class) fileContent as T else jsonx.decodeFromString(fileContent)
+}
+
+val jsonx = Json {
+    prettyPrint = true
+    ignoreUnknownKeys = false
+    isLenient = false
+}
+
+fun StringValues.toFlatMap(): Map<String, String> =
+    toMap().mapValues { it.value.single() }
+
+operator fun TimeRange.Companion.invoke(fromTo: String) =
+    DateParser.parseTimes(fromTo, "-")

@@ -1,8 +1,8 @@
-package seepick.localsportsclub.api.checkin
+package com.github.seepick.uscclient.checkin
 
-import seepick.localsportsclub.service.date.DateParser
-import seepick.localsportsclub.service.date.TimeRange
-import seepick.localsportsclub.service.jsoupBody
+import com.github.seepick.uscclient.DateParser
+import com.github.seepick.uscclient.TimeRange
+import com.github.seepick.uscclient.jsoupBody
 import java.time.LocalDate
 
 data class CheckinsPage(

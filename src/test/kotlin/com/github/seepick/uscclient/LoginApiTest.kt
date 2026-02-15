@@ -1,4 +1,4 @@
-package seepick.localsportsclub.api
+package com.github.seepick.uscclient
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.maps.shouldContain
@@ -14,9 +14,6 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.Url
 import io.ktor.http.headersOf
-import seepick.localsportsclub.readTestResponse
-import seepick.localsportsclub.service.model.Credentials
-import seepick.localsportsclub.toFlatMap
 
 class LoginApiTest : StringSpec() {
     private val baseUrl = Url("http://baseurl.test")

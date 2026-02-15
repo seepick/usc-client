@@ -1,6 +1,5 @@
 package com.github.seepick.uscclient
 
-@Deprecated("use usc-client")
 sealed interface Plan {
 
     companion object {

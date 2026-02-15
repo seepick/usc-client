@@ -1,13 +1,13 @@
-package seepick.localsportsclub.api.venue
+package com.github.seepick.uscclient.venue
 
+import com.github.seepick.uscclient.Pageable
+import com.github.seepick.uscclient.StatsJson
 import kotlinx.serialization.Serializable
-import seepick.localsportsclub.api.Pageable
-import seepick.localsportsclub.api.StatsJson
 
 @Serializable
 data class VenuesJson(
     val success: Boolean,
-    val data: VenuesDataJson
+    val data: VenuesDataJson,
 )
 
 @Serializable
@@ -16,5 +16,5 @@ data class VenuesDataJson(
     val content: String, // HTML
     val stats: StatsJson, // summary of used data in this response
     val searchExecutedEvent: String, // big JSON
-    val regionSelectorSelected: String? // ... what type?!
+    val regionSelectorSelected: String?, // ... what type?!
 ) : Pageable

@@ -1,12 +1,12 @@
-package seepick.localsportsclub.api.venue
+package com.github.seepick.uscclient.venue
 
+import com.github.seepick.uscclient.Plan
+import com.github.seepick.uscclient.readTestResponse
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldBeSingleton
 import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.shouldBe
 import io.ktor.http.Url
-import seepick.localsportsclub.readTestResponse
-import seepick.localsportsclub.service.model.Plan
 
 fun main() {
     val json = readTestResponse<VenuesJson>("venues.json")

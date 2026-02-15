@@ -1,12 +1,13 @@
-package seepick.localsportsclub.api.checkin
+package com.github.seepick.uscclient.checkin
 
+import com.github.seepick.uscclient.TimeRange
+import com.github.seepick.uscclient.invoke
+import com.github.seepick.uscclient.readTestResponse
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldBeSingleton
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
-import seepick.localsportsclub.readTestResponse
-import seepick.localsportsclub.service.date.TimeRange
 import java.time.LocalDate
 
 class CheckinsParserTest : StringSpec() {

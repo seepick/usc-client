@@ -1,10 +1,10 @@
-package seepick.localsportsclub.api.activity
+package com.github.seepick.uscclient.activity
 
+import com.github.seepick.uscclient.DateParser
+import com.github.seepick.uscclient.serializerLenient
 import kotlinx.serialization.Serializable
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
-import seepick.localsportsclub.serializerLenient
-import seepick.localsportsclub.service.date.DateParser
 import java.time.LocalDateTime
 
 private val regexpDate = Regex("""\d\d/\d\d/\d\d\d\d""")

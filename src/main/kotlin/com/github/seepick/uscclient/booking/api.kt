@@ -1,5 +1,10 @@
-package seepick.localsportsclub.api.booking
+package com.github.seepick.uscclient.booking
 
+import com.github.seepick.uscclient.PhpSessionId
+import com.github.seepick.uscclient.ResponseStorage
+import com.github.seepick.uscclient.UscConfig
+import com.github.seepick.uscclient.safePost
+import com.github.seepick.uscclient.serializerLenient
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import io.ktor.client.HttpClient
 import io.ktor.client.request.cookie
@@ -10,11 +15,6 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
-import seepick.localsportsclub.api.PhpSessionId
-import seepick.localsportsclub.api.ResponseStorage
-import seepick.localsportsclub.api.UscConfig
-import seepick.localsportsclub.serializerLenient
-import seepick.localsportsclub.service.safePost
 
 interface BookingApi {
     suspend fun book(session: PhpSessionId, activityOrFreetrainingId: Int): BookingResult

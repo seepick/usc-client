@@ -1,10 +1,11 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 plugins {
-    kotlin("jvm") version "2.3.10"
-    id("io.kotest") version "6.1.3"
     `java-library`
+    kotlin("jvm") version "2.3.10"
+    kotlin("plugin.serialization") version "2.3.10"
     id("maven-publish")
+    id("io.kotest") version "6.1.3"
     id("java-test-fixtures")
     id("com.github.ben-manes.versions") version "0.53.0"
 }
@@ -14,6 +15,7 @@ repositories {
 }
 
 dependencies {
+    implementation(kotlin("reflect"))
     val versionKtor = "3.4.0"
     listOf(
         "client-core",
@@ -25,6 +27,8 @@ dependencies {
         implementation("io.ktor:ktor-$it:$versionKtor")
     }
     implementation("org.jsoup:jsoup:1.21.2")
+    val versionKoin = "4.1.1"
+    implementation("io.insert-koin:koin-core:$versionKoin")
 
     implementation("io.github.oshai:kotlin-logging-jvm:7.0.14")
     runtimeOnly("ch.qos.logback:logback-classic:1.5.31")
@@ -33,6 +37,9 @@ dependencies {
     testImplementation("io.kotest:kotest-runner-junit5:$versionKotest")
     testImplementation("io.kotest:kotest-assertions-core:$versionKotest")
     testImplementation("io.kotest:kotest-property:$versionKotest")
+    testImplementation("io.insert-koin:koin-test:$versionKoin")
+    testImplementation("io.ktor:ktor-client-mock:$versionKtor")
+    testImplementation("io.mockk:mockk:1.14.7")
 }
 
 java {

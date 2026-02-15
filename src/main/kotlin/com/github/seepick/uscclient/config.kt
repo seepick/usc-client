@@ -1,7 +1,6 @@
-package seepick.localsportsclub.api
+package com.github.seepick.uscclient
 
 import io.ktor.http.Url
-import seepick.localsportsclub.UscLang
 
 data class UscConfig(
     val baseUrl: Url = Url("https://urbansportsclub.com/${UscLang.English.urlCode}"),

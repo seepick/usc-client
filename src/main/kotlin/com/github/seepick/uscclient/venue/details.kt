@@ -1,10 +1,10 @@
-package seepick.localsportsclub.api.venue
+package com.github.seepick.uscclient.venue
 
+import com.github.seepick.uscclient.jsoupHeadAndBody
+import com.github.seepick.uscclient.serializerLenient
+import com.github.seepick.uscclient.unescape
 import io.ktor.http.Url
 import kotlinx.serialization.Serializable
-import seepick.localsportsclub.serializerLenient
-import seepick.localsportsclub.service.jsoupHeadAndBody
-import seepick.localsportsclub.service.unescape
 
 data class VenueDetails(
     val title: String, // a.k.a. "name"
@@ -28,7 +28,7 @@ data class VenueDetails(
 
 @Serializable
 data class VenueDetailEmbedJson(
-    val telephone: String, val image: String, val address: VenueDetailEmbedAddress, val geo: VenueDetailEmbedGeo
+    val telephone: String, val image: String, val address: VenueDetailEmbedAddress, val geo: VenueDetailEmbedGeo,
 )
 
 @Serializable

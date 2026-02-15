@@ -1,34 +1,30 @@
 package com.github.seepick.uscclient
 
+import com.github.seepick.uscclient.activity.ActivitiesFilter
+import com.github.seepick.uscclient.activity.ActivitiesParser
+import com.github.seepick.uscclient.activity.ActivityApi
+import com.github.seepick.uscclient.activity.ActivityDetails
+import com.github.seepick.uscclient.activity.ActivityInfo
+import com.github.seepick.uscclient.activity.FreetrainingDetails
+import com.github.seepick.uscclient.activity.FreetrainingInfo
+import com.github.seepick.uscclient.activity.ServiceType
+import com.github.seepick.uscclient.booking.BookingApi
+import com.github.seepick.uscclient.booking.BookingResult
+import com.github.seepick.uscclient.booking.CancelResult
+import com.github.seepick.uscclient.checkin.CheckinApi
+import com.github.seepick.uscclient.checkin.CheckinsPage
+import com.github.seepick.uscclient.plan.Membership
+import com.github.seepick.uscclient.plan.MembershipApi
+import com.github.seepick.uscclient.schedule.ScheduleApi
+import com.github.seepick.uscclient.schedule.ScheduleRow
+import com.github.seepick.uscclient.venue.VenueApi
+import com.github.seepick.uscclient.venue.VenueDetails
+import com.github.seepick.uscclient.venue.VenueInfo
+import com.github.seepick.uscclient.venue.VenueParser
+import com.github.seepick.uscclient.venue.VenuesFilter
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import io.ktor.http.Url
 import kotlinx.coroutines.delay
-import seepick.localsportsclub.api.LoginApi
-import seepick.localsportsclub.api.LoginResult
-import seepick.localsportsclub.api.PhpSessionId
-import seepick.localsportsclub.api.activity.ActivitiesFilter
-import seepick.localsportsclub.api.activity.ActivitiesParser
-import seepick.localsportsclub.api.activity.ActivityApi
-import seepick.localsportsclub.api.activity.ActivityDetails
-import seepick.localsportsclub.api.activity.ActivityInfo
-import seepick.localsportsclub.api.activity.FreetrainingDetails
-import seepick.localsportsclub.api.activity.FreetrainingInfo
-import seepick.localsportsclub.api.activity.ServiceType
-import seepick.localsportsclub.api.booking.BookingApi
-import seepick.localsportsclub.api.booking.BookingResult
-import seepick.localsportsclub.api.booking.CancelResult
-import seepick.localsportsclub.api.checkin.CheckinApi
-import seepick.localsportsclub.api.checkin.CheckinsPage
-import seepick.localsportsclub.api.plan.Membership
-import seepick.localsportsclub.api.plan.MembershipApi
-import seepick.localsportsclub.api.schedule.ScheduleApi
-import seepick.localsportsclub.api.schedule.ScheduleRow
-import seepick.localsportsclub.api.venue.VenueApi
-import seepick.localsportsclub.api.venue.VenueDetails
-import seepick.localsportsclub.api.venue.VenueInfo
-import seepick.localsportsclub.api.venue.VenueParser
-import seepick.localsportsclub.api.venue.VenuesFilter
-import seepick.localsportsclub.service.date.DateTimeRange
 import java.time.LocalDate
 import java.time.LocalDateTime
 
@@ -41,7 +37,7 @@ interface UscApi {
     suspend fun fetchFreetrainings(session: PhpSessionId, filter: ActivitiesFilter): List<FreetrainingInfo>
     suspend fun fetchFreetrainingDetails(session: PhpSessionId, freetrainingId: Int): FreetrainingDetails
     suspend fun fetchScheduleRows(session: PhpSessionId): List<ScheduleRow>
-    suspend fun fetchCheckinsPage(session: PhpSessionId, pageNr: Int): CheckinsPage
+    suspend fun fetchCheckinsPage(session: PhpSessionId, pageNr: Int, today: LocalDate): CheckinsPage
     suspend fun book(session: PhpSessionId, activityOrFreetrainingId: Int): BookingResult
     suspend fun cancel(session: PhpSessionId, activityOrFreetrainingId: Int): CancelResult
     suspend fun fetchMembership(session: PhpSessionId): Membership
@@ -121,7 +117,7 @@ class MockUscApi : UscApi {
         return emptyList()
     }
 
-    override suspend fun fetchCheckinsPage(session: PhpSessionId, pageNr: Int): CheckinsPage {
+    override suspend fun fetchCheckinsPage(session: PhpSessionId, pageNr: Int, today: LocalDate): CheckinsPage {
         log.debug { "Mock returning empty checkins page." }
         delay(500)
         return CheckinsPage.empty
@@ -193,8 +189,8 @@ class UscApiAdapter(
     override suspend fun fetchScheduleRows(session: PhpSessionId) =
         scheduleApi.fetchScheduleRows(session)
 
-    override suspend fun fetchCheckinsPage(session: PhpSessionId, pageNr: Int) =
-        checkinApi.fetchPage(session, pageNr)
+    override suspend fun fetchCheckinsPage(session: PhpSessionId, pageNr: Int, today: LocalDate) =
+        checkinApi.fetchPage(session, pageNr, today)
 
     override suspend fun book(session: PhpSessionId, activityOrFreetrainingId: Int): BookingResult =
         bookingApi.book(session, activityOrFreetrainingId)

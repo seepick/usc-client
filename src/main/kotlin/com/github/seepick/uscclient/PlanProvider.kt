@@ -1,5 +1,6 @@
-package seepick.localsportsclub.api
+package com.github.seepick.uscclient
 
+// TODO nooo
 //class PlanProvider(
 ////    private val singlesService: SinglesService,
 //    private val membershipApi: MembershipApi,

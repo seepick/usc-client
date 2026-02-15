@@ -1,12 +1,12 @@
-package seepick.localsportsclub.api.activity
+package com.github.seepick.uscclient.activity
 
+import com.github.seepick.uscclient.DateTimeRange
+import com.github.seepick.uscclient.Plan
+import com.github.seepick.uscclient.readTestResponse
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldBeSingleton
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
-import seepick.localsportsclub.readTestResponse
-import seepick.localsportsclub.service.date.DateTimeRange
-import seepick.localsportsclub.service.model.Plan
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime

@@ -1,11 +1,11 @@
-package seepick.localsportsclub.api.activity
+package com.github.seepick.uscclient.activity
 
+import com.github.seepick.uscclient.DateTimeRange
+import com.github.seepick.uscclient.Plan.UscPlan
+import com.github.seepick.uscclient.readTestResponse
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.shouldBe
-import seepick.localsportsclub.readTestResponse
-import seepick.localsportsclub.service.date.DateTimeRange
-import seepick.localsportsclub.service.model.Plan
 import java.time.LocalDate
 import java.time.LocalDateTime
 
@@ -29,7 +29,7 @@ class ActivityDetailsParserTest : StringSpec() {
                 category = "Yoga",
                 spotsLeft = 2,
                 cancellationDateLimit = LocalDateTime.of(2024, 12, 27, 8, 0),
-                plan = Plan.UscPlan.Medium,
+                plan = UscPlan.Medium,
                 teacher = "Teacher A.",
                 description = "activity details",
             )
@@ -48,7 +48,7 @@ class ActivityDetailsParserTest : StringSpec() {
                 category = "Meditation",
                 spotsLeft = 0, // for past, this is actually not available ;)
                 cancellationDateLimit = null,
-                plan = Plan.UscPlan.Small,
+                plan = UscPlan.Small,
                 teacher = "Teacher P.",
                 description = "past description",
             )
@@ -63,7 +63,7 @@ class ActivityDetailsParserTest : StringSpec() {
                 date = LocalDate.of(2024, 12, 29),
                 venueSlug = "vitality-spa-fitness-amsterdam",
                 category = "Wellness",
-                plan = Plan.UscPlan.Small,
+                plan = UscPlan.Small,
             )
         }
 

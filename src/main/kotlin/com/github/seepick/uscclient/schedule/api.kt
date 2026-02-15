@@ -1,13 +1,13 @@
-package seepick.localsportsclub.api.schedule
+package com.github.seepick.uscclient.schedule
 
+import com.github.seepick.uscclient.PhpSessionId
+import com.github.seepick.uscclient.ResponseStorage
+import com.github.seepick.uscclient.UscConfig
+import com.github.seepick.uscclient.safeGet
 import io.ktor.client.HttpClient
 import io.ktor.client.request.cookie
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.Url
-import seepick.localsportsclub.api.PhpSessionId
-import seepick.localsportsclub.api.ResponseStorage
-import seepick.localsportsclub.api.UscConfig
-import seepick.localsportsclub.service.safeGet
 
 interface ScheduleApi {
     suspend fun fetchScheduleRows(session: PhpSessionId): List<ScheduleRow>

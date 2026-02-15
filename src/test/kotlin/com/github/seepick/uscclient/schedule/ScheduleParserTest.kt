@@ -1,9 +1,9 @@
-package seepick.localsportsclub.api.schedule
+package com.github.seepick.uscclient.schedule
 
+import com.github.seepick.uscclient.EntityType
+import com.github.seepick.uscclient.readTestResponse
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import seepick.localsportsclub.readTestResponse
-import seepick.localsportsclub.service.model.EntityType
 
 class ScheduleParserTest : StringSpec() {
     private fun parseSchedule(fileName: String) =

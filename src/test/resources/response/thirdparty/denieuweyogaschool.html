@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- test 1 -->
+    <title>Denieuweyogaschool | Les Reserveren</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="-1"/>
+    <meta http-equiv="CACHE-CONTROL" content="no-cache, no-store, must-revalidate, pre-check=0, post-check=0"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="action-cable-url" content="wss://api-staging.controlplus.org/cable"/>
+    <!-- test 2 -->
+    <link rel="stylesheet" href="/club_portal/simple-scrollbar.css" type="text/css"/>
+    <link rel="stylesheet" href="/club_portal/fonts/fontello.css?1733309249" type="text/css"/>
+    <link rel="stylesheet" href="/club_portal/css.css?3466613467" type="text/css"/>
+    <link rel="Stylesheet" type="text/css" media="screen"
+          href="https://assets.opencontrolplus.com/stylesheets/autosuggest_inquisitor.css?1576534387"/>
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic' rel='stylesheet'
+          type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">
+    <script src="/club_portal/simple-scrollbar.min.js" type="text/javascript"></script>
+    <script src="/club_portal/jquery-3.0.0.min.js" type="text/javascript"></script>
+    <script src="/club_portal/jquery.touchSwipe.min.js" type="text/javascript"></script>
+    <script>
+        $.noConflict();
+    </script>
+    <script type="text/javascript"
+            src="https://assets.opencontrolplus.com/javascripts/defaults_comp.js?1699373616"></script>
+    <script type="text/javascript"
+            src="https://assets.opencontrolplus.com/javascripts/application.js?1733219899"></script>
+    <script type="text/javascript"
+            src="https://assets.opencontrolplus.com/javascripts/calendar_slider.js?1642431281"></script>
+    <script type="text/javascript"
+            src="https://assets.opencontrolplus.com/javascripts/signature_pad.js?1576534386"></script>
+    <script type="text/javascript"
+            src="https://assets.opencontrolplus.com/javascripts/AutoSuggest.js?1613379447"></script>
+    <script type="text/javascript"
+            src="https://assets.opencontrolplus.com/javascripts/calendarview.js?1711353559"></script>
+    <script type="text/javascript"
+            src="https://assets.opencontrolplus.com/javascripts/fileuploader.js?1589870373"></script>
+    <script type="text/javascript"
+            src="https://assets.opencontrolplus.com/javascripts/messagebox.js?1644229243"></script>
+    <script src="/index/javascript_translates/nl?upd=2" type="text/javascript"></script>
+    <link href="/javascripts/color_picker/css/prototype_colorpicker.css" rel="stylesheet" type="text/css"/>
+    <script src="/javascripts/color_picker/js/prototype_colorpicker_min.js" type="text/javascript"></script>
+    <script src="/club_portal/js.js?3458248747" type="text/javascript"></script>
+    <!-- test 3 -->
+    <script src="/javascripts/slider.js" type="text/javascript"></script>
+    <link rel="manifest" href="/pwa/manifest.json" crossorigin="use-credentials">
+    <link rel="stylesheet" href="/pwa/add_to_home.css?321" type="text/css"/>
+    <!-- polyfill for promises -->
+    <!--https://www.npmjs.com/package/promise-polyfill-->
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
+    <!-- serviceworker -->
+    <script src="/service_worker_registration.js?1733309249" type="text/javascript"></script>
+    <link rel='icon' sizes='192x192' href='/pwa/icon/192'>
+    <!-- Chrome, Firefox OS and Opera theme color -->
+    <meta name="theme-color" content="#d4e6df">
+    <!-- For Windows Phone theme color -->
+    <meta name="msapplication-navbutton-color" content="#d4e6df">
+    <!-- APPLE -->
+    <!-- ios status bar style -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Override title -->
+    <meta name="apple-mobile-web-app-title" content="denieuweyogaschool">
+    <!-- iPhone Icon-->
+    <link rel="apple-touch-icon" sizes="57x57" href="/pwa/icon/57">
+    <link rel="apple-touch-icon" sizes="72x72" href="/pwa/icon/72">
+    <link rel="apple-touch-icon" sizes="114x114" href="/pwa/icon/144">
+    <link rel="apple-touch-icon" sizes="150x150" href="/pwa/icon/150">
+    <link rel="apple-touch-icon" sizes="167x167" href="/pwa/icon/167">
+    <link rel="apple-touch-icon" sizes="180x180" href="/pwa/icon/180">
+    <link rel="apple-touch-startup-image" href="/pwa/splash_screen/2048x2732">
+    <link rel="apple-touch-startup-image" href="/pwa/splash_screen/640x1136"
+          media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="/pwa/splash_screen/750x1294"
+          media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <!-- iPhone Xr (828px x 1792px) -->
+    <link rel="apple-touch-startup-image" href="/pwa/splash_screen/828x1792"
+          media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="/pwa/splash_screen/1242x2148"
+          media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="/pwa/splash_screen/1536x2048"
+          media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="/pwa/splash_screen/1668x2224"
+          media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="/pwa/splash_screen/2048x2732"
+          media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+    <!-- iPhone X, Xs (1125px x 2436px) -->
+    <link rel="apple-touch-startup-image" href="/pwa/splash_screen/1125x2436"
+          media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <!-- iPhone Xs Max (1242px x 2688px) -->
+    <link rel="apple-touch-startup-image"
+          media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
+          href="/pwa/splash_screen/1242x2688">
+    <!-- iPhone 8 Plus, 7 Plus, 6s Plus, 6 Plus (1242px x 2208px) -->
+    <link rel="apple-touch-startup-image"
+          media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3)"
+          href="/pwa/splash_screen/1242x2208">
+    <!-- iPhone 8, 7, 6s, 6 (750px x 1334px) -->
+    <link rel="apple-touch-startup-image"
+          media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+          href="/pwa/splash_screen/750x1334">
+    <!-- iPad Pro 12.9" (2048px x 2732px) -->
+    <!--<link rel="apple-touch-startup-image" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" href="/apple-launch-2048x2732.png">-->
+    <!-- iPad Pro 11” (1668px x 2388px) -->
+    <!--<link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" href="/apple-launch-1668x2388.png">-->
+    <!-- iPad Pro 10.5" (1668px x 2224px) -->
+    <!--<link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" href="/apple-launch-1668x2224.png">-->
+    <!-- iPad Mini, Air (1536px x 2048px) -->
+    <!--<link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" href="/apple-launch-1536x2048.png">-->
+    <!-- test 4 -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N94MKF3');
+    </script>
+    <!-- End Google Tag Manager -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N94MKF3"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <meta name="facebook-domain-verification" content="1f35d0oxga9tjnhhbgzyin7zz8dw6y"/>
+</head>
+<!-- test 5 -->
+<body id="body" class="main_style lessons " params="325809780" c="3">
+<div class="wrap">
+    <div class="munub"></div>
+    <div id="overlayportal"></div>
+    <div id="left_menu">
+        <!--<form class="search" method="post" enctype="multipart/form-data" action="/club_portal/search">
+        <input type="text" name="q" placeholder="Zoeken" ></input>
+        <input type="button" name="search" value=""></input>
+        </form>-->
+        <ul id="side-menu">
+            <li><a href='/'><span class='csf home'></span><span style='font-size: 16px; display: inline-block;'
+                                                                class='main_menu_texts'>Home</span></a></li>
+            <li><a href='/club_portal/membership'><span class='csf recurring'></span><span
+                    style='font-size: 16px; display: inline-block;' class='main_menu_texts'>Abonnementen</span><span
+                    class='fa arrow'></span></a></li>
+            <li><a class='active' href='/club_portal/lessons'><span class='csf college'></span><span
+                    style='font-size: 16px; display: inline-block;' class='main_menu_texts'>Les Reserveren</span><span
+                    class='fa arrow'></span></a></li>
+            <li><a href='/club_portal/workshop'><span class='csf workshop'></span><span
+                    style='font-size: 16px; display: inline-block;' class='main_menu_texts'>Workshops</span><span
+                    class='fa arrow'></span></a></li>
+            <li><a href='/club_portal/online_lessons'><span class='csf online_lessons'></span><span
+                    style='font-size: 16px; display: inline-block;' class='main_menu_texts'>Online lessen</span><span
+                    class='fa arrow'></span></a></li>
+        </ul>
+        <a href="https://denieuweyogaschool.nl" class="btn_on_ws"><span></span>Website</a>
+        <div class="clear"></div>
+        <div id="outlet">
+            <div>
+                <h2>Contactgegevens</h2>
+                <p>Laurierstraat </p>
+                <p>1016 PL Amsterdam</p>
+                <p></p>
+                <p><a href="mailto:info@denieuweyogaschool.nl">E-mail contact</a></p>
+                <br/>
+                <h2>IBAN nummer</h2>
+                <p>NL64INGB0006115882</p>
+                <p>BTW nr. NL853161847B01</p>
+                <p>KVK nr 58741186</p>
+            </div>
+        </div>
+        <div class="clearblock"></div>
+    </div> <!-- left_menu -->
+    <div id="lessons_page" class="club_pages ">
+        <div id="header">
+            <a class="logo" href="/club_portal/index"><img src="/uploads/30/29/04/69/de_nieuwe_yogaschool_logo_wit.png"
+                                                           style="max-height: 108px;"/></a>
+            <span class="lang_block non_selectable simple_mode" onclick="openToggle(this)">
+nl
+<span class="arrow_bottom"><img src="/club_portal/arrowb.png"/></span>
+<span class="arrow_top" style="display: none"><img src="/club_portal/arrowt.png"/></span>
+</span>
+            <div id="select_language_popup" style="display: none">
+                <a href="/club_portal/set_language/1819">English (en)</a>
+            </div>
+        </div>
+        <div id="content_frame">
+            <div id="content" class="cartnotblank">
+                <noscript>Voor een goede werking van de website is het van belang dat u JavaScript toe laat binnen de
+                    browser.
+                </noscript>
+                <div id="user_login_block" style="display:block" class="">
+                    <noscript>Voor een goede werking van de website is het van belang dat u JavaScript toe laat binnen
+                        de browser.
+                    </noscript>
+                    <form class="login" method="post" enctype="multipart/form-data" action="/club_portal/">
+                        <label>INLOGGEN</label>
+                        <div class="clearblock"></div>
+                        <input name="email" id="email" placeholder="e-mailadres" type="text" class="form_fields"/>
+                        <input name="password" id="password" placeholder="Wachtwoord" type="password"
+                               class="form_fields"/>
+                        <div class="clearblock"></div>
+                        <input name="commit" type="submit" value="INLOGGEN"/>
+                        <a href="/club_portal/password_restore">Wachtwoord vergeten?</a>
+                        <div>
+<span class="with_club_name">
+Nog geen lid bij <span class='club_name'>denieuweyogaschool</span>?
+</span>
+                            <span class="without_club_name">
+Nieuw lid?
+</span>
+                            <a href="/club_portal/register">Maak een account </a>
+                        </div>
+                    </form>
+                </div>
+                <div id="user_tarcon_login_block" style="display: none">
+                    <div id="tarcon_login_error"></div>
+                    <div id="movies" style="display: none"></div>
+                </div>
+                <div class="lessen headerp">
+                    <span class="i"></span>
+                    <span class="text">
+<h2>Les Reserveren</h2>
+Reserveer hier je studioles of online livestreamles.
+</span>
+                </div>
+                <ul class="lessons">
+                    <div id="calendar_wrap">
+                        <div class="allmonthwrap">
+                            <div id="allmonths">
+                                <a href="/club_portal/lessons/0?f%5Bactivity_resource_ids%5D%5B%5D="
+                                   onClick="$$('ul li.lesson_element').each(function(e){ new Effect.Fade(e, { duration: 0.5 }) });"
+                                   class="">maandag <span>13 jan</span></a>
+                                <a href="/club_portal/lessons/1?f%5Bactivity_resource_ids%5D%5B%5D="
+                                   onClick="$$('ul li.lesson_element').each(function(e){ new Effect.Fade(e, { duration: 0.5 }) });"
+                                   class="">Dinsdag <span>14 jan</span></a>
+                                <a href="/club_portal/lessons/2?f%5Bactivity_resource_ids%5D%5B%5D="
+                                   onClick="$$('ul li.lesson_element').each(function(e){ new Effect.Fade(e, { duration: 0.5 }) });"
+                                   class="">woensdag <span>15 jan</span></a>
+                                <a href="/club_portal/lessons/3?f%5Bactivity_resource_ids%5D%5B%5D="
+                                   onClick="$$('ul li.lesson_element').each(function(e){ new Effect.Fade(e, { duration: 0.5 }) });"
+                                   class="allweekb">donderdag <span>16 jan</span></a>
+                                <a href="/club_portal/lessons/4?f%5Bactivity_resource_ids%5D%5B%5D="
+                                   onClick="$$('ul li.lesson_element').each(function(e){ new Effect.Fade(e, { duration: 0.5 }) });"
+                                   class="">Vrijdag <span>17 jan</span></a>
+                                <a href="/club_portal/lessons/5?f%5Bactivity_resource_ids%5D%5B%5D="
+                                   onClick="$$('ul li.lesson_element').each(function(e){ new Effect.Fade(e, { duration: 0.5 }) });"
+                                   class="">zaterdag <span>18 jan</span></a>
+                                <a href="/club_portal/lessons/6?f%5Bactivity_resource_ids%5D%5B%5D="
+                                   onClick="$$('ul li.lesson_element').each(function(e){ new Effect.Fade(e, { duration: 0.5 }) });"
+                                   class="">zondag <span>19 jan</span></a>
+                                <a href="/club_portal/lessons/7?f%5Bactivity_resource_ids%5D%5B%5D="
+                                   onClick="$$('ul li.lesson_element').each(function(e){ new Effect.Fade(e, { duration: 0.5 }) });"
+                                   class="">maandag <span>20 jan</span></a>
+                                <a href="/club_portal/lessons/8?f%5Bactivity_resource_ids%5D%5B%5D="
+                                   onClick="$$('ul li.lesson_element').each(function(e){ new Effect.Fade(e, { duration: 0.5 }) });"
+                                   class="">Dinsdag <span>21 jan</span></a>
+                                <a href="/club_portal/lessons/9?f%5Bactivity_resource_ids%5D%5B%5D="
+                                   onClick="$$('ul li.lesson_element').each(function(e){ new Effect.Fade(e, { duration: 0.5 }) });"
+                                   class="">woensdag <span>22 jan</span></a>
+                                <a href="/club_portal/lessons/10?f%5Bactivity_resource_ids%5D%5B%5D="
+                                   onClick="$$('ul li.lesson_element').each(function(e){ new Effect.Fade(e, { duration: 0.5 }) });"
+                                   class="">donderdag <span>23 jan</span></a>
+                                <a href="/club_portal/lessons/11?f%5Bactivity_resource_ids%5D%5B%5D="
+                                   onClick="$$('ul li.lesson_element').each(function(e){ new Effect.Fade(e, { duration: 0.5 }) });"
+                                   class="">Vrijdag <span>24 jan</span></a>
+                                <a href="/club_portal/lessons/12?f%5Bactivity_resource_ids%5D%5B%5D="
+                                   onClick="$$('ul li.lesson_element').each(function(e){ new Effect.Fade(e, { duration: 0.5 }) });"
+                                   class="">zaterdag <span>25 jan</span></a>
+                                <a href="/club_portal/lessons/13?f%5Bactivity_resource_ids%5D%5B%5D="
+                                   onClick="$$('ul li.lesson_element').each(function(e){ new Effect.Fade(e, { duration: 0.5 }) });"
+                                   class="">zondag <span>26 jan</span></a>
+                                <a href="/club_portal/lessons/14?f%5Bactivity_resource_ids%5D%5B%5D="
+                                   onClick="$$('ul li.lesson_element').each(function(e){ new Effect.Fade(e, { duration: 0.5 }) });"
+                                   class="">maandag <span>27 jan</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 1 -->
+                    <div class="filterhead">De Nieuwe Yogaschool B.V.</div>
+                    <!-- 2 -->
+                    <li class="lesson_element">
+                        <div class="imgwrap">
+                            <img width="175" alt="Basic Flow (60 min) EN"
+                                 src="https://assets.opencontrolplus.com/custom_site/img/29632597?h=175&amp;w=175&amp;g=5&amp;c=Image"/>
+                        </div>
+                        <div class="textwrap tbl28228059 ltbl28228162">
+<span>
+</span>
+                            <div class="headlesson">
+                                <h3>Basic Flow (60 min) EN </h3>
+                                <span class="trainer">Studio 1</span>
+                                <span class="trainer">gegeven door Liisa Russmann</span>
+                            </div>
+                            <div class="imgwraptablet">
+                                <img width="170" alt="Basic Flow (60 min) EN"
+                                     src="https://assets.opencontrolplus.com/custom_site/img/29632597?h=170&amp;w=170&amp;g=5&amp;c=Image"/>
+                            </div>
+                            <div class="bodylesson">
+                                <p dir="ltr"><span>Boek hier je les in de studio of online livestreamles (scroll down for English).</span>
+                                </p>
+                            </div>
+                            <div class="clearblock"></div>
+                            <div class="clearblock"></div>
+                        </div>
+                        <div class="buttonsbottom">
+                            <div class="dib fr">
+                                <!-- 1 -->
+                                <!-- 3 -->
+                                <!-- 4 -->
+                                <!-- 6 -->
+                                <!-- 7 -->
+                                <!-- 8 -->
+                                <a href='/cart/add/?id=28228059&type=a_reservation_tables' id='reserve_28228059'
+                                   class='button di second_line' style='margin-bottom: 5px;' onClick=''>Studio: Kosten €&nbsp;15,00</a>
+                                <!-- 1 -->
+                                <!-- 3 -->
+                                <!-- 4 -->
+                                <!-- 6 -->
+                                <!-- 7 -->
+                                <!-- 8 -->
+                                <a href='/cart/add/?id=28228162&type=a_reservation_tables' id='reserve_28228162'
+                                   class='button di second_line' style='' onClick=''>Online: Kosten €&nbsp;9,00</a>
+                                <a href="/club_portal/show_lessons/60923?end_week_d=14&amp;res_table_id=28228059"
+                                   class="button mi">Meer info</a>
+                                <span class="givenby fr">
+16 januari 2025
+<span class='d_time'>09:00- 10:00 UUR</span>
+</span>
+                            </div>
+                            <div class="clearblock"></div>
+                        </div>
+                        <div class="clearblock"></div>
+                    </li>
+                    <!-- 2 -->
+                    <li class="lesson_element">
+                        <div class="imgwrap">
+                            <img width="175" alt="Flow4All (75 min) EN"
+                                 src="https://assets.opencontrolplus.com/custom_site/img/29632603?h=175&amp;w=175&amp;g=5&amp;c=Image"/>
+                        </div>
+                        <div class="textwrap tbl28228265 ltbl28228368">
+<span>
+</span>
+                            <div class="headlesson">
+                                <h3>Flow4All (75 min) EN </h3>
+                                <span class="trainer">Studio 1</span>
+                                <span class="trainer">gegeven door Kasia Kayara </span>
+                            </div>
+                            <div class="imgwraptablet">
+                                <img width="170" alt="Flow4All (75 min) EN"
+                                     src="https://assets.opencontrolplus.com/custom_site/img/29632603?h=170&amp;w=170&amp;g=5&amp;c=Image"/>
+                            </div>
+                            <div class="bodylesson">
+                                <p dir="ltr"><span>Boek hier je les in de studio of online livestreamles (scroll down for English).</span>
+                                </p>
+                            </div>
+                            <div class="clearblock"></div>
+                            <div class="clearblock"></div>
+                        </div>
+                        <div class="buttonsbottom">
+                            <div class="dib fr">
+                                <!-- 1 -->
+                                <!-- 3 -->
+                                <!-- 4 -->
+                                <!-- 6 -->
+                                <!-- 7 -->
+                                <!-- 8 -->
+                                <a href='/cart/add/?id=28228265&type=a_reservation_tables' id='reserve_28228265'
+                                   class='button di second_line' style='margin-bottom: 5px;' onClick=''>Studio: Kosten €&nbsp;17,00</a>
+                                <!-- 1 -->
+                                <!-- 3 -->
+                                <!-- 4 -->
+                                <!-- 6 -->
+                                <!-- 7 -->
+                                <!-- 8 -->
+                                <a href='/cart/add/?id=28228368&type=a_reservation_tables' id='reserve_28228368'
+                                   class='button di second_line' style='' onClick=''>Online: Kosten €&nbsp;9,00</a>
+                                <a href="/club_portal/show_lessons/60925?end_week_d=14&amp;res_table_id=28228265"
+                                   class="button mi">Meer info</a>
+                                <span class="givenby fr">
+16 januari 2025
+<span class='d_time'>10:30- 11:45 UUR</span>
+</span>
+                            </div>
+                            <div class="clearblock"></div>
+                        </div>
+                        <div class="clearblock"></div>
+                    </li>
+                    <!-- 2 -->
+                    <li class="lesson_element">
+                        <div class="imgwrap">
+                            <img width="175" alt="Circular breathing /..."
+                                 src="https://assets.opencontrolplus.com/custom_site/img/29937934?h=175&amp;w=175&amp;g=5&amp;c=Image"/>
+                        </div>
+                        <div class="textwrap tbl28228471 ltbl28228574">
+<span>
+</span>
+                            <div class="headlesson">
+                                <h3>Circular breathing / Verbonden ademhaling (60 min) NL </h3>
+                                <span class="trainer">Studio 1</span>
+                                <span class="trainer">gegeven door Simone Heijhoff</span>
+                            </div>
+                            <div class="imgwraptablet">
+                                <img width="170" alt="Circular breathing /..."
+                                     src="https://assets.opencontrolplus.com/custom_site/img/29937934?h=170&amp;w=170&amp;g=5&amp;c=Image"/>
+                            </div>
+                            <div class="bodylesson">
+                                <p>Boek hier je les in de studio of online livestreamles (scroll down for English).</p>
+                            </div>
+                            <div class="clearblock"></div>
+                            <div class="clearblock"></div>
+                        </div>
+                        <div class="buttonsbottom">
+                            <div class="dib fr">
+                                <!-- 1 -->
+                                <!-- 3 -->
+                                <!-- 4 -->
+                                <!-- 6 -->
+                                <!-- 7 -->
+                                <!-- 8 -->
+                                <a href='/cart/add/?id=28228471&type=a_reservation_tables' id='reserve_28228471'
+                                   class='button di second_line' style='margin-bottom: 5px;' onClick=''>Studio: Kosten €&nbsp;15,00</a>
+                                <!-- 1 -->
+                                <!-- 3 -->
+                                <!-- 4 -->
+                                <!-- 6 -->
+                                <!-- 7 -->
+                                <!-- 8 -->
+                                <a href='/cart/add/?id=28228574&type=a_reservation_tables' id='reserve_28228574'
+                                   class='button di second_line' style='' onClick=''>Online: Kosten €&nbsp;9,00</a>
+                                <a href="/club_portal/show_lessons/60927?end_week_d=14&amp;res_table_id=28228471"
+                                   class="button mi">Meer info</a>
+                                <span class="givenby fr">
+16 januari 2025
+<span class='d_time'>12:15- 13:15 UUR</span>
+</span>
+                            </div>
+                            <div class="clearblock"></div>
+                        </div>
+                        <div class="clearblock"></div>
+                    </li>
+                    <!-- 2 -->
+                    <li class="lesson_element">
+                        <div class="imgwrap">
+                            <img width="175" alt="Healing yoga (60 min..."
+                                 src="https://assets.opencontrolplus.com/custom_site/img/30031309?h=175&amp;w=175&amp;g=5&amp;c=Image"/>
+                        </div>
+                        <div class="textwrap tbl27479492 ltbl27479866">
+<span>
+</span>
+                            <div class="headlesson">
+                                <h3>Healing yoga (60 min) EN </h3>
+                                <span class="trainer">Studio 1</span>
+                                <span class="trainer">gegeven door Tyler Micocci</span>
+                            </div>
+                            <div class="imgwraptablet">
+                                <img width="170" alt="Healing yoga (60 min..."
+                                     src="https://assets.opencontrolplus.com/custom_site/img/30031309?h=170&amp;w=170&amp;g=5&amp;c=Image"/>
+                            </div>
+                            <div class="bodylesson">
+                                <p>Boek hier je les in de studio of online livestreamles (scroll down for English).</p>
+                            </div>
+                            <div class="clearblock"></div>
+                            <div class="clearblock"></div>
+                        </div>
+                        <div class="buttonsbottom">
+                            <div class="dib fr">
+                                <!-- 1 -->
+                                <!-- 3 -->
+                                <!-- 4 -->
+                                <!-- 6 -->
+                                <!-- 7 -->
+                                <!-- 8 -->
+                                <a href='/cart/add/?id=27479492&type=a_reservation_tables' id='reserve_27479492'
+                                   class='button di second_line' style='margin-bottom: 5px;' onClick=''>Studio: Kosten €&nbsp;15,00</a>
+                                <!-- 1 -->
+                                <!-- 3 -->
+                                <!-- 4 -->
+                                <!-- 6 -->
+                                <!-- 7 -->
+                                <!-- 8 -->
+                                <a href='/cart/add/?id=27479866&type=a_reservation_tables' id='reserve_27479866'
+                                   class='button di second_line' style='' onClick=''>Online: Kosten €&nbsp;9,00</a>
+                                <a href="/club_portal/show_lessons/68797?end_week_d=14&amp;res_table_id=27479492"
+                                   class="button mi">Meer info</a>
+                                <span class="givenby fr">
+16 januari 2025
+<span class='d_time'>14:00- 15:00 UUR</span>
+</span>
+                            </div>
+                            <div class="clearblock"></div>
+                        </div>
+                        <div class="clearblock"></div>
+                    </li>
+                    <!-- 2 -->
+                    <li class="lesson_element">
+                        <div class="imgwrap">
+                            <img width="175" alt="Yin Yoga (75 min) EN..."
+                                 src="https://assets.opencontrolplus.com/custom_site/img/28999225?h=175&amp;w=175&amp;g=5&amp;c=Image"/>
+                        </div>
+                        <div class="textwrap tbl26657946 ltbl16779967">
+<span>
+</span>
+                            <div class="headlesson">
+                                <h3>Yin Yoga (75 min) EN </h3>
+                                <span class="trainer">Studio 1</span>
+                                <span class="trainer">gegeven door Skadi van Paasschen</span>
+                            </div>
+                            <div class="imgwraptablet">
+                                <img width="170" alt="Yin Yoga (75 min) EN..."
+                                     src="https://assets.opencontrolplus.com/custom_site/img/28999225?h=170&amp;w=170&amp;g=5&amp;c=Image"/>
+                            </div>
+                            <div class="bodylesson">
+                                <p>Boek hier je les in de studio of online livestreamles (scroll down for English).</p>
+                            </div>
+                            <div class="clearblock"></div>
+                            <div class="clearblock"></div>
+                        </div>
+                        <div class="buttonsbottom">
+                            <div class="dib fr">
+                                <!-- 1 -->
+                                <!-- 3 -->
+                                <!-- 4 -->
+                                <!-- 6 -->
+                                <!-- 7 -->
+                                <!-- 8 -->
+                                <a href='/cart/add/?id=26657946&type=a_reservation_tables' id='reserve_26657946'
+                                   class='button di second_line' style='margin-bottom: 5px;' onClick=''>Studio: Kosten €&nbsp;17,00</a>
+                                <!-- 1 -->
+                                <!-- 3 -->
+                                <!-- 4 -->
+                                <!-- 6 -->
+                                <!-- 7 -->
+                                <!-- 8 -->
+                                <a href='/cart/add/?id=16779967&type=a_reservation_tables' id='reserve_16779967'
+                                   class='button di second_line' style='' onClick=''>Online: Kosten €&nbsp;9,00</a>
+                                <a href="/club_portal/show_lessons/37032?end_week_d=14&amp;res_table_id=26657946"
+                                   class="button mi">Meer info</a>
+                                <span class="givenby fr">
+16 januari 2025
+<span class='d_time'>15:45- 17:00 UUR</span>
+</span>
+                            </div>
+                            <div class="clearblock"></div>
+                        </div>
+                        <div class="clearblock"></div>
+                    </li>
+                    <!-- 2 -->
+                    <li class="lesson_element">
+                        <div class="imgwrap">
+                            <img width="175" alt="Flow4All (75 min) EN"
+                                 src="https://assets.opencontrolplus.com/custom_site/img/29402397?h=175&amp;w=175&amp;g=5&amp;c=Image"/>
+                        </div>
+                        <div class="textwrap tbl26658522 ltbl26658595">
+<span>
+</span>
+                            <div class="headlesson">
+                                <h3>Flow4All (75 min) EN </h3>
+                                <span class="trainer">Studio 1</span>
+                                <span class="trainer">gegeven door Liisa Russmann</span>
+                            </div>
+                            <div class="imgwraptablet">
+                                <img width="170" alt="Flow4All (75 min) EN"
+                                     src="https://assets.opencontrolplus.com/custom_site/img/29402397?h=170&amp;w=170&amp;g=5&amp;c=Image"/>
+                            </div>
+                            <div class="bodylesson">
+                                <p>Boek hier je les in de studio of online livestreamles (scroll down for English).</p>
+                            </div>
+                            <div class="clearblock"></div>
+                            <div class="clearblock"></div>
+                        </div>
+                        <div class="buttonsbottom">
+                            <div class="dib fr">
+                                <!-- 1 -->
+                                <!-- 3 -->
+                                <!-- 4 -->
+                                <!-- 6 -->
+                                <!-- 7 -->
+                                <!-- 8 -->
+                                <a href='/cart/add/?id=26658522&type=a_reservation_tables' id='reserve_26658522'
+                                   class='button di second_line' style='margin-bottom: 5px;' onClick=''>Studio: Kosten €&nbsp;17,00</a>
+                                <!-- 1 -->
+                                <!-- 3 -->
+                                <!-- 4 -->
+                                <!-- 6 -->
+                                <!-- 7 -->
+                                <!-- 8 -->
+                                <a href='/cart/add/?id=26658595&type=a_reservation_tables' id='reserve_26658595'
+                                   class='button di second_line' style='' onClick=''>Online: Kosten €&nbsp;9,00</a>
+                                <a href="/club_portal/show_lessons/55595?end_week_d=14&amp;res_table_id=26658522"
+                                   class="button mi">Meer info</a>
+                                <span class="givenby fr">
+16 januari 2025
+<span class='d_time'>17:45- 19:00 UUR</span>
+</span>
+                            </div>
+                            <div class="clearblock"></div>
+                        </div>
+                        <div class="clearblock"></div>
+                    </li>
+                    <!-- 2 -->
+                    <li class="lesson_element">
+                        <div class="imgwrap">
+                            <img width="175" alt="Ashtanga (75 min) EN  "
+                                 src="https://assets.opencontrolplus.com/custom_site/img/29988325?h=175&amp;w=175&amp;g=5&amp;c=Image"/>
+                        </div>
+                        <div class="textwrap tbl27179286 ltbl">
+<span>
+<div class='show_price pr-one-27179286'><span><span class='curr_price'
+                                                    id='player_price_27179286'>€&nbsp;17,00</span></span></div>
+</span>
+                            <div class="headlesson">
+                                <h3>Ashtanga (75 min) EN </h3>
+                                <span class="trainer">Studio 3</span>
+                                <span class="trainer">gegeven door Tina Rumenović</span>
+                            </div>
+                            <div class="imgwraptablet">
+                                <img width="170" alt="Ashtanga (75 min) EN  "
+                                     src="https://assets.opencontrolplus.com/custom_site/img/29988325?h=170&amp;w=170&amp;g=5&amp;c=Image"/>
+                            </div>
+                            <div class="bodylesson">
+                                <p>Boek hier je studioles. Deze les is niet beschikbaar als livestreamles (scroll down
+                                    for English).</p>
+                            </div>
+                            <div class="clearblock"></div>
+                            <div class="clearblock"></div>
+                        </div>
+                        <div class="buttonsbottom">
+                            <div class="dib fr">
+                                <!-- 1 -->
+                                <!-- 3 -->
+                                <!-- 4 -->
+                                <!-- 6 -->
+                                <!-- 7 -->
+                                <a href='/cart/add/?id=27179286&type=a_reservation_tables' id='reserve_27179286'
+                                   class='button di ' style='' onClick=''>winkelwagen</a>
+                                <a href="/club_portal/show_lessons/67915?end_week_d=14&amp;res_table_id=27179286"
+                                   class="button mi">Meer info</a>
+                                <span class="givenby fr">
+16 januari 2025
+<span class='d_time'>18:15- 19:30 UUR</span>
+</span>
+                            </div>
+                            <div class="clearblock"></div>
+                        </div>
+                        <div class="clearblock"></div>
+                    </li>
+                    <!-- 2 -->
+                    <li class="lesson_element">
+                        <div class="imgwrap">
+                            <img width="175" alt="Restorative Nidra Sp..."
+                                 src="https://assets.opencontrolplus.com/custom_site/img/29904045?h=175&amp;w=175&amp;g=5&amp;c=Image"/>
+                        </div>
+                        <div class="textwrap tbl26906209 ltbl26906313">
+<span>
+</span>
+                            <div class="headlesson">
+                                <h3>Restorative Nidra Special (90 min) EN </h3>
+                                <span class="trainer">Studio 1</span>
+                                <span class="trainer">gegeven door Marjolein Vos</span>
+                            </div>
+                            <div class="imgwraptablet">
+                                <img width="170" alt="Restorative Nidra Sp..."
+                                     src="https://assets.opencontrolplus.com/custom_site/img/29904045?h=170&amp;w=170&amp;g=5&amp;c=Image"/>
+                            </div>
+                            <div class="bodylesson">
+                                Boek hier je les in de studio of online livestreamles (scroll down for English).
+                            </div>
+                            <div class="clearblock"></div>
+                            <div class="clearblock"></div>
+                        </div>
+                        <div class="buttonsbottom">
+                            <div class="dib fr">
+                                <!-- 1 -->
+                                <!-- 3 -->
+                                <!-- 4 -->
+                                <!-- 6 -->
+                                <!-- 7 -->
+                                <!-- 8 -->
+                                <a href='/cart/add/?id=26906209&type=a_reservation_tables' id='reserve_26906209'
+                                   class='button di second_line' style='margin-bottom: 5px;' onClick=''>Studio: Kosten €&nbsp;17,00</a>
+                                <!-- 1 -->
+                                <!-- 3 -->
+                                <!-- 4 -->
+                                <!-- 6 -->
+                                <!-- 7 -->
+                                <!-- 8 -->
+                                <a href='/cart/add/?id=26906313&type=a_reservation_tables' id='reserve_26906313'
+                                   class='button di second_line' style='' onClick=''>Online: Kosten €&nbsp;9,00</a>
+                                <a href="/club_portal/show_lessons/66376?end_week_d=14&amp;res_table_id=26906209"
+                                   class="button mi">Meer info</a>
+                                <span class="givenby fr">
+16 januari 2025
+<span class='d_time'>19:30- 21:00 UUR</span>
+</span>
+                            </div>
+                            <div class="clearblock"></div>
+                        </div>
+                        <div class="clearblock"></div>
+                    </li>
+                </ul>
+            </div>
+            <div id="filterid">
+                <div class="filterincont">
+                    <h1>Filters en zoeken</h1>
+                    <form action="/club_portal/lessons/3?f%5Bactivity_resource_ids%5D%5B%5D=" method="get"
+                          id="filtering">
+                        <h2>Vrij zoeken</h2>
+                        <div class="search">
+                            <input name="f[phrase_search]" id="f[phrase_search]" placeholder="Zoeken Lessen"
+                                   type="text"/>
+                            <input name="commit" type="submit" value=""/>
+                        </div>
+                        <div class="filtersmallpart" id="filter_years">
+                            <h2>Kies dag</h2>
+                            <span id='calendar_start_at' class='calendar_field'></span><input type='text' id='start_at'
+                                                                                              class='datetime_select date '
+                                                                                              placeholder='Kies dag'
+                                                                                              value='' name='start_at'
+                                                                                              onchange='this.value = minimum_date_today(this.value, 0, 14); this.form.submit();'/>
+                            <script type='text/javascript'>
+                                Calendar.setup({dateField: 'start_at', popupDateField: 'calendar_start_at'  });
+                            </script>
+                        </div>
+                        <div class="filtersmallpart" id="filter_activity_times">
+                            <h2>Select timeframe</h2>
+                            <input name="f[activity_time][]" onchange="clearOtherTimeframe(event); this.form.submit()"
+                                   id="activity_time" checked="checked" type="checkbox" value=""
+                                   class="nice_checkbox timeframe"/>
+                            <label for="activity_time">Allemaal</label>
+                            <input name="f[activity_time][]" onchange="clearOtherTimeframe(event); this.form.submit()"
+                                   id="activity_time_1" type="checkbox" value="1" class="nice_checkbox timeframe"/>
+                            <label for="activity_time_1">Ochtend</label>
+                            <input name="f[activity_time][]" onchange="clearOtherTimeframe(event); this.form.submit()"
+                                   id="activity_time_2" type="checkbox" value="2" class="nice_checkbox timeframe"/>
+                            <label for="activity_time_2">Namiddag</label>
+                            <input name="f[activity_time][]" onchange="clearOtherTimeframe(event); this.form.submit()"
+                                   id="activity_time_3" type="checkbox" value="3" class="nice_checkbox timeframe"/>
+                            <label for="activity_time_3">Avond</label>
+                        </div>
+                        <div class="filtersmallpart" id="filter_resource_types">
+                            <h2>Kies lestype</h2>
+                            <input name="f[activity_resource_type_ids][]" onchange="this.form.submit()"
+                                   id="activity_resource_type_ids_1982" type="checkbox" value="1982"
+                                   class="nice_checkbox"/>
+                            <label for="activity_resource_type_ids_1982">Gentle Flow</label>
+                            <input name="f[activity_resource_type_ids][]" onchange="this.form.submit()"
+                                   id="activity_resource_type_ids_252" type="checkbox" value="252"
+                                   class="nice_checkbox"/>
+                            <label for="activity_resource_type_ids_252">Breathwork & Meditation</label>
+                            <input name="f[activity_resource_type_ids][]" onchange="this.form.submit()"
+                                   id="activity_resource_type_ids_262" type="checkbox" value="262"
+                                   class="nice_checkbox"/>
+                            <label for="activity_resource_type_ids_262">Flow4all (Vinyasa)</label>
+                            <input name="f[activity_resource_type_ids][]" onchange="this.form.submit()"
+                                   id="activity_resource_type_ids_362" type="checkbox" value="362"
+                                   class="nice_checkbox"/>
+                            <label for="activity_resource_type_ids_362">Core Flow</label>
+                            <input name="f[activity_resource_type_ids][]" onchange="this.form.submit()"
+                                   id="activity_resource_type_ids_232" type="checkbox" value="232"
+                                   class="nice_checkbox"/>
+                            <label for="activity_resource_type_ids_232">Yin yoga</label>
+                            <input name="f[activity_resource_type_ids][]" onchange="this.form.submit()"
+                                   id="activity_resource_type_ids_1985" type="checkbox" value="1985"
+                                   class="nice_checkbox"/>
+                            <label for="activity_resource_type_ids_1985">Circular Breathing/ Verbonden
+                                Ademhaling</label>
+                            <input name="f[activity_resource_type_ids][]" onchange="this.form.submit()"
+                                   id="activity_resource_type_ids_1979" type="checkbox" value="1979"
+                                   class="nice_checkbox"/>
+                            <label for="activity_resource_type_ids_1979">Wake up Flow</label>
+                            <input name="f[activity_resource_type_ids][]" onchange="this.form.submit()"
+                                   id="activity_resource_type_ids_1981" type="checkbox" value="1981"
+                                   class="nice_checkbox"/>
+                            <label for="activity_resource_type_ids_1981">Slow Flow</label>
+                            <input name="f[activity_resource_type_ids][]" onchange="this.form.submit()"
+                                   id="activity_resource_type_ids_1987" type="checkbox" value="1987"
+                                   class="nice_checkbox"/>
+                            <label for="activity_resource_type_ids_1987">Restorative Special</label>
+                            <input name="f[activity_resource_type_ids][]" onchange="this.form.submit()"
+                                   id="activity_resource_type_ids_242" type="checkbox" value="242"
+                                   class="nice_checkbox"/>
+                            <label for="activity_resource_type_ids_242">Basic Flow</label>
+                            <input name="f[activity_resource_type_ids][]" onchange="this.form.submit()"
+                                   id="activity_resource_type_ids_342" type="checkbox" value="342"
+                                   class="nice_checkbox"/>
+                            <label for="activity_resource_type_ids_342">Ashtanga</label>
+                            <input name="f[activity_resource_type_ids][]" onchange="this.form.submit()"
+                                   id="activity_resource_type_ids_1988" type="checkbox" value="1988"
+                                   class="nice_checkbox"/>
+                            <label for="activity_resource_type_ids_1988">Advanced Flow</label>
+                            <input name="f[activity_resource_type_ids][]" onchange="this.form.submit()"
+                                   id="activity_resource_type_ids_372" type="checkbox" value="372"
+                                   class="nice_checkbox"/>
+                            <label for="activity_resource_type_ids_372">Pilates</label>
+                            <input name="f[activity_resource_type_ids][]" onchange="this.form.submit()"
+                                   id="activity_resource_type_ids_1986" type="checkbox" value="1986"
+                                   class="nice_checkbox"/>
+                            <label for="activity_resource_type_ids_1986">Healing yoga</label>
+                            <input name="f[activity_resource_type_ids][]" onchange="this.form.submit()"
+                                   id="activity_resource_type_ids_282" type="checkbox" value="282"
+                                   class="nice_checkbox"/>
+                            <label for="activity_resource_type_ids_282">Kundalini</label>
+                            <input name="f[activity_resource_type_ids][]" onchange="this.form.submit()"
+                                   id="activity_resource_type_ids_1980" type="checkbox" value="1980"
+                                   class="nice_checkbox"/>
+                            <label for="activity_resource_type_ids_1980">Restorative & Meditatie</label>
+                            <input name="f[activity_resource_type_ids][]" onchange="this.form.submit()"
+                                   id="activity_resource_type_ids_1896" type="checkbox" value="1896"
+                                   class="nice_checkbox"/>
+                            <label for="activity_resource_type_ids_1896">Restorative Nidra</label>
+                            <input type="hidden" value="0" name="f[activity_resource_type_ids][]"/>
+                        </div>
+                        <div class="filtersmallpart">
+                            <h2>Op locatie</h2>
+                            <input name="f[activity_resource_ids][]" onchange="this.form.submit()"
+                                   id="activity_resource_ids_382" type="checkbox" value="382" class="nice_checkbox"/>
+                            <label for="activity_resource_ids_382">Studio 3</label>
+                            <input name="f[activity_resource_ids][]" onchange="this.form.submit()"
+                                   id="activity_resource_ids_362" type="checkbox" value="362" class="nice_checkbox"/>
+                            <label for="activity_resource_ids_362">Studio 1</label>
+                            <input type="hidden" value="0" name="f[activity_resource_ids][]"/>
+                        </div>
+                        <div class="filtersmallpart" id="filter_staffs">
+                            <h2>Kies docent/instructeur</h2>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_472822"
+                                   type="checkbox" value="472822" class="nice_checkbox"/>
+                            <label for="staffs_472822">Kim Terpstra</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_475002"
+                                   type="checkbox" value="475002" class="nice_checkbox"/>
+                            <label for="staffs_475002">Simone Heijhoff</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_499412"
+                                   type="checkbox" value="499412" class="nice_checkbox"/>
+                            <label for="staffs_499412">Skadi van Paasschen</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_499422"
+                                   type="checkbox" value="499422" class="nice_checkbox"/>
+                            <label for="staffs_499422">Johan Noorloos</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_499492"
+                                   type="checkbox" value="499492" class="nice_checkbox"/>
+                            <label for="staffs_499492">Simon Rowe</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_499532"
+                                   type="checkbox" value="499532" class="nice_checkbox"/>
+                            <label for="staffs_499532">Moena de Jong</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_499602"
+                                   type="checkbox" value="499602" class="nice_checkbox"/>
+                            <label for="staffs_499602">Hoyte de Ranitz</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_499712"
+                                   type="checkbox" value="499712" class="nice_checkbox"/>
+                            <label for="staffs_499712">Carine Goekoop</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_499722"
+                                   type="checkbox" value="499722" class="nice_checkbox"/>
+                            <label for="staffs_499722">Vanessa van de Weerd</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_499772"
+                                   type="checkbox" value="499772" class="nice_checkbox"/>
+                            <label for="staffs_499772">Inge Peters</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_632802"
+                                   type="checkbox" value="632802" class="nice_checkbox"/>
+                            <label for="staffs_632802">Liisa Russmann</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_987574"
+                                   type="checkbox" value="987574" class="nice_checkbox"/>
+                            <label for="staffs_987574">Rolandjan van Mulligen</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_1093615"
+                                   type="checkbox" value="1093615" class="nice_checkbox"/>
+                            <label for="staffs_1093615">Mariken Hogenhout</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_1093616"
+                                   type="checkbox" value="1093616" class="nice_checkbox"/>
+                            <label for="staffs_1093616">Sijbrand Maal</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_1243378"
+                                   type="checkbox" value="1243378" class="nice_checkbox"/>
+                            <label for="staffs_1243378">Rosan Oosterom</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_1245076"
+                                   type="checkbox" value="1245076" class="nice_checkbox"/>
+                            <label for="staffs_1245076">Aiki Terstegen</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_1252045"
+                                   type="checkbox" value="1252045" class="nice_checkbox"/>
+                            <label for="staffs_1252045">Esther de Graaf</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_1404043"
+                                   type="checkbox" value="1404043" class="nice_checkbox"/>
+                            <label for="staffs_1404043">Anna Scott Miller</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_1790724"
+                                   type="checkbox" value="1790724" class="nice_checkbox"/>
+                            <label for="staffs_1790724">Jolijn Bruijnaers</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_1863638"
+                                   type="checkbox" value="1863638" class="nice_checkbox"/>
+                            <label for="staffs_1863638">Marjolein Vos</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_1890923"
+                                   type="checkbox" value="1890923" class="nice_checkbox"/>
+                            <label for="staffs_1890923">Arben Sinani</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_1947167"
+                                   type="checkbox" value="1947167" class="nice_checkbox"/>
+                            <label for="staffs_1947167">Jantje Oostijen</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_1978996"
+                                   type="checkbox" value="1978996" class="nice_checkbox"/>
+                            <label for="staffs_1978996">Devon Ress</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_1999383"
+                                   type="checkbox" value="1999383" class="nice_checkbox"/>
+                            <label for="staffs_1999383">Tyler Micocci</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_2033667"
+                                   type="checkbox" value="2033667" class="nice_checkbox"/>
+                            <label for="staffs_2033667">Debbie van Leeuwen </label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_2035516"
+                                   type="checkbox" value="2035516" class="nice_checkbox"/>
+                            <label for="staffs_2035516">Nathalie Ho Kang You</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_2039879"
+                                   type="checkbox" value="2039879" class="nice_checkbox"/>
+                            <label for="staffs_2039879">Bonnie Warnars</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_2099990"
+                                   type="checkbox" value="2099990" class="nice_checkbox"/>
+                            <label for="staffs_2099990">Chris Wenker</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_2119615"
+                                   type="checkbox" value="2119615" class="nice_checkbox"/>
+                            <label for="staffs_2119615">Carmen Guda</label>
+                            <input name="f[staff_ids][]" onchange="this.form.submit()" id="staffs_2153091"
+                                   type="checkbox" value="2153091" class="nice_checkbox"/>
+                            <label for="staffs_2153091">Federica Latore</label>
+                            <input type="hidden" value="0" name="f[staff_ids][]"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="clearblock"></div>
+        <div class="loginb">
+            <div class="textbutton">Zoeken en filteren</div>
+            <div class="arrowindec"></div>
+        </div>
+        <div id="right_side"></div>
+        <div class="clearblock"></div>
+    </div>
+</div>
+<div id="offline" class="display_offline">
+    <span class="display_offline_text">Offline</span> <img class="display_add_to_home_iphone_share"
+                                                           src="/pwa/offline.png"/>
+</div>
+</body>
+<!-- test 6 -->
+</html>
+<script type="text/javascript">
+    function is_standalone() {
+    return (window.matchMedia('(display-mode: standalone)').matches) || (window.navigator.standalone === true) || document.referrer.includes('android-app://');
+    }
+    if (is_standalone()) {
+    sess_key = 'pwaSessionKey';
+    sess_val = localStorage.getItem(sess_key);
+    if (sess_val) {
+    localStorage.removeItem(sess_key);
+    window.location.replace('/club_portal/pwa_login/' + sess_val);
+    }
+    pwa_block = $('add_to_home_screen');
+    if (pwa_block){
+    pwa_block.style.display = 'none';
+    }
+    }
+    Event.observe(window, 'load', languagePopupAlignLogOutM);
+    Event.observe(window, 'resize', languagePopupAlignLogOutM);
+</script>

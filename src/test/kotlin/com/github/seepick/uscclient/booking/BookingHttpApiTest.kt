@@ -1,14 +1,14 @@
-package seepick.localsportsclub.api.booking
+package com.github.seepick.uscclient.booking
 
+import com.github.seepick.uscclient.NoopResponseStorage
+import com.github.seepick.uscclient.PhpSessionId
+import com.github.seepick.uscclient.buildMockClient
+import com.github.seepick.uscclient.uscConfig
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.property.Arb
 import io.kotest.property.arbitrary.next
 import io.ktor.client.HttpClient
-import seepick.localsportsclub.api.NoopResponseStorage
-import seepick.localsportsclub.api.PhpSessionId
-import seepick.localsportsclub.api.buildMockClient
-import seepick.localsportsclub.uscConfig
 
 class BookingHttpApiTest : DescribeSpec() {
 

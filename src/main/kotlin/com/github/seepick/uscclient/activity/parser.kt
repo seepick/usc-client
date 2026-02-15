@@ -1,9 +1,9 @@
-package seepick.localsportsclub.api.activity
+package com.github.seepick.uscclient.activity
 
+import com.github.seepick.uscclient.Plan
 import kotlinx.serialization.Serializable
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
-import seepick.localsportsclub.service.model.Plan
 
 fun Element.selectPlanFromSnippet(): Plan.UscPlan =
     selectPlanForClassFrom("snippet")

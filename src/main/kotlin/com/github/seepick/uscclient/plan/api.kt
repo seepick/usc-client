@@ -1,17 +1,17 @@
-package seepick.localsportsclub.api.plan
+package com.github.seepick.uscclient.plan
 
+import com.github.seepick.uscclient.City
+import com.github.seepick.uscclient.Country
+import com.github.seepick.uscclient.PhpSessionId
+import com.github.seepick.uscclient.Plan
+import com.github.seepick.uscclient.ResponseStorage
+import com.github.seepick.uscclient.UscConfig
+import com.github.seepick.uscclient.safeGet
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import io.ktor.client.HttpClient
 import io.ktor.client.request.cookie
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.Url
-import seepick.localsportsclub.api.PhpSessionId
-import seepick.localsportsclub.api.ResponseStorage
-import seepick.localsportsclub.api.UscConfig
-import seepick.localsportsclub.service.model.City
-import seepick.localsportsclub.service.model.Country
-import seepick.localsportsclub.service.model.Plan
-import seepick.localsportsclub.service.safeGet
 
 interface MembershipApi {
     suspend fun fetch(session: PhpSessionId): Membership

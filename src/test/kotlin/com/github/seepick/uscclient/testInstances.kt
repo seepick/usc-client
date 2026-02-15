@@ -1,5 +1,11 @@
-package seepick.localsportsclub.api
+package com.github.seepick.uscclient
 
+import com.github.seepick.uscclient.activity.ActivityInfo
+import com.github.seepick.uscclient.checkin.ActivityCheckinEntry
+import com.github.seepick.uscclient.checkin.ActivityCheckinEntryType
+import com.github.seepick.uscclient.checkin.FreetrainingCheckinEntry
+import com.github.seepick.uscclient.venue.VenueDetails
+import com.github.seepick.uscclient.venue.VenueInfo
 import io.kotest.property.Arb
 import io.kotest.property.arbitrary.Codepoint
 import io.kotest.property.arbitrary.alphanumeric
@@ -11,18 +17,6 @@ import io.kotest.property.arbitrary.list
 import io.kotest.property.arbitrary.localDate
 import io.kotest.property.arbitrary.orNull
 import io.kotest.property.arbitrary.string
-import seepick.localsportsclub.api.activity.ActivityInfo
-import seepick.localsportsclub.api.checkin.ActivityCheckinEntry
-import seepick.localsportsclub.api.checkin.ActivityCheckinEntryType
-import seepick.localsportsclub.api.checkin.FreetrainingCheckinEntry
-import seepick.localsportsclub.api.venue.VenueDetails
-import seepick.localsportsclub.api.venue.VenueInfo
-import seepick.localsportsclub.imageUrl
-import seepick.localsportsclub.service.date.dateTimeRange
-import seepick.localsportsclub.service.date.timeRange
-import seepick.localsportsclub.service.model.Plan
-import seepick.localsportsclub.slug
-import seepick.localsportsclub.url
 
 fun Arb.Companion.venueInfo() = arbitrary {
     VenueInfo(

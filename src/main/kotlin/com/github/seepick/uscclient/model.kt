@@ -1,4 +1,4 @@
-package seepick.localsportsclub.api
+package com.github.seepick.uscclient
 
 import kotlinx.serialization.Serializable
 
@@ -66,3 +66,8 @@ data class StatsVenueJson(
 data class StatsVenueAttributesJson(
     val value: Int,
 )
+
+// TODO rename
+enum class EntityType {
+    Activity, Freetraining
+}

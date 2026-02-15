@@ -1,28 +1,21 @@
-package seepick.localsportsclub.api
+package com.github.seepick.uscclient
 
+import com.github.seepick.uscclient.City.Companion.Amsterdam
+import com.github.seepick.uscclient.activity.ActivitiesFilter
+import com.github.seepick.uscclient.activity.ActivitiesParser
+import com.github.seepick.uscclient.activity.ActivityHttpApi
+import com.github.seepick.uscclient.activity.ServiceType
+import com.github.seepick.uscclient.booking.BookingHttpApi
+import com.github.seepick.uscclient.checkin.CheckinHttpApi
+import com.github.seepick.uscclient.plan.MembershipHttpApi
+import com.github.seepick.uscclient.schedule.ScheduleHttpApi
+import com.github.seepick.uscclient.venue.VenueHttpApi
+import com.github.seepick.uscclient.venue.VenueParser
+import com.github.seepick.uscclient.venue.VenuesFilter
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import io.kotest.matchers.types.shouldBeInstanceOf
 import kotlinx.coroutines.runBlocking
-import seepick.localsportsclub.api.activity.ActivitiesFilter
-import seepick.localsportsclub.api.activity.ActivitiesParser
-import seepick.localsportsclub.api.activity.ActivityHttpApi
-import seepick.localsportsclub.api.activity.ServiceType
-import seepick.localsportsclub.api.booking.BookingHttpApi
-import seepick.localsportsclub.api.checkin.CheckinHttpApi
-import seepick.localsportsclub.api.plan.MembershipHttpApi
-import seepick.localsportsclub.api.venue.VenueHttpApi
-import seepick.localsportsclub.api.venue.VenueParser
-import seepick.localsportsclub.api.venue.VenuesFilter
-import seepick.localsportsclub.persistence.ExposedActivityRepo
-import seepick.localsportsclub.persistence.ExposedSinglesRepo
-import seepick.localsportsclub.service.date.SystemClock
-import seepick.localsportsclub.service.httpClient
-import seepick.localsportsclub.service.model.City
-import seepick.localsportsclub.service.model.Credentials
-import seepick.localsportsclub.service.model.Plan
-import seepick.localsportsclub.service.singles.SinglesServiceImpl
-import seepick.localsportsclub.sync.DummySyncProgress
-import seepick.localsportsclub.tools.cliConnectToDatabase
+import java.io.File
 import java.time.Duration
 import java.time.LocalDate
 
@@ -33,7 +26,8 @@ object ManualSystemTests {
     private val uscConfig = UscConfig(
         storeResponses = false,
     )
-    private val responseStorage = ResponseStorageImpl()
+    private val responseLogFolder = File("build/api-logs")
+    private val responseStorage = ResponseStorageImpl(responseLogFolder)
     private val phpSessionId: PhpSessionId by lazy { runBlocking { loadSessionId() } }
     private val syncProgress = DummySyncProgress
 
@@ -54,8 +48,8 @@ object ManualSystemTests {
         }
     }
 
-    private fun activityApi() = ActivityHttpApi(httpClient, responseStorage, uscConfig, SystemClock)
-    private fun checkinApi() = CheckinHttpApi(httpClient, responseStorage, SystemClock, uscConfig)
+    private fun activityApi() = ActivityHttpApi(httpClient, responseStorage, uscConfig, LocalDate.now().year)
+    private fun checkinApi() = CheckinHttpApi(httpClient, responseStorage, uscConfig)
     private fun venueApi() = VenueHttpApi(httpClient, responseStorage, uscConfig, syncProgress)
     private fun bookingApi() = BookingHttpApi(httpClient, uscConfig, responseStorage)
 
@@ -77,7 +71,7 @@ object ManualSystemTests {
     }
 
     private suspend fun testCheckins() {
-        val response = checkinApi().fetchPage(phpSessionId, 1)
+        val response = checkinApi().fetchPage(phpSessionId, 1, LocalDate.now())
         println("received ${response.entries.size} checkins")
         response.entries.forEach { entry ->
             println(entry)
@@ -96,7 +90,7 @@ object ManualSystemTests {
         val pages = venueApi().fetchPages(
             phpSessionId,
             VenuesFilter(
-                city = City.Amsterdam, plan = Plan.OnefitPlan.Premium
+                city = Amsterdam, plan = Plan.OnefitPlan.Premium
             )
         )
         pages.flatMap { VenueParser.parseHtmlContent(it.content) }.sortedBy { it.slug }
@@ -142,17 +136,11 @@ object ManualSystemTests {
     }
 
     private suspend fun testSchedule() {
-        val booked = ExposedActivityRepo.selectAllBooked(City.Amsterdam.id)
-        println("Got ${booked.size} locally booked activities.")
-        booked.forEach { row ->
+        val rows = ScheduleHttpApi(httpClient, responseStorage, uscConfig).fetchScheduleRows(phpSessionId)
+        println("Got ${rows.size} scheduled rows back.")
+        rows.forEach { row ->
             println("- $row")
         }
-
-//        val rows = ScheduleHttpApi(httpClient, responseStorage, uscConfig).fetchScheduleRows(phpSessionId)
-//        println("Got ${rows.size} scheduled rows back.")
-//        rows.forEach { row ->
-//            println("- $row")
-//        }
     }
 
     private suspend fun loadSessionId(): PhpSessionId {
@@ -163,14 +151,14 @@ object ManualSystemTests {
         }
         val syspropUsername = System.getProperty("username")
         val syspropPassword = System.getProperty("password")
-        val credentials = if (syspropUsername != null && syspropPassword != null) {
-            println("Using credentials from system property.")
-            Credentials(syspropUsername, syspropPassword)
-        } else {
-            cliConnectToDatabase(isProd = false)
-            println("Using credentials from exposed repository.")
-            SinglesServiceImpl(ExposedSinglesRepo).preferences.uscCredentials ?: error("No credentials stored in DB")
-        }
+        require(syspropUsername != null && syspropPassword != null)
+        println("Using credentials from system property.")
+        val credentials = Credentials(syspropUsername, syspropPassword)
+
+        // TODO move back to LSC
+//            cliConnectToDatabase(isProd = false)
+//            println("Using credentials from exposed repository.")
+//            SinglesServiceImpl(ExposedSinglesRepo).preferences.uscCredentials ?: error("No credentials stored in DB")
         return LoginHttpApi(httpClient, uscConfig.baseUrl).login(credentials)
             .shouldBeInstanceOf<LoginResult.Success>().phpSessionId.also {
                 println("New PHP session ID is: $it")

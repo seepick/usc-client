@@ -1,5 +1,14 @@
-package seepick.localsportsclub.api.venue
+package com.github.seepick.uscclient.venue
 
+import com.github.seepick.uscclient.ApiException
+import com.github.seepick.uscclient.City
+import com.github.seepick.uscclient.PhpSessionId
+import com.github.seepick.uscclient.Plan
+import com.github.seepick.uscclient.ResponseStorage
+import com.github.seepick.uscclient.SyncProgress
+import com.github.seepick.uscclient.UscConfig
+import com.github.seepick.uscclient.fetchPageable
+import com.github.seepick.uscclient.safeGet
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -8,16 +17,6 @@ import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.Url
-import seepick.localsportsclub.api.PhpSessionId
-import seepick.localsportsclub.api.ResponseStorage
-import seepick.localsportsclub.api.UscConfig
-import seepick.localsportsclub.api.fetchPageable
-import seepick.localsportsclub.service.ApiException
-import seepick.localsportsclub.service.model.City
-import seepick.localsportsclub.service.model.Plan
-import seepick.localsportsclub.service.safeGet
-import seepick.localsportsclub.sync.SyncProgress
-import seepick.localsportsclub.sync.onProgressVenues
 import java.util.concurrent.atomic.AtomicInteger
 
 data class VenuesFilter(
@@ -28,6 +27,10 @@ data class VenuesFilter(
 interface VenueApi {
     suspend fun fetchPages(session: PhpSessionId, filter: VenuesFilter): List<VenuesDataJson>
     suspend fun fetchDetails(session: PhpSessionId, slug: String): VenueDetails
+}
+
+fun SyncProgress.onProgressVenues(detail: String?) {
+    onProgress("Venues", detail)
 }
 
 class VenueHttpApi(

@@ -1,0 +1,64 @@
+{
+  "success": true,
+  "data": {
+    "showMore": true,
+    "content": "\n<div\n    class=\"smm-studio-snippet b-studio-item\"\n    data-address-id=\"25678\"\n    data-position=\"1\"\n>\n    <a class=\"smm-studio-snippet__image-link\" href=\"/nl/venues/amsterdam-west\">\n        <img class=\"smm-studio-snippet__lazy-image\"\n                            data-src=\"https://storage.googleapis.com/download/storage/v1/b/usc-pro-uscweb-live-media/o/de-live%2FvenueCatalog_311x175_bmrtjlmxbveot0zlvwuj_1727358338834864.png?generation=1727358339345039&amp;alt=media\"\n                        alt=\"24Seven - Amsterdam West\"\n            title=\"24Seven - Amsterdam West\">\n\n                    <noscript>\n                <img src=\"https://storage.googleapis.com/download/storage/v1/b/usc-pro-uscweb-live-media/o/de-live%2FvenueCatalog_311x175_bmrtjlmxbveot0zlvwuj_1727358338834864.png?generation=1727358339345039&amp;alt=media\"\n                    alt=\"24Seven - Amsterdam West\"\n                    title=\"24Seven - Amsterdam West\">\n            </noscript>\n        \n        <span class=\"usc-button-rebrand usc-button-rebrand--dim usc-button-rebrand--small smm-studio-snippet__details-text\">\n            Meer details        </span>\n\n        \n            </a>\n\n    <p class=\"smm-studio-snippet__title\">\n        <a class=\"smm-studio-snippet__studio-link\" href=\"/nl/venues/amsterdam-west\">\n            24Seven - Amsterdam West        </a>\n            </p>\n\n    <h3 class=\"smm-studio-snippet__disciplines\">\n                    <div class=\"disciplines\">\n                Bokssport &middot; Fitness            </div>\n            </h3>\n\n    <address class=\"smm-studio-snippet__addresses\">\n                <p class=\"smm-studio-snippet__address\">\n            West,\n            <span class=\"smm-studio-snippet__address-street\">\n                Herentalsstraat 132            </span>\n        </p>\n    </address>\n\n    <p class=\"smm-studio-snippet__studio-plans\">\n                                   <span class=\"smm-studio-snippet__studio-plan\" data-type=\"2\">\n                                            M                                    </span>\n                                                <span class=\"smm-studio-snippet__studio-plan\" data-type=\"3\">\n                                            L                                    </span>\n                                                <span class=\"smm-studio-snippet__studio-plan\" data-type=\"6\">\n                                            XL                                    </span>\n                        </p>\n</div>\n",
+    "stats": {
+      "category": [
+        {
+          "name": "Yoga",
+          "attributes": {
+            "value": "40002"
+          }
+        }
+      ],
+      "district": {
+        "district": [],
+        "areas": [
+          {
+            "name": "Amsterdam",
+            "attributes": {
+              "value": 8749,
+              "class": "area"
+            },
+            "districts": [
+              {
+                "name": "Zuidoost",
+                "attributes": {
+                  "value": 8771,
+                  "class": "area-district"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Ouderkerk aan de Amstel",
+            "attributes": {
+              "value": 8750,
+              "class": "area"
+            },
+            "districts": [
+              {
+                "name": "Ouderkerk aan de Amstel",
+                "attributes": {
+                  "value": 8759,
+                  "class": "area-district"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "venue": [
+        {
+          "name": "Wellcome Wellness",
+          "attributes": {
+            "value": 14400
+          }
+        }
+      ]
+    },
+    "searchExecutedEvent": "{}",
+    "regionSelectorSelected": null
+  }
+}

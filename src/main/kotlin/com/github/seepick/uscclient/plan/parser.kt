@@ -1,12 +1,11 @@
-package seepick.localsportsclub.api.plan
+package com.github.seepick.uscclient.plan
 
+import com.github.seepick.uscclient.City
+import com.github.seepick.uscclient.Country
+import com.github.seepick.uscclient.Plan
+import com.github.seepick.uscclient.jsoupBody
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
-import seepick.localsportsclub.service.jsoupBody
-import seepick.localsportsclub.service.model.City
-import seepick.localsportsclub.service.model.Country
-import seepick.localsportsclub.service.model.Plan
-
 
 object MembershipParser {
     fun parse(string: String): Membership {

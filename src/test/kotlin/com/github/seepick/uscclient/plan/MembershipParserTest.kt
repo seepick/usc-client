@@ -1,11 +1,11 @@
-package seepick.localsportsclub.api.plan
+package com.github.seepick.uscclient.plan
 
+import com.github.seepick.uscclient.City
+import com.github.seepick.uscclient.Country
+import com.github.seepick.uscclient.Plan
+import com.github.seepick.uscclient.readTestResponse
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import seepick.localsportsclub.readTestResponse
-import seepick.localsportsclub.service.model.City
-import seepick.localsportsclub.service.model.Country
-import seepick.localsportsclub.service.model.Plan
 
 class MembershipParserTest : StringSpec() {
     init {

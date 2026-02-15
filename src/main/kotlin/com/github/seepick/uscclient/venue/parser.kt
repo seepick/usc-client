@@ -1,11 +1,11 @@
-package seepick.localsportsclub.api.venue
+package com.github.seepick.uscclient.venue
 
+import com.github.seepick.uscclient.Plan
+import com.github.seepick.uscclient.activity.selectPlanForVenue
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import io.ktor.http.Url
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
-import seepick.localsportsclub.api.activity.selectPlanForVenue
-import seepick.localsportsclub.service.model.Plan
 
 object VenueParser {
     private val log = logger {}

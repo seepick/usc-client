@@ -1,4 +1,4 @@
-package seepick.localsportsclub.api
+package com.github.seepick.uscclient
 
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import io.ktor.client.HttpClient
@@ -13,9 +13,6 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonObject
 import org.jsoup.Jsoup
-import seepick.localsportsclub.service.model.Credentials
-import seepick.localsportsclub.service.phpSessionId
-import seepick.localsportsclub.service.requireStatusOk
 
 class UscLoginException(message: String) : Exception(message)
 

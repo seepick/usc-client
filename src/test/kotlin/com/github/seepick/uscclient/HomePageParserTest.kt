@@ -1,8 +1,7 @@
-package seepick.localsportsclub.api
+package com.github.seepick.uscclient
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import seepick.localsportsclub.readTestResponse
 
 const val responseHomeSecretKey = "UWZZNDJwNmEvaS9YTHZHN01XQ2QxQT09"
 const val responseHomeSecretValue = "SlVBNHExWEQ4bncyQTZiRnBrcVNYQT09"

@@ -1,13 +1,13 @@
-package seepick.localsportsclub.api.activity
+package com.github.seepick.uscclient.activity
 
+import com.github.seepick.uscclient.DateParser
+import com.github.seepick.uscclient.DateTimeRange
+import com.github.seepick.uscclient.Plan
+import com.github.seepick.uscclient.serializerLenient
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.serialization.Serializable
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
-import seepick.localsportsclub.serializerLenient
-import seepick.localsportsclub.service.date.DateParser
-import seepick.localsportsclub.service.date.DateTimeRange
-import seepick.localsportsclub.service.model.Plan
 import java.time.LocalDate
 
 object ActivitiesParser {
@@ -63,7 +63,6 @@ object ActivitiesParser {
     }
 
 }
-
 
 data class ActivityInfo(
     val id: Int,

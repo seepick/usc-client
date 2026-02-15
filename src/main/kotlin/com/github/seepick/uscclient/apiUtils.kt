@@ -1,6 +1,5 @@
-package seepick.localsportsclub.api
+package com.github.seepick.uscclient
 
-import seepick.localsportsclub.service.workParallel
 import kotlin.math.max
 
 interface Pageable {

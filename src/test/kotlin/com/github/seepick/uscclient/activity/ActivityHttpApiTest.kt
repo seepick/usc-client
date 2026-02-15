@@ -1,26 +1,25 @@
-package seepick.localsportsclub.api.activity
+package com.github.seepick.uscclient.activity
 
+import com.github.seepick.uscclient.City
+import com.github.seepick.uscclient.NoopResponseStorage
+import com.github.seepick.uscclient.PhpSessionId
+import com.github.seepick.uscclient.Plan
+import com.github.seepick.uscclient.StatsDistrictJson
+import com.github.seepick.uscclient.StatsJson
+import com.github.seepick.uscclient.buildMockClient
+import com.github.seepick.uscclient.uscConfig
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldBeSingleton
 import io.kotest.matchers.shouldBe
 import io.kotest.property.Arb
 import io.kotest.property.arbitrary.next
-import seepick.localsportsclub.StaticClock
-import seepick.localsportsclub.api.NoopResponseStorage
-import seepick.localsportsclub.api.PhpSessionId
-import seepick.localsportsclub.api.StatsDistrictJson
-import seepick.localsportsclub.api.StatsJson
-import seepick.localsportsclub.api.buildMockClient
-import seepick.localsportsclub.service.model.City
-import seepick.localsportsclub.service.model.Plan
-import seepick.localsportsclub.uscConfig
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class ActivityHttpApiTest : StringSpec() {
     private val uscConfig = Arb.uscConfig().next()
     private val phpSessionId = PhpSessionId("testPhpSessionId")
-    private val clock = StaticClock()
+    private val currentYear = 2000
     private val filter = ActivitiesFilter(
         city = City.Amsterdam,
         plan = Plan.UscPlan.Medium,
@@ -37,9 +36,9 @@ class ActivityHttpApiTest : StringSpec() {
             val api = ActivityHttpApi(
                 http = http,
                 uscConfig = uscConfig,
-                clock = clock,
                 responseStorage = NoopResponseStorage,
                 pageSizeHint = 1,
+                currentYear = currentYear,
             )
 
             val response = api.fetchPages(phpSessionId, filter, ServiceType.Courses)

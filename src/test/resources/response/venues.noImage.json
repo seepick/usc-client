@@ -1,0 +1,64 @@
+{
+  "success": true,
+  "data": {
+    "showMore": true,
+    "content": "\n<div\n    class=\"smm-studio-snippet b-studio-item\"\n    data-address-id=\"25829\"\n    data-position=\"1\"\n>\n    <a class=\"smm-studio-snippet__image-link\" href=\"/nl/venues/critical-alignment-yoga-therapie-studio-paul-bra\">\n        <img class=\"smm-studio-snippet__lazy-image\"\n                            data-src=\"/images/merchant/venueCatalog.jpg\"\n                        alt=\"Critical Alignment yoga &amp; therapie - Paul Braaksma\"\n            title=\"Critical Alignment yoga &amp; therapie - Paul Braaksma\">\n\n                    <noscript>\n                <img src=\"/images/merchant/venueCatalog.jpg\"\n                    alt=\"Critical Alignment yoga &amp; therapie - Paul Braaksma\"\n                    title=\"Critical Alignment yoga &amp; therapie - Paul Braaksma\">\n            </noscript>\n        \n        <span class=\"usc-button-rebrand usc-button-rebrand--dim usc-button-rebrand--small smm-studio-snippet__details-text\">\n            Meer details        </span>\n\n        <div class=\"usc-studio-status-label container\">\n            \n                    </div>\n\n            </a>\n\n    <p class=\"smm-studio-snippet__title\">\n        <a class=\"smm-studio-snippet__studio-link\" href=\"/nl/venues/critical-alignment-yoga-therapie-studio-paul-bra\">\n            Critical Alignment yoga &amp; therapie - Paul Braaksma        </a>\n            </p>\n\n    <h3 class=\"smm-studio-snippet__disciplines\">\n                    <div class=\"disciplines\">\n                Yoga            </div>\n            </h3>\n\n    <address class=\"smm-studio-snippet__addresses\">\n                <p class=\"smm-studio-snippet__address\">\n            Zuid,\n            <span class=\"smm-studio-snippet__address-street\">\n                Rustenburgerstraat 233            </span>\n        </p>\n    </address>\n\n    <p class=\"smm-studio-snippet__studio-plans\">\n                                    <span class=\"smm-studio-snippet__studio-plan\" data-type=\"1\">\n                                            Essential                                    </span>\n                                                <span class=\"smm-studio-snippet__studio-plan\" data-type=\"2\">\n                                            Classic                                    </span>\n                                                <span class=\"smm-studio-snippet__studio-plan\" data-type=\"3\">\n                                            Premium                                    </span>\n                                                <span class=\"smm-studio-snippet__studio-plan\" data-type=\"6\">\n                                            Max                                    </span>\n                        </p>\n</div>\n",
+    "stats": {
+      "category": [
+        {
+          "name": "Yoga",
+          "attributes": {
+            "value": "40002"
+          }
+        }
+      ],
+      "district": {
+        "district": [],
+        "areas": [
+          {
+            "name": "Amsterdam",
+            "attributes": {
+              "value": 8749,
+              "class": "area"
+            },
+            "districts": [
+              {
+                "name": "Zuidoost",
+                "attributes": {
+                  "value": 8771,
+                  "class": "area-district"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Ouderkerk aan de Amstel",
+            "attributes": {
+              "value": 8750,
+              "class": "area"
+            },
+            "districts": [
+              {
+                "name": "Ouderkerk aan de Amstel",
+                "attributes": {
+                  "value": 8759,
+                  "class": "area-district"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "venue": [
+        {
+          "name": "Wellcome Wellness",
+          "attributes": {
+            "value": 14400
+          }
+        }
+      ]
+    },
+    "searchExecutedEvent": "{}",
+    "regionSelectorSelected": null
+  }
+}

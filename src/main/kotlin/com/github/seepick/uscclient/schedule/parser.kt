@@ -1,11 +1,11 @@
-package seepick.localsportsclub.api.schedule
+package com.github.seepick.uscclient.schedule
 
+import com.github.seepick.uscclient.EntityType
+import com.github.seepick.uscclient.jsoupBody
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
-import seepick.localsportsclub.service.jsoupBody
-import seepick.localsportsclub.service.model.EntityType
 
 data class ScheduleHtml(
-    val rows: List<ScheduleRow>
+    val rows: List<ScheduleRow>,
 )
 
 data class ScheduleRow(
