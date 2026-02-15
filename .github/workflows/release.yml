@@ -10,11 +10,14 @@ permissions: # keep this at the root level, despite any warnings about placement
   contents: write  # required to create releases
 jobs:
   release:
-    name: Create new release
+    name: Create new Release
     runs-on: ubuntu-latest
     steps:
-    - uses: ./.github/actions/setup-env
-    - name: Build
+    - name: Checkout Code
+      uses: actions/checkout@v6
+    - name: Setup Env
+      uses: ./.github/actions/setup-env
+    - name: Gradle Build
       run: ./gradlew build
     - name: Create GIT Tag
       uses: negz/create-tag@v1
@@ -22,7 +25,7 @@ jobs:
         version: ${{ inputs.version }}
         message: tag version ${{ inputs.version }}
         token: ${{ secrets.GITHUB_TOKEN }}
-    - name: Create Release
+    - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
       with:
         tag_name: v${{ inputs.version }}

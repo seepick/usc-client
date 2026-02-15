@@ -7,6 +7,9 @@ jobs:
     name: Execute CI Pipeline
     runs-on: ubuntu-latest
     steps:
-    - uses: ./.github/actions/setup-env
-    - name: Run tests
+    - name: Checkout Code
+      uses: actions/checkout@v6
+    - name: Setup Env
+      uses: ./.github/actions/setup-env
+    - name: Run Tests
       run: ./gradlew test
