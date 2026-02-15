@@ -1,0 +1,12 @@
+name: CI
+on:
+  push:
+    branches: [ "**" ]
+jobs:
+  continuous:
+    name: Execute CI Pipeline
+    runs-on: ubuntu-latest
+    steps:
+    - uses: ./.github/actions/setup-env
+    - name: Run tests
+      run: ./gradlew test

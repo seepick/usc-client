@@ -1,0 +1,23 @@
+name: Setup Environment
+description: Checkout code, setup JDK and cache
+runs:
+  using: "composite"
+  steps:
+    - name: Setup JDK
+      uses: actions/setup-java@v5
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    - name: Checkout code
+      uses: actions/checkout@v6
+#    - name: Setup Gradle
+#      uses: gradle/actions/setup-gradle@v4
+    - name: Cache Gradle
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: gradle-cache-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          gradle-cache-${{ runner.os }}-
