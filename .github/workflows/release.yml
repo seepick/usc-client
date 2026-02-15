@@ -18,7 +18,9 @@ jobs:
     - name: Setup Env
       uses: ./.github/actions/setup-env
     - name: Gradle Build
-      run: ./gradlew build
+      run: ./gradlew test build publish -Pversion=${{ inputs.version }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Create GIT Tag
       uses: negz/create-tag@v1
       with:
