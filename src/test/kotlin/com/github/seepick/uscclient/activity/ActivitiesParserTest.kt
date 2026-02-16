@@ -1,8 +1,8 @@
 package com.github.seepick.uscclient.activity
 
-import com.github.seepick.uscclient.DateTimeRange
-import com.github.seepick.uscclient.Plan
+import com.github.seepick.uscclient.plan.Plan
 import com.github.seepick.uscclient.readTestResponse
+import com.github.seepick.uscclient.utils.DateTimeRange
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldBeSingleton
 import io.kotest.matchers.collections.shouldHaveSize
@@ -13,6 +13,7 @@ import java.time.LocalTime
 
 class ActivitiesParserTest : StringSpec() {
 
+    // TODO read from file
     private val singleFreetrainingHtmlContent = """<div class="smm-class-snippet row"
    data-appointment-id="83845951"
    data-address-id="25091">

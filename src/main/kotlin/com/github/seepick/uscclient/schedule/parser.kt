@@ -1,45 +1,33 @@
 package com.github.seepick.uscclient.schedule
 
-import com.github.seepick.uscclient.EntityType
-import com.github.seepick.uscclient.jsoupBody
+import com.github.seepick.uscclient.shared.JsoupUtil
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
 
-data class ScheduleHtml(
-    val rows: List<ScheduleRow>,
-)
-
-data class ScheduleRow(
-    val activityOrFreetrainingId: Int,
-    val venueSlug: String,
-    val entityType: EntityType,
-)
-
-object ScheduleParser {
+internal object ScheduleParser {
 
     private val log = logger {}
 
-    fun parse(html: String): ScheduleHtml {
-        val body = jsoupBody(html)
+    fun parse(html: String): List<ScheduleRow> {
+        val body = JsoupUtil.extractBody(html)
         val divs = body.select("div.reservations div.timetable div[class=\"smm-class-snippet row\"]").toList()
 
-        return ScheduleHtml(rows = divs.map { div ->
+        return divs.map { div ->
             ScheduleRow(
                 activityOrFreetrainingId = div.attr("data-appointment-id").toInt(),
                 venueSlug = div.select("a.smm-studio-link").attr("href").substringAfterLast("/"),
                 entityType = div.select("span.smm-booking-state-label").let {
                     if (it.hasClass("booked")) {
-                        EntityType.Activity
+                        ScheduleEntityType.Activity
                     } else if (it.hasClass("scheduled")) {
-                        EntityType.Freetraining
+                        ScheduleEntityType.Freetraining
                     } else error(
                         "Couldn't determine whether it's an activity or freetraining based on CSS classes: ${
                             it.attr("class")
                         }"
                     )
-
                 }
             )
-        }).also {
+        }.also {
             log.debug { "Parsed ${divs.size} reservation <div> tags to: $it" }
         }
     }

@@ -1,7 +1,7 @@
 package com.github.seepick.uscclient.activity
 
-import com.github.seepick.uscclient.DateTimeRange
-import com.github.seepick.uscclient.Plan.UscPlan
+import com.github.seepick.uscclient.utils.DateTimeRange
+import com.github.seepick.uscclient.plan.Plan.UscPlan
 import com.github.seepick.uscclient.readTestResponse
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.nulls.shouldBeNull

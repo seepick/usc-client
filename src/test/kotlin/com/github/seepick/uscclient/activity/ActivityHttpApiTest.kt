@@ -1,11 +1,11 @@
 package com.github.seepick.uscclient.activity
 
-import com.github.seepick.uscclient.City
-import com.github.seepick.uscclient.NoopResponseStorage
-import com.github.seepick.uscclient.PhpSessionId
-import com.github.seepick.uscclient.Plan
-import com.github.seepick.uscclient.StatsDistrictJson
-import com.github.seepick.uscclient.StatsJson
+import com.github.seepick.uscclient.model.City
+import com.github.seepick.uscclient.shared.NoopResponseStorage
+import com.github.seepick.uscclient.login.PhpSessionId
+import com.github.seepick.uscclient.plan.Plan
+import com.github.seepick.uscclient.shared.StatsDistrictJson
+import com.github.seepick.uscclient.shared.StatsJson
 import com.github.seepick.uscclient.buildMockClient
 import com.github.seepick.uscclient.uscConfig
 import io.kotest.core.spec.style.StringSpec

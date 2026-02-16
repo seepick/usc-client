@@ -1,13 +1,12 @@
 package com.github.seepick.uscclient.venue
 
-import com.github.seepick.uscclient.Plan
 import com.github.seepick.uscclient.activity.selectPlanForVenue
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
-import io.ktor.http.Url
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
+import java.net.URL
 
-object VenueParser {
+internal object VenueParser {
     private val log = logger {}
     private const val NO_IMAGE_SET = "/images/merchant/venueCatalog.jpg"
 
@@ -22,7 +21,7 @@ object VenueParser {
                 title = div.select("p.smm-studio-snippet__title").text().trim(),
                 slug = div.select("a.smm-studio-snippet__studio-link").attr("href").substringAfterLast("/"),
                 imageUrl = div.select("img.smm-studio-snippet__lazy-image").attr("data-src").let {
-                    if (it == NO_IMAGE_SET) null else Url(it)
+                    if (it == NO_IMAGE_SET) null else URL(it)
                 },
                 disciplines = div.select("div.disciplines").text().trim().split("·").map { it.trim() },
                 addressId = div.attr("data-address-id").toInt(),
@@ -33,14 +32,3 @@ object VenueParser {
         }
     }
 }
-
-data class VenueInfo(
-    val title: String,
-    val slug: String, // e.g. to be used as "/en/venues/{slug}"
-    val imageUrl: Url?,
-    val disciplines: List<String>,
-    val addressId: Int,
-    val addressDistrict: String,
-    val addressStreet: String,
-    val plan: Plan.UscPlan,
-)

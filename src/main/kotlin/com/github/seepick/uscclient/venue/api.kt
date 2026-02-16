@@ -1,14 +1,12 @@
 package com.github.seepick.uscclient.venue
 
-import com.github.seepick.uscclient.ApiException
-import com.github.seepick.uscclient.City
-import com.github.seepick.uscclient.PhpSessionId
-import com.github.seepick.uscclient.Plan
-import com.github.seepick.uscclient.ResponseStorage
-import com.github.seepick.uscclient.SyncProgress
 import com.github.seepick.uscclient.UscConfig
-import com.github.seepick.uscclient.fetchPageable
-import com.github.seepick.uscclient.safeGet
+import com.github.seepick.uscclient.sync.SyncProgress
+import com.github.seepick.uscclient.UscException
+import com.github.seepick.uscclient.login.PhpSessionId
+import com.github.seepick.uscclient.shared.ResponseStorage
+import com.github.seepick.uscclient.shared.fetchPageable
+import com.github.seepick.uscclient.shared.safeGet
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -19,21 +17,12 @@ import io.ktor.client.statement.bodyAsText
 import io.ktor.http.Url
 import java.util.concurrent.atomic.AtomicInteger
 
-data class VenuesFilter(
-    val city: City,
-    val plan: Plan,
-)
-
-interface VenueApi {
+internal interface VenueApi {
     suspend fun fetchPages(session: PhpSessionId, filter: VenuesFilter): List<VenuesDataJson>
     suspend fun fetchDetails(session: PhpSessionId, slug: String): VenueDetails
 }
 
-fun SyncProgress.onProgressVenues(detail: String?) {
-    onProgress("Venues", detail)
-}
-
-class VenueHttpApi(
+internal class VenueHttpApi(
     private val http: HttpClient,
     private val responseStorage: ResponseStorage,
     uscConfig: UscConfig,
@@ -43,6 +32,7 @@ class VenueHttpApi(
 
     private val log = logger {}
     private var pageCounter = AtomicInteger(-1)
+
     override suspend fun fetchPages(session: PhpSessionId, filter: VenuesFilter): List<VenuesDataJson> {
         pageCounter.set(0)
         return fetchPageable(20) { fetchPage(session, filter, it) }
@@ -62,7 +52,7 @@ class VenueHttpApi(
         responseStorage.store(response, "VenuesPage-$page")
         val json = response.body<VenuesJson>()
         if (!json.success) {
-            throw ApiException("Venues endpoint returned failure!")
+            throw UscException("Venues endpoint returned failure!")
         }
         return json.data
     }
@@ -83,4 +73,8 @@ class VenueHttpApi(
             throw e
         }
     }
+}
+
+private fun SyncProgress.onProgressVenues(detail: String?) {
+    onProgress("Venues", detail)
 }

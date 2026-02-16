@@ -1,14 +1,11 @@
 package com.github.seepick.uscclient.activity
 
-import com.github.seepick.uscclient.ApiException
-import com.github.seepick.uscclient.City
-import com.github.seepick.uscclient.DateTimeRange
-import com.github.seepick.uscclient.PhpSessionId
-import com.github.seepick.uscclient.Plan
-import com.github.seepick.uscclient.ResponseStorage
 import com.github.seepick.uscclient.UscConfig
-import com.github.seepick.uscclient.fetchPageable
-import com.github.seepick.uscclient.safeGet
+import com.github.seepick.uscclient.UscException
+import com.github.seepick.uscclient.login.PhpSessionId
+import com.github.seepick.uscclient.shared.ResponseStorage
+import com.github.seepick.uscclient.shared.fetchPageable
+import com.github.seepick.uscclient.shared.safeGet
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -17,60 +14,38 @@ import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.Url
-import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-interface ActivityApi {
-
+internal interface ActivityApi {
     suspend fun fetchPages(
         session: PhpSessionId,
         filter: ActivitiesFilter,
         serviceType: ServiceType,
     ): List<ActivitiesDataJson>
 
-    suspend fun fetchActivityDetails(session: PhpSessionId, id: Int): ActivityDetails
-    suspend fun fetchFreetrainingDetails(session: PhpSessionId, id: Int): FreetrainingDetails
+    suspend fun fetchActivityDetails(
+        session: PhpSessionId,
+        id: Int,
+    ): ActivityDetails
+
+    suspend fun fetchFreetrainingDetails(
+        session: PhpSessionId,
+        id: Int,
+    ): FreetrainingDetails
 }
 
-data class ActivitiesFilter(
-    val city: City,
-    val plan: Plan,
-    val date: LocalDate,
-)
-
-enum class ActivityType(val apiValue: String) {
+internal enum class ActivityType(val apiValue: String) {
     OnSite("onsite"),
-//    OnlineLive("live"),
+    OnlineLive("live"),
 }
 
-enum class ServiceType(val apiValue: Int) {
+/** Similar to [com.github.seepick.uscclient.schedule.ScheduleEntityType]. */
+internal enum class ServiceType(val apiValue: Int) {
     Courses(0),
     FreeTraining(1),
 }
 
-data class ActivityDetails(
-    val name: String,
-    val dateTimeRange: DateTimeRange,
-    val venueName: String,
-    val category: String,
-    val spotsLeft: Int,
-    val cancellationDateLimit: LocalDateTime?,
-    val plan: Plan.UscPlan,
-    val teacher: String?,
-    val description: String,
-)
-
-data class FreetrainingDetails(
-    val id: Int,
-    val name: String,
-    val date: LocalDate,
-    val venueSlug: String,
-    val category: String,
-    val plan: Plan.UscPlan,
-)
-
-class ActivityHttpApi(
+internal class ActivityHttpApi(
     private val http: HttpClient,
     private val responseStorage: ResponseStorage,
     uscConfig: UscConfig,
@@ -109,7 +84,7 @@ class ActivityHttpApi(
         responseStorage.store(response, "ActivtiesPage-$page")
         val json = response.body<ActivitiesJson>()
         if (!json.success) {
-            throw ApiException("Activities endpoint returned failure!")
+            throw UscException("Activities endpoint returned failure!")
         }
         return json.data
     }

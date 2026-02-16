@@ -1,15 +1,14 @@
 package com.github.seepick.uscclient.plan
 
-import com.github.seepick.uscclient.City
-import com.github.seepick.uscclient.Country
-import com.github.seepick.uscclient.Plan
-import com.github.seepick.uscclient.jsoupBody
+import com.github.seepick.uscclient.model.City
+import com.github.seepick.uscclient.model.Country
+import com.github.seepick.uscclient.shared.JsoupUtil
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
-object MembershipParser {
+internal object MembershipParser {
     fun parse(string: String): Membership {
-        val body = jsoupBody(string)
+        val body = JsoupUtil.extractBody(string)
         val membershipDiv = body.select("div[data-scroll=membership]").toList().first()
         val membershipJsonString = membershipDiv.select("a[class=form-link]").toList()
             .first().attr("data-datalayer")

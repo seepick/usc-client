@@ -1,46 +1,12 @@
 package com.github.seepick.uscclient.checkin
 
-import com.github.seepick.uscclient.DateParser
-import com.github.seepick.uscclient.TimeRange
-import com.github.seepick.uscclient.jsoupBody
+import com.github.seepick.uscclient.utils.DateParser
+import com.github.seepick.uscclient.shared.JsoupUtil
 import java.time.LocalDate
 
-data class CheckinsPage(
-    val entries: List<CheckinEntry>,
-) {
-    companion object {
-        val empty = CheckinsPage(emptyList())
-    }
-
-    val isEmpty = entries.isEmpty()
-}
-
-sealed interface CheckinEntry {
-    val venueSlug: String
-    val date: LocalDate
-}
-
-enum class ActivityCheckinEntryType {
-    Checkedin, Noshow, CancelledLate;
-}
-
-data class ActivityCheckinEntry(
-    val activityId: Int,
-    override val venueSlug: String,
-    override val date: LocalDate,
-    val timeRange: TimeRange,
-    val type: ActivityCheckinEntryType,
-) : CheckinEntry
-
-data class FreetrainingCheckinEntry(
-    val freetrainingId: Int,
-    override val venueSlug: String,
-    override val date: LocalDate,
-) : CheckinEntry
-
-object CheckinsParser {
+internal object CheckinsParser {
     fun parse(rawHtml: String, today: LocalDate): CheckinsPage {
-        val body = jsoupBody(rawHtml)
+        val body = JsoupUtil.extractBody(rawHtml)
         var currentDate: LocalDate? = null
         val entries = mutableListOf<CheckinEntry>()
         val timetable = body.select("div.timetable").first() ?: return CheckinsPage.empty

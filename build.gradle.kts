@@ -40,6 +40,8 @@ dependencies {
     testImplementation("io.insert-koin:koin-test:$versionKoin")
     testImplementation("io.ktor:ktor-client-mock:$versionKtor")
     testImplementation("io.mockk:mockk:1.14.7")
+
+    testFixturesImplementation("io.kotest:kotest-property:$versionKotest")
 }
 
 java {

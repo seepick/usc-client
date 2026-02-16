@@ -5,7 +5,7 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
-import io.ktor.http.Url
+import java.net.URL
 
 class VenueDetailsParserTest : DescribeSpec() {
     init {
@@ -65,7 +65,7 @@ class VenueDetailsParserTest : DescribeSpec() {
                 read0().websiteUrl.shouldBeNull()
             }
             it("Set") {
-                read1().websiteUrl shouldBe Url("https://www.aerials.amsterdam")
+                read1().websiteUrl shouldBe URL("https://www.aerials.amsterdam")
             }
         }
         describe("Opening Times") {

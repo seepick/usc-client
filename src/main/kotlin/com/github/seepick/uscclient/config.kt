@@ -1,9 +1,25 @@
 package com.github.seepick.uscclient
 
-import io.ktor.http.Url
+import com.github.seepick.uscclient.model.UscLang
+import java.io.File
+import java.net.URL
 
+data class ApiConfig(
+    val apiMode: ApiMode,
+//    val sync: SyncMode,
+    val usc: UscConfig = UscConfig(),
+//    val logFileEnabled: Boolean = false,
+    val responseLogFolder: File, // api logs
+)
+
+enum class ApiMode {
+    Mock, RealHttp
+}
+
+// TODO merge both Config classes together
 data class UscConfig(
-    val baseUrl: Url = Url("https://urbansportsclub.com/${UscLang.English.urlCode}"),
+    // TODO allow to pass UscLang only
+    val baseUrl: URL = URL("https://urbansportsclub.com/${UscLang.English.urlCode}"),
     val storeResponses: Boolean = true,
     val syncDaysAhead: Int = 14, // including today
 ) {

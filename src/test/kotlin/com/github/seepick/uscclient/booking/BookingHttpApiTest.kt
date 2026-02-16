@@ -1,7 +1,7 @@
 package com.github.seepick.uscclient.booking
 
-import com.github.seepick.uscclient.NoopResponseStorage
-import com.github.seepick.uscclient.PhpSessionId
+import com.github.seepick.uscclient.shared.NoopResponseStorage
+import com.github.seepick.uscclient.login.PhpSessionId
 import com.github.seepick.uscclient.buildMockClient
 import com.github.seepick.uscclient.uscConfig
 import io.kotest.core.spec.style.DescribeSpec
