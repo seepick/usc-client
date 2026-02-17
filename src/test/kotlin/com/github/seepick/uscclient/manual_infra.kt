@@ -36,6 +36,7 @@ private fun loadPhpSessionId(): PhpSessionId? {
         log.info { "Using system property's session ID: $syspropSessionId" }
         return PhpSessionId(syspropSessionId)
     }
+    log.debug { "Checking: ${localFile.canonicalPath}" }
     if (localFile.exists()) {
         val props = Properties().also {
             it.load(localFile.reader().buffered())

@@ -23,14 +23,14 @@ object ManualSystemTestApp {
         runBlocking {
             log.info { "Manual check running..." }
 //            testFreetrainingDetails()
-//            testCheckins()
+            testCheckins()
 //            testVenues()
 //            testVenue()
 //            testActivity(92788662)
 //            testActivities()
 //            testSchedule()
 //            testBook(84737975)
-            testMembership()
+//            testMembership()
         }
     }
 

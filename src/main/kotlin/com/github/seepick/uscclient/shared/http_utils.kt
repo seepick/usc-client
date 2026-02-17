@@ -72,10 +72,10 @@ private suspend fun HttpClient.safeAny(
     path: String,
     block: HttpRequestBuilder.() -> Unit = {},
 ): HttpResponse {
-    log.debug { "safeAny($method, $path)" }
+    log.trace { "safeAny($method, $path)" }
     val response = try {
         // HttpClient expected to have a default base URL configured
-        request(path) {
+        request(path.trimStart('/')) {
             this.method = method
             block()
         }
@@ -83,7 +83,7 @@ private suspend fun HttpClient.safeAny(
         log.error(e) { "Failed to ${method.value}: $path" }
         error("Failed to ${method.value}: $path")
     }
-    log.debug { "Received response from: ${response.request.url}" }
+    log.trace { "Received response from: ${response.request.url}" }
     response.requireStatusOk {
         "Response body was: ${response.bodyAsText()}"
     }

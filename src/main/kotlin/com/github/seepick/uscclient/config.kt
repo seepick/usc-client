@@ -14,5 +14,5 @@ public data class UscConfig(
     val currentYear: Int,
 )
 
-public val UscLang.baseUrl: URL get() = URL("https://urbansportsclub.com/$urlCode")
+public val UscLang.baseUrl: URL get() = URL("https://urbansportsclub.com/$urlCode/")
 public val UscConfig.baseUrl: URL get() = lang.baseUrl
