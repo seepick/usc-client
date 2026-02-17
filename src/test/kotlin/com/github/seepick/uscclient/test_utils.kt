@@ -1,9 +1,10 @@
 package com.github.seepick.uscclient
 
+import com.github.seepick.uscclient.login.PhpSessionId
+import com.github.seepick.uscclient.model.UscLang
+import com.github.seepick.uscclient.shared.jsonSerializer
 import com.github.seepick.uscclient.utils.DateParser
 import com.github.seepick.uscclient.utils.TimeRange
-import com.github.seepick.uscclient.login.PhpSessionId
-import com.github.seepick.uscclient.shared.jsonSerializer
 import io.kotest.matchers.maps.shouldContain
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
@@ -18,10 +19,16 @@ import io.ktor.util.StringValues
 import io.ktor.util.toMap
 import kotlinx.serialization.json.Json
 import java.io.InputStream
+import java.net.URL
+
+const val defaultMockBaseUrl = "http://localhost"
+
+val UscLang.baseUrl: URL get() = URL("https://urbansportsclub.com/$urlCode")
+val UscConfig.baseUrl: URL get() = lang.baseUrl
 
 internal inline fun <reified T> buildMockClient(expectedUrl: String, phpSessionId: PhpSessionId, responsePayload: T) =
     HttpClient(MockEngine { request ->
-        request.url.toString() shouldBe expectedUrl
+        request.url.toString() shouldBe "$defaultMockBaseUrl$expectedUrl"
         val headers = request.headers.toFlatMap()
         headers.shouldContain("x-requested-with" to "XMLHttpRequest")
         headers["Cookie"].shouldContain("PHPSESSID=$phpSessionId")

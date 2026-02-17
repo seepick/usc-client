@@ -15,11 +15,10 @@ import io.ktor.client.request.forms.FormDataContent
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
-import java.net.URL
 
 class LoginApiTest : StringSpec() {
 
-    private val baseUrl = URL("http://baseurl.test")
+    private val baseUrl = "http://localhost"
     private val anyUsername = "anyUsername"
     private val anyPassword = "anyPassword"
     private val anyCredentials = Credentials(anyUsername, anyPassword)
@@ -38,7 +37,7 @@ class LoginApiTest : StringSpec() {
         "When login Then sent right data to login endpoint" {
             LoginHttpApi(HttpClient(MockEngine { request ->
                 when (val requestUrl = request.url.toString()) {
-                    baseUrl.toString() -> homeRespond(sessionId)
+                    "$baseUrl/" -> homeRespond(sessionId)
                     "$baseUrl/login" -> {
                         val headers = request.headers.toFlatMap()
                         headers["Cookie"].shouldContain("PHPSESSID=$sessionId")
@@ -52,7 +51,7 @@ class LoginApiTest : StringSpec() {
 
                     else -> error("Unhandled request URL: [$requestUrl]")
                 }
-            }), baseUrl).login(Credentials(username, password))
+            })).login(Credentials(username, password))
         }
 
         "Given successful login response When login Then succeed and return session Id" {
@@ -75,11 +74,11 @@ class LoginApiTest : StringSpec() {
     private fun mockedApi(isSuccess: Boolean, sessionId: PhpSessionId = anySessionId) =
         LoginHttpApi(HttpClient(MockEngine { request ->
             when (val requestUrl = request.url.toString()) {
-                baseUrl.toString() -> homeRespond(sessionId)
+                "$baseUrl/" -> homeRespond(sessionId)
                 "$baseUrl/login" -> loginRespond(isSuccess)
                 else -> error("Unhandled request URL: [$requestUrl]")
             }
-        }), baseUrl)
+        }))
 
     private fun MockRequestHandleScope.loginRespond(isSuccess: Boolean) = respond(
         content = if (isSuccess) loginResponseSuccess else loginResponseFail,

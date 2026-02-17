@@ -13,7 +13,6 @@ import io.ktor.http.parameters
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonObject
-import java.net.URL
 
 public class UscLoginException(message: String) : UscException(message)
 
@@ -23,7 +22,6 @@ internal interface LoginApi {
 
 internal class LoginHttpApi(
     private val http: HttpClient,
-    private val baseUrl: URL,
 ) : LoginApi {
 
     private val log = logger {}
@@ -48,7 +46,7 @@ internal class LoginHttpApi(
 
     private suspend fun loadHome(): HomeResponse {
         log.debug { "Requesting home to extract basic session info." }
-        val response = http.get(baseUrl)
+        val response = http.get("/")
         response.requireStatusOk()
         val html = HomePageParser.parse(response.bodyAsText())
         return HomeResponse(
@@ -61,7 +59,7 @@ internal class LoginHttpApi(
 
     private suspend fun submitLogin(login: LoginRequest): LoginResult {
         val response = http.submitForm(
-            url = "$baseUrl/login",
+            url = "/login",
             formParameters = parameters {
                 append("email", login.email)
                 append("password", login.password)

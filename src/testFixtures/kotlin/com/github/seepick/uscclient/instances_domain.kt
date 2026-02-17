@@ -1,7 +1,9 @@
 package com.github.seepick.uscclient
 
 import com.github.seepick.uscclient.checkin.FreetrainingCheckinEntry
+import com.github.seepick.uscclient.login.Credentials
 import com.github.seepick.uscclient.model.City
+import com.github.seepick.uscclient.model.UscLang
 import com.github.seepick.uscclient.plan.Plan
 import com.github.seepick.uscclient.venue.VenueDetails
 import com.github.seepick.uscclient.venue.VenueInfo
@@ -18,11 +20,21 @@ import io.kotest.property.arbitrary.localDate
 import io.kotest.property.arbitrary.orNull
 import io.kotest.property.arbitrary.string
 
-fun Arb.Companion.uscConfig() = arbitrary {
+fun Arb.Companion.apiConfig() = arbitrary {
     UscConfig(
-        baseUrl = url().bind(),
-        storeResponses = boolean().bind(),
+        credentials = Arb.credentials().bind(),
+        lang = Arb.uscLang().bind(),
+        responseLogFolder = null,
+        currentYear = int(2000..2025).bind(),
     )
+}
+
+fun Arb.Companion.uscLang() = arbitrary {
+    enum<UscLang>().bind()
+}
+
+fun Arb.Companion.credentials() = arbitrary {
+    Credentials(username = string().bind(), password = string().bind())
 }
 
 fun Arb.Companion.venueInfo() = arbitrary {

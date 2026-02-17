@@ -2,76 +2,82 @@ package com.github.seepick.uscclient
 
 import com.github.seepick.uscclient.activity.ActivitiesFilter
 import com.github.seepick.uscclient.activity.ActivitiesParser
-import com.github.seepick.uscclient.activity.ActivityApi
 import com.github.seepick.uscclient.activity.ActivityDetails
+import com.github.seepick.uscclient.activity.ActivityHttpApi
 import com.github.seepick.uscclient.activity.FreetrainingDetails
 import com.github.seepick.uscclient.activity.FreetrainingInfo
 import com.github.seepick.uscclient.activity.ServiceType
-import com.github.seepick.uscclient.booking.BookingApi
+import com.github.seepick.uscclient.booking.BookingHttpApi
 import com.github.seepick.uscclient.booking.BookingResult
 import com.github.seepick.uscclient.booking.CancelResult
-import com.github.seepick.uscclient.checkin.CheckinApi
-import com.github.seepick.uscclient.login.Credentials
-import com.github.seepick.uscclient.login.LoginApi
-import com.github.seepick.uscclient.login.LoginResult
+import com.github.seepick.uscclient.checkin.CheckinHttpApi
+import com.github.seepick.uscclient.login.PhpSessionId
 import com.github.seepick.uscclient.plan.Membership
-import com.github.seepick.uscclient.plan.MembershipApi
-import com.github.seepick.uscclient.schedule.ScheduleApi
-import com.github.seepick.uscclient.venue.VenueApi
+import com.github.seepick.uscclient.plan.MembershipHttpApi
+import com.github.seepick.uscclient.schedule.ScheduleHttpApi
+import com.github.seepick.uscclient.shared.NoopResponseStorage
+import com.github.seepick.uscclient.shared.ResponseStorageImpl
+import com.github.seepick.uscclient.venue.VenueHttpApi
 import com.github.seepick.uscclient.venue.VenueParser
 import com.github.seepick.uscclient.venue.VenuesFilter
-import com.github.seepick.uscclient.login.PhpSessionId
+import io.ktor.client.HttpClient
+import java.io.File
 import java.time.LocalDate
 
 internal class UscApiFacade(
-    private val loginApi: LoginApi,
-    private val venueApi: VenueApi,
-    private val activityApi: ActivityApi,
-    private val scheduleApi: ScheduleApi,
-    private val checkinApi: CheckinApi,
-    private val bookingApi: BookingApi,
-    private val membershipApi: MembershipApi,
+    val phpSessionId: PhpSessionId,
+    httpClient: HttpClient,
+    responseLogFolder: File?,
+    currentYear: Int,
 ) : UscApi {
 
-    override suspend fun login(credentials: Credentials): LoginResult =
-        loginApi.login(credentials)
+    private val responseStorage =
+        if (responseLogFolder != null) ResponseStorageImpl(responseLogFolder)
+        else NoopResponseStorage
 
-    override suspend fun fetchVenues(session: PhpSessionId, filter: VenuesFilter) =
-        venueApi.fetchPages(session, filter).flatMap {
+    val venueApi = VenueHttpApi(httpClient, responseStorage)
+    val activityApi = ActivityHttpApi(httpClient, responseStorage, currentYear)
+    val scheduleApi = ScheduleHttpApi(httpClient, responseStorage)
+    val checkinApi = CheckinHttpApi(httpClient, responseStorage)
+    val bookingApi = BookingHttpApi(httpClient, responseStorage)
+    val membershipApi = MembershipHttpApi(httpClient, responseStorage)
+
+    override suspend fun fetchVenues(filter: VenuesFilter) =
+        venueApi.fetchPages(phpSessionId, filter).flatMap {
             VenueParser.parseHtmlContent(it.content)
         }
 
-    override suspend fun fetchVenueDetail(session: PhpSessionId, slug: String) =
-        venueApi.fetchDetails(session, slug)
+    override suspend fun fetchVenueDetail(slug: String) =
+        venueApi.fetchDetails(phpSessionId, slug)
 
-    override suspend fun fetchActivities(session: PhpSessionId, filter: ActivitiesFilter) =
-        activityApi.fetchPages(session, filter, ServiceType.Courses).flatMap {
+    override suspend fun fetchActivities(filter: ActivitiesFilter) =
+        activityApi.fetchPages(phpSessionId, filter, ServiceType.Courses).flatMap {
             ActivitiesParser.parseContent(it.content, filter.date)
         }
 
-    override suspend fun fetchActivityDetails(session: PhpSessionId, activityId: Int): ActivityDetails =
-        activityApi.fetchActivityDetails(session, activityId)
+    override suspend fun fetchActivityDetails(activityId: Int): ActivityDetails =
+        activityApi.fetchActivityDetails(phpSessionId, activityId)
 
-    override suspend fun fetchFreetrainings(session: PhpSessionId, filter: ActivitiesFilter): List<FreetrainingInfo> =
-        activityApi.fetchPages(session, filter, ServiceType.FreeTraining).flatMap {
+    override suspend fun fetchFreetrainings(filter: ActivitiesFilter): List<FreetrainingInfo> =
+        activityApi.fetchPages(phpSessionId, filter, ServiceType.FreeTraining).flatMap {
             ActivitiesParser.parseFreetrainingContent(it.content)
         }
 
-    override suspend fun fetchFreetrainingDetails(session: PhpSessionId, freetrainingId: Int): FreetrainingDetails =
-        activityApi.fetchFreetrainingDetails(session, freetrainingId)
+    override suspend fun fetchFreetrainingDetails(freetrainingId: Int): FreetrainingDetails =
+        activityApi.fetchFreetrainingDetails(phpSessionId, freetrainingId)
 
-    override suspend fun fetchScheduleRows(session: PhpSessionId) =
-        scheduleApi.fetchScheduleRows(session)
+    override suspend fun fetchScheduleRows() =
+        scheduleApi.fetchScheduleRows(phpSessionId)
 
-    override suspend fun fetchCheckinsPage(session: PhpSessionId, pageNr: Int, today: LocalDate) =
-        checkinApi.fetchPage(session, pageNr, today)
+    override suspend fun fetchCheckinsPage(pageNr: Int, today: LocalDate) =
+        checkinApi.fetchPage(phpSessionId, pageNr, today)
 
-    override suspend fun book(session: PhpSessionId, activityOrFreetrainingId: Int): BookingResult =
-        bookingApi.book(session, activityOrFreetrainingId)
+    override suspend fun book(activityOrFreetrainingId: Int): BookingResult =
+        bookingApi.book(phpSessionId, activityOrFreetrainingId)
 
-    override suspend fun cancel(session: PhpSessionId, activityOrFreetrainingId: Int): CancelResult =
-        bookingApi.cancel(session, activityOrFreetrainingId)
+    override suspend fun cancel(activityOrFreetrainingId: Int): CancelResult =
+        bookingApi.cancel(phpSessionId, activityOrFreetrainingId)
 
-    override suspend fun fetchMembership(session: PhpSessionId): Membership =
-        membershipApi.fetch(session)
+    override suspend fun fetchMembership(): Membership =
+        membershipApi.fetch(phpSessionId)
 }

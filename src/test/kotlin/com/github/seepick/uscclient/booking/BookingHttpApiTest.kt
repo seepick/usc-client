@@ -1,26 +1,21 @@
 package com.github.seepick.uscclient.booking
 
-import com.github.seepick.uscclient.shared.NoopResponseStorage
-import com.github.seepick.uscclient.login.PhpSessionId
 import com.github.seepick.uscclient.buildMockClient
-import com.github.seepick.uscclient.uscConfig
+import com.github.seepick.uscclient.login.PhpSessionId
+import com.github.seepick.uscclient.shared.NoopResponseStorage
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
-import io.kotest.property.Arb
-import io.kotest.property.arbitrary.next
 import io.ktor.client.HttpClient
 
 class BookingHttpApiTest : DescribeSpec() {
 
     private val activityId = 42
-    private val uscConfig = Arb.uscConfig().next()
     private val phpSessionId = PhpSessionId("testPhpSessionId")
     private val anyFreeSpotsJson = FreeSpotsJson(21, 42)
     private val errorMessage = "some error message routed through API"
 
     private fun api(httpClient: HttpClient): BookingApi = BookingHttpApi(
         http = httpClient,
-        uscConfig = uscConfig,
         responseStorage = NoopResponseStorage,
     )
 
@@ -37,7 +32,7 @@ class BookingHttpApiTest : DescribeSpec() {
                 )
                 val response = api(
                     buildMockClient(
-                        expectedUrl = "${uscConfig.baseUrl}/search/book/$activityId",
+                        expectedUrl = "/search/book/$activityId",
                         phpSessionId = phpSessionId,
                         responsePayload = rootJson
                     )
@@ -55,7 +50,7 @@ class BookingHttpApiTest : DescribeSpec() {
                 )
                 val response = api(
                     buildMockClient(
-                        expectedUrl = "${uscConfig.baseUrl}/search/book/$activityId",
+                        expectedUrl = "/search/book/$activityId",
                         phpSessionId = phpSessionId,
                         responsePayload = rootJson
                     )
@@ -76,7 +71,7 @@ class BookingHttpApiTest : DescribeSpec() {
                 )
                 val response = api(
                     buildMockClient(
-                        expectedUrl = "${uscConfig.baseUrl}/search/cancel/$activityId",
+                        expectedUrl = "/search/cancel/$activityId",
                         phpSessionId = phpSessionId,
                         responsePayload = rootJson
                     )
@@ -94,7 +89,7 @@ class BookingHttpApiTest : DescribeSpec() {
                 )
                 val response = api(
                     buildMockClient(
-                        expectedUrl = "${uscConfig.baseUrl}/search/cancel/$activityId",
+                        expectedUrl = "/search/cancel/$activityId",
                         phpSessionId = phpSessionId,
                         responsePayload = rootJson
                     )

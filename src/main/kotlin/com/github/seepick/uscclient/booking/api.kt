@@ -1,6 +1,5 @@
 package com.github.seepick.uscclient.booking
 
-import com.github.seepick.uscclient.UscConfig
 import com.github.seepick.uscclient.login.PhpSessionId
 import com.github.seepick.uscclient.shared.ResponseStorage
 import com.github.seepick.uscclient.shared.jsonSerializer
@@ -10,7 +9,6 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.cookie
 import io.ktor.client.request.header
 import io.ktor.client.statement.bodyAsText
-import io.ktor.http.Url
 import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
@@ -22,16 +20,14 @@ internal interface BookingApi {
 
 internal class BookingHttpApi(
     private val http: HttpClient,
-    uscConfig: UscConfig,
     private val responseStorage: ResponseStorage,
 ) : BookingApi {
 
     private val log = logger {}
-    private val baseUrl = uscConfig.baseUrl
 
     override suspend fun book(session: PhpSessionId, activityOrFreetrainingId: Int): BookingResult {
         log.info { "About to book activityOrFreetrainingId: $activityOrFreetrainingId" }
-        val response = http.safePost(Url("$baseUrl/search/book/$activityOrFreetrainingId")) {
+        val response = http.safePost("/search/book/$activityOrFreetrainingId") {
             cookie("PHPSESSID", session.value)
             header("x-requested-with", "XMLHttpRequest")
         }
@@ -58,7 +54,7 @@ internal class BookingHttpApi(
 
     override suspend fun cancel(session: PhpSessionId, activityOrFreetrainingId: Int): CancelResult {
         log.info { "About to cancel booking for activityOrFreetrainingId: $activityOrFreetrainingId" }
-        val response = http.safePost(Url("$baseUrl/search/cancel/$activityOrFreetrainingId")) {
+        val response = http.safePost("/search/cancel/$activityOrFreetrainingId") {
             cookie("PHPSESSID", session.value)
             header("x-requested-with", "XMLHttpRequest")
         }

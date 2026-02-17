@@ -1,6 +1,5 @@
 package com.github.seepick.uscclient.activity
 
-import com.github.seepick.uscclient.UscConfig
 import com.github.seepick.uscclient.UscException
 import com.github.seepick.uscclient.login.PhpSessionId
 import com.github.seepick.uscclient.shared.ResponseStorage
@@ -13,7 +12,6 @@ import io.ktor.client.request.cookie
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.bodyAsText
-import io.ktor.http.Url
 import java.time.format.DateTimeFormatter
 
 internal interface ActivityApi {
@@ -48,13 +46,11 @@ internal enum class ServiceType(val apiValue: Int) {
 internal class ActivityHttpApi(
     private val http: HttpClient,
     private val responseStorage: ResponseStorage,
-    uscConfig: UscConfig,
     private val currentYear: Int,
     private val pageSizeHint: Int = 100,
 ) : ActivityApi {
 
     private val log = logger {}
-    private val baseUrl = uscConfig.baseUrl
 
     override suspend fun fetchPages(
         session: PhpSessionId,
@@ -70,7 +66,7 @@ internal class ActivityHttpApi(
         serviceType: ServiceType,
         page: Int,
     ): ActivitiesDataJson {
-        val response = http.safeGet(Url("$baseUrl/activities")) {
+        val response = http.safeGet("/activities") {
             cookie("PHPSESSID", session.value)
             header("x-requested-with", "XMLHttpRequest") // IMPORTANT! to change the response to JSON!!!
             parameter("city_id", filter.city.id)
@@ -91,7 +87,7 @@ internal class ActivityHttpApi(
 
     override suspend fun fetchActivityDetails(session: PhpSessionId, id: Int): ActivityDetails {
         log.debug { "Fetching details for $id" }
-        val response = http.safeGet(Url("$baseUrl/class-details/$id")) {
+        val response = http.safeGet("/class-details/$id") {
             cookie("PHPSESSID", session.value)
         }
         responseStorage.store(response, "ActivtiesDetails-$id")
@@ -99,7 +95,7 @@ internal class ActivityHttpApi(
     }
 
     override suspend fun fetchFreetrainingDetails(session: PhpSessionId, id: Int): FreetrainingDetails {
-        val response = http.safeGet(Url("$baseUrl/class-details/$id")) {
+        val response = http.safeGet("/class-details/$id") {
             cookie("PHPSESSID", session.value)
         }
         responseStorage.store(response, "FreetrainingDetails-$id")

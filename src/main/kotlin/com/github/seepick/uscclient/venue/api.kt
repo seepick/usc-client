@@ -1,7 +1,5 @@
 package com.github.seepick.uscclient.venue
 
-import com.github.seepick.uscclient.UscConfig
-import com.github.seepick.uscclient.sync.SyncProgress
 import com.github.seepick.uscclient.UscException
 import com.github.seepick.uscclient.login.PhpSessionId
 import com.github.seepick.uscclient.shared.ResponseStorage
@@ -14,7 +12,6 @@ import io.ktor.client.request.cookie
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.bodyAsText
-import io.ktor.http.Url
 import java.util.concurrent.atomic.AtomicInteger
 
 internal interface VenueApi {
@@ -25,10 +22,8 @@ internal interface VenueApi {
 internal class VenueHttpApi(
     private val http: HttpClient,
     private val responseStorage: ResponseStorage,
-    uscConfig: UscConfig,
-    private val progress: SyncProgress,
+// FIXME   private val progress: SyncProgress,
 ) : VenueApi {
-    private val baseUrl = uscConfig.baseUrl
 
     private val log = logger {}
     private var pageCounter = AtomicInteger(-1)
@@ -41,8 +36,8 @@ internal class VenueHttpApi(
     // GET https://urbansportsclub.com/nl/venues?city_id=1144&plan_type=3&page=2
     private suspend fun fetchPage(session: PhpSessionId, filter: VenuesFilter, page: Int): VenuesDataJson {
         log.debug { "Fetching venue page $page" }
-        progress.onProgressVenues("Page ${pageCounter.incrementAndGet()}")
-        val response = http.safeGet(Url("$baseUrl/venues")) {
+//        progress.onProgressVenues("Page ${pageCounter.incrementAndGet()}")
+        val response = http.safeGet("/venues") {
             cookie("PHPSESSID", session.value)
             header("x-requested-with", "XMLHttpRequest") // IMPORTANT! to change the response to JSON!!!
             parameter("city_id", filter.city.id)
@@ -59,8 +54,8 @@ internal class VenueHttpApi(
 
     override suspend fun fetchDetails(session: PhpSessionId, slug: String): VenueDetails {
         log.debug { "Fetching details for: [$slug]" }
-        val venueUrl = "$baseUrl/venues/$slug"
-        val response = http.safeGet(Url(venueUrl)) {
+        val venueUrl = "/venues/$slug"
+        val response = http.safeGet(venueUrl) {
             cookie("PHPSESSID", session.value)
         }
         responseStorage.store(response, "VenueDetails-$slug")
@@ -75,6 +70,6 @@ internal class VenueHttpApi(
     }
 }
 
-private fun SyncProgress.onProgressVenues(detail: String?) {
-    onProgress("Venues", detail)
-}
+//private fun SyncProgress.onProgressVenues(detail: String?) {
+//    onProgress("Venues", detail)
+//}

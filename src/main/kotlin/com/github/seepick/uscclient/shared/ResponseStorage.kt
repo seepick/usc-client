@@ -38,6 +38,11 @@ internal class ResponseStorageImpl(
     private val fileSuffix = "apilog.txt"
 
     init {
+        if (!responseLogFolder.exists()) {
+            if (!responseLogFolder.mkdirs()) {
+                error("Failed to create directories for: ${responseLogFolder.canonicalPath}")
+            }
+        }
         log.info { "Initializing response storage at: ${responseLogFolder.canonicalPath}" }
     }
 

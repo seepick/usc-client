@@ -5,6 +5,7 @@ import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.apache.Apache
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
 import io.ktor.client.statement.HttpResponse
@@ -12,16 +13,22 @@ import io.ktor.client.statement.bodyAsText
 import io.ktor.client.statement.request
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
-import io.ktor.http.Url
 import io.ktor.serialization.kotlinx.json.json
 import org.apache.http.ConnectionClosedException
 import java.net.ConnectException
 import java.net.SocketException
+import java.net.URL
 import kotlin.reflect.full.isSuperclassOf
 
 private val log = logger {}
 
-internal val httpClient: HttpClient = HttpClient(Apache) {
+// TODO switch to Apache5; test throughly!
+internal fun buildHttpClient(baseUrl: URL): HttpClient = HttpClient(Apache) {
+    log.info { "Building HTTP client with base URL: $baseUrl" }
+    defaultRequest {
+        url(baseUrl.toString())
+    }
+
     install(ContentNegotiation) {
         json(jsonSerializer)
     }
@@ -42,34 +49,36 @@ internal suspend fun HttpResponse.requireStatusOk(message: suspend () -> String 
     }
 }
 
-internal suspend fun HttpClient.safeGet(url: Url, block: HttpRequestBuilder.() -> Unit = {}): HttpResponse =
-    safeRetry(HttpMethod.Get, url, block)
+internal suspend fun HttpClient.safeGet(path: String, block: HttpRequestBuilder.() -> Unit = {}): HttpResponse =
+    safeRetry(HttpMethod.Get, path, block)
 
-internal suspend fun HttpClient.safePost(url: Url, block: HttpRequestBuilder.() -> Unit = {}): HttpResponse =
-    safeRetry(HttpMethod.Post, url, block)
+internal suspend fun HttpClient.safePost(path: String, block: HttpRequestBuilder.() -> Unit = {}): HttpResponse =
+    safeRetry(HttpMethod.Post, path, block)
 
 private suspend fun HttpClient.safeRetry(
     method: HttpMethod,
-    url: Url,
+    path: String,
     block: HttpRequestBuilder.() -> Unit = {},
 ): HttpResponse =
     retrySuspended(maxAttempts = 3, listOf(SocketException::class.java, ConnectionClosedException::class.java)) {
-        safeAny(method, url, block)
+        safeAny(method, path, block)
     }
 
 private suspend fun HttpClient.safeAny(
     method: HttpMethod,
-    url: Url,
+    path: String,
     block: HttpRequestBuilder.() -> Unit = {},
 ): HttpResponse {
+    log.debug { "safeAny($method, $path)" }
     val response = try {
-        request(url) {
+        // HttpClient expected to have a default base URL configured
+        request(path) {
             this.method = method
             block()
         }
     } catch (e: ConnectException) {
-        log.error(e) { "Failed to ${method.value}: $url" }
-        error("Failed to ${method.value}: $url")
+        log.error(e) { "Failed to ${method.value}: $path" }
+        error("Failed to ${method.value}: $path")
     }
     log.debug { "Received response from: ${response.request.url}" }
     response.requireStatusOk {

@@ -1,6 +1,5 @@
 package com.github.seepick.uscclient.plan
 
-import com.github.seepick.uscclient.UscConfig
 import com.github.seepick.uscclient.login.PhpSessionId
 import com.github.seepick.uscclient.shared.ResponseStorage
 import com.github.seepick.uscclient.shared.safeGet
@@ -8,7 +7,6 @@ import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import io.ktor.client.HttpClient
 import io.ktor.client.request.cookie
 import io.ktor.client.statement.bodyAsText
-import io.ktor.http.Url
 
 /** A requirement to be injected via the koin module by the user. */
 public interface PlanRepository {
@@ -23,15 +21,13 @@ internal interface MembershipApi {
 internal class MembershipHttpApi(
     private val http: HttpClient,
     private val responseStorage: ResponseStorage,
-    uscConfig: UscConfig,
 ) : MembershipApi {
 
     private val log = logger {}
-    private val baseUrl = uscConfig.baseUrl
 
     override suspend fun fetch(session: PhpSessionId): Membership {
         log.debug { "fetch()" }
-        val response = http.safeGet(Url("$baseUrl/profile/membership")) {
+        val response = http.safeGet("/profile/membership") {
             cookie("PHPSESSID", session.value)
         }
         responseStorage.store(response, "Membership")
@@ -39,6 +35,7 @@ internal class MembershipHttpApi(
     }
 }
 
+// FIXME move to LSC?!
 internal class CachedPlanOrFetchProvider(
     private val planRepo: PlanRepository,
     private val membershipApi: MembershipApi,

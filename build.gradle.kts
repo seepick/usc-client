@@ -10,6 +10,9 @@ plugins {
     id("com.github.ben-manes.versions") version "0.53.0"
 }
 
+group = "com.github.seepick"
+version = "2000.0.SNAPSHOT"
+
 repositories {
     mavenCentral()
 }
@@ -59,7 +62,7 @@ publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
-            groupId = "com.github.seepick"
+            groupId = project.group.toString()
             artifactId = project.name
             version = project.findProperty("version")?.toString() ?: error("version not specified!")
             pom {
