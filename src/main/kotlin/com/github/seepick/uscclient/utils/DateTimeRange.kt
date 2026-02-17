@@ -4,7 +4,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 
-// TODO replace with java.time defaults
+// java's Duration is not sufficient
 data class TimeRange(
     val start: LocalTime,
     val end: LocalTime,
@@ -16,6 +16,7 @@ data class TimeRange(
     companion object // for extensions
 }
 
+// java's Period is not sufficient
 data class DateTimeRange(
     val from: LocalDateTime,
     val to: LocalDateTime,

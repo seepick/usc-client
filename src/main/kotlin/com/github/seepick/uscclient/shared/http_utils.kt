@@ -22,7 +22,6 @@ import kotlin.reflect.full.isSuperclassOf
 
 private val log = logger {}
 
-// TODO switch to Apache5; test throughly!
 internal fun buildHttpClient(baseUrl: URL): HttpClient = HttpClient(Apache) {
     log.info { "Building HTTP client with base URL: $baseUrl" }
     defaultRequest {

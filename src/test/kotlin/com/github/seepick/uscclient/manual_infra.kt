@@ -69,8 +69,4 @@ private fun loadCredentialsOrThrow(): Credentials {
         return Credentials(props.getProperty("username"), props.getProperty("password"))
     }
     error("No credentials provided via sys-props or in: ${localFile.canonicalPath}.")
-    // TODO move back to LSC
-//            cliConnectToDatabase(isProd = false)
-//            println("Using credentials from exposed repository.")
-//            SinglesServiceImpl(ExposedSinglesRepo).preferences.uscCredentials ?: error("No credentials stored in DB")
 }

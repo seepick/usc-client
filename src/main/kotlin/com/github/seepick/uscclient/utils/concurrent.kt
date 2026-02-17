@@ -11,7 +11,6 @@ import kotlin.math.min
 
 private val log = logger {}
 
-// TODO rework as service with interface, so can be mocked out easily during testing (?)
 // duplicate from LSC
 suspend fun <T, R> workParallel(
     coroutineCount: Int,

@@ -10,7 +10,6 @@ import java.util.Locale
 
 internal object DateParser {
 
-    // TODO map Locale from UscLang
     private val dayMonthFormatter = DateTimeFormatter.ofPattern("EEEE, d MMMM", Locale.ENGLISH)
     private val timeParser = DateTimeFormatter.ofPattern("H:mm", Locale.ENGLISH)
     private val concatDateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd", Locale.ENGLISH)

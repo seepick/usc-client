@@ -22,7 +22,7 @@ internal interface VenueApi {
 internal class VenueHttpApi(
     private val http: HttpClient,
     private val responseStorage: ResponseStorage,
-// FIXME   private val progress: SyncProgress,
+// FIXME   private val apiListener: LscApiListener, ... see progress below
 ) : VenueApi {
 
     private val log = logger {}
@@ -36,7 +36,7 @@ internal class VenueHttpApi(
     // GET https://urbansportsclub.com/nl/venues?city_id=1144&plan_type=3&page=2
     private suspend fun fetchPage(session: PhpSessionId, filter: VenuesFilter, page: Int): VenuesDataJson {
         log.debug { "Fetching venue page $page" }
-//        progress.onProgressVenues("Page ${pageCounter.incrementAndGet()}")
+//        progress.onProgress("Venues", "Page ${pageCounter.incrementAndGet()}")
         val response = http.safeGet("/venues") {
             cookie("PHPSESSID", session.value)
             header("x-requested-with", "XMLHttpRequest") // IMPORTANT! to change the response to JSON!!!
@@ -70,6 +70,3 @@ internal class VenueHttpApi(
     }
 }
 
-//private fun SyncProgress.onProgressVenues(detail: String?) {
-//    onProgress("Venues", detail)
-//}

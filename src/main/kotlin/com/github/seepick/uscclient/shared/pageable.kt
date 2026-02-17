@@ -13,7 +13,6 @@ internal suspend fun <P : Pageable> fetchPageable(
 ): List<P> {
     val result = mutableListOf<P>()
     do {
-        // FIXME bug here; not going beyond 20 pages!
         val pages = workParallel(max(1, pageSizeHint / 2), (1..pageSizeHint).toList()) { pageNumber ->
             fetcher(pageNumber)
         }
