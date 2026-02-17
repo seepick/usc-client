@@ -1,6 +1,5 @@
 package com.github.seepick.uscclient.activity
 
-import com.github.seepick.uscclient.apiConfig
 import com.github.seepick.uscclient.buildMockClient
 import com.github.seepick.uscclient.login.PhpSessionId
 import com.github.seepick.uscclient.model.City
@@ -8,6 +7,7 @@ import com.github.seepick.uscclient.plan.Plan
 import com.github.seepick.uscclient.shared.NoopResponseStorage
 import com.github.seepick.uscclient.shared.StatsDistrictJson
 import com.github.seepick.uscclient.shared.StatsJson
+import com.github.seepick.uscclient.uscConfig
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldBeSingleton
 import io.kotest.matchers.shouldBe
@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter
 
 
 class ActivityHttpApiTest : StringSpec() {
-    private val uscConfig = Arb.apiConfig().next()
+    private val uscConfig = Arb.uscConfig().next()
     private val phpSessionId = PhpSessionId("testPhpSessionId")
     private val currentYear = 2000
     private val filter = ActivitiesFilter(

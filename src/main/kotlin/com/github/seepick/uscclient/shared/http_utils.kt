@@ -49,7 +49,10 @@ internal suspend fun HttpResponse.requireStatusOk(message: suspend () -> String 
     }
 }
 
-internal suspend fun HttpClient.safeGet(path: String, block: HttpRequestBuilder.() -> Unit = {}): HttpResponse =
+public suspend fun HttpClient.safeGet(url: URL, block: HttpRequestBuilder.() -> Unit = {}): HttpResponse =
+    safeGet(url.toString(), block)
+
+public suspend fun HttpClient.safeGet(path: String, block: HttpRequestBuilder.() -> Unit = {}): HttpResponse =
     safeRetry(HttpMethod.Get, path, block)
 
 internal suspend fun HttpClient.safePost(path: String, block: HttpRequestBuilder.() -> Unit = {}): HttpResponse =

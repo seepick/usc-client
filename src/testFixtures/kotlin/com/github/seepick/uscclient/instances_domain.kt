@@ -1,5 +1,8 @@
 package com.github.seepick.uscclient
 
+import com.github.seepick.uscclient.activity.ActivityInfo
+import com.github.seepick.uscclient.checkin.ActivityCheckinEntry
+import com.github.seepick.uscclient.checkin.ActivityCheckinEntryType
 import com.github.seepick.uscclient.checkin.FreetrainingCheckinEntry
 import com.github.seepick.uscclient.login.Credentials
 import com.github.seepick.uscclient.model.City
@@ -20,7 +23,9 @@ import io.kotest.property.arbitrary.localDate
 import io.kotest.property.arbitrary.orNull
 import io.kotest.property.arbitrary.string
 
-fun Arb.Companion.apiConfig() = arbitrary {
+fun testFixt() {}
+
+fun Arb.Companion.uscConfig() = arbitrary {
     UscConfig(
         credentials = Arb.credentials().bind(),
         lang = Arb.uscLang().bind(),
@@ -29,12 +34,15 @@ fun Arb.Companion.apiConfig() = arbitrary {
     )
 }
 
-fun Arb.Companion.uscLang() = arbitrary {
-    enum<UscLang>().bind()
+fun Arb.Companion.credentials() = arbitrary {
+    Credentials(
+        username = string(minSize = 3, maxSize = 64).bind(),
+        password = string(minSize = 3, maxSize = 50).bind(), // 128 max, but will be encrypted
+    )
 }
 
-fun Arb.Companion.credentials() = arbitrary {
-    Credentials(username = string().bind(), password = string().bind())
+fun Arb.Companion.uscLang() = arbitrary {
+    enum<UscLang>().bind()
 }
 
 fun Arb.Companion.venueInfo() = arbitrary {
@@ -95,4 +103,26 @@ fun Arb.Companion.plan(): Arb<Plan> = arbitrary {
 
 fun Arb.Companion.slug() = arbitrary {
     string(minSize = 3, maxSize = 8, codepoints = Codepoint.alphanumeric()).bind()
+}
+
+fun Arb.Companion.activityInfo() = arbitrary {
+    ActivityInfo(
+        id = int(min = 1).bind(),
+        venueSlug = slug().bind(),
+        name = string(minSize = 5, maxSize = 20).bind(),
+        category = string(minSize = 1, maxSize = 5, codepoints = Codepoint.az()).bind(),
+        spotsLeft = int(min = 0, max = 10).bind(),
+        dateTimeRange = dateTimeRange().bind(),
+        plan = enum<Plan.UscPlan>().bind(),
+    )
+}
+
+fun Arb.Companion.activityCheckinEntry() = arbitrary {
+    ActivityCheckinEntry(
+        activityId = int(min = 1).bind(),
+        venueSlug = slug().bind(),
+        date = localDate().bind(),
+        timeRange = timeRange().bind(),
+        type = enum<ActivityCheckinEntryType>().bind(),
+    )
 }

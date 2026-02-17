@@ -7,7 +7,7 @@ public data class Credentials(
     override fun toString() = "Credentials[username=$username, password=***]"
 }
 
-public sealed interface LoginResult {
-    public data class Success(val phpSessionId: PhpSessionId) : LoginResult
-    public data class Failure(val message: String) : LoginResult
+internal sealed class LoginResult {
+    public data class Success(val phpSessionId: PhpSessionId) : LoginResult()
+    public data class Failure(val message: String) : LoginResult()
 }

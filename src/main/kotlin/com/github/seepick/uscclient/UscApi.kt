@@ -8,6 +8,8 @@ import com.github.seepick.uscclient.activity.FreetrainingInfo
 import com.github.seepick.uscclient.booking.BookingResult
 import com.github.seepick.uscclient.booking.CancelResult
 import com.github.seepick.uscclient.checkin.CheckinsPage
+import com.github.seepick.uscclient.login.Credentials
+import com.github.seepick.uscclient.model.UscLang
 import com.github.seepick.uscclient.plan.Membership
 import com.github.seepick.uscclient.schedule.ScheduleRow
 import com.github.seepick.uscclient.venue.VenueDetails
@@ -32,7 +34,12 @@ public interface UscApi {
 }
 
 public interface UscConnector {
+
     suspend fun connect(config: UscConfig): UscApi
+    suspend fun verifyConnection(
+        credentials: Credentials,
+        lang: UscLang = UscLang.English,
+    ): ConnectionVerificationResult
 
     companion object {
         operator fun invoke(): UscConnector = UscConnectorImpl()

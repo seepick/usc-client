@@ -1,13 +1,23 @@
 package com.github.seepick.uscclient.activity
 
 import com.github.seepick.uscclient.plan.Plan
+import com.github.seepick.uscclient.shared.jsonSerializer
 import com.github.seepick.uscclient.utils.DateParser
 import com.github.seepick.uscclient.utils.DateTimeRange
-import com.github.seepick.uscclient.shared.jsonSerializer
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import java.time.LocalDate
+
+public fun cleanActivityFreetrainingName(input: String): String {
+    var htmlInput = input
+    var oldHtmlInput: String
+    do {
+        oldHtmlInput = htmlInput
+        htmlInput = Jsoup.parse(oldHtmlInput).text()
+    } while (oldHtmlInput != htmlInput)
+    return htmlInput.trim()
+}
 
 internal object ActivitiesParser {
 
@@ -79,13 +89,3 @@ private fun Element.selectPlanFrom(queryName: String): Plan.UscPlan =
     select(".${queryName}s > .${queryName}").map {
         Plan.UscPlan.byId(it.attr("data-type").toInt())
     }.minBy { it.id }
-
-internal fun cleanActivityFreetrainingName(input: String): String {
-    var htmlInput = input
-    var oldHtmlInput: String
-    do {
-        oldHtmlInput = htmlInput
-        htmlInput = Jsoup.parse(oldHtmlInput).text()
-    } while (oldHtmlInput != htmlInput)
-    return htmlInput.trim()
-}

@@ -5,7 +5,6 @@ plugins {
     kotlin("jvm") version "2.3.10"
     kotlin("plugin.serialization") version "2.3.10"
     id("maven-publish")
-    id("io.kotest") version "6.1.3"
     id("java-test-fixtures")
     id("com.github.ben-manes.versions") version "0.53.0"
 }
@@ -29,7 +28,7 @@ dependencies {
     ).forEach {
         implementation("io.ktor:ktor-$it:$versionKtor")
     }
-    implementation("org.jsoup:jsoup:1.21.2")
+    implementation("org.jsoup:jsoup:1.22.1")
     val versionKoin = "4.1.1"
     implementation("io.insert-koin:koin-core:$versionKoin")
 
@@ -43,7 +42,6 @@ dependencies {
     testImplementation("io.insert-koin:koin-test:$versionKoin")
     testImplementation("io.ktor:ktor-client-mock:$versionKtor")
     testImplementation("io.mockk:mockk:1.14.7")
-
     testFixturesImplementation("io.kotest:kotest-property:$versionKotest")
 }
 
@@ -65,6 +63,7 @@ publishing {
             groupId = project.group.toString()
             artifactId = project.name
             version = project.findProperty("version")?.toString() ?: error("version not specified!")
+            suppressAllPomMetadataWarnings() // testFixturesApiElements
             pom {
                 name.set(project.name)
                 description.set("You gonna like this")
@@ -77,7 +76,7 @@ publishing {
 tasks.withType<DependencyUpdatesTask> {
     val rejectPatterns = listOf(
         ".*-ea.*", ".*RC.*", ".*rc.*", ".*M1", ".*check",
-        ".*dev.*", ".*[Bb]eta.*", ".*[Aa]lpha.*", ".*SNAPSHOT.*",
+        ".*dev.*", ".*[Bb]eta.*", ".*[Aa]lpha.*", ".*SNAPSHOT.*"
     ).map { Regex(it) }
     rejectVersionIf {
         rejectPatterns.any {

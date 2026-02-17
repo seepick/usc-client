@@ -1,7 +1,6 @@
 package com.github.seepick.uscclient
 
 import com.github.seepick.uscclient.login.PhpSessionId
-import com.github.seepick.uscclient.model.UscLang
 import com.github.seepick.uscclient.shared.jsonSerializer
 import com.github.seepick.uscclient.utils.DateParser
 import com.github.seepick.uscclient.utils.TimeRange
@@ -19,12 +18,8 @@ import io.ktor.util.StringValues
 import io.ktor.util.toMap
 import kotlinx.serialization.json.Json
 import java.io.InputStream
-import java.net.URL
 
 const val defaultMockBaseUrl = "http://localhost"
-
-val UscLang.baseUrl: URL get() = URL("https://urbansportsclub.com/$urlCode")
-val UscConfig.baseUrl: URL get() = lang.baseUrl
 
 internal inline fun <reified T> buildMockClient(expectedUrl: String, phpSessionId: PhpSessionId, responsePayload: T) =
     HttpClient(MockEngine { request ->

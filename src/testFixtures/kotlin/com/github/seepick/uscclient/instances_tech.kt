@@ -15,7 +15,7 @@ import io.kotest.property.arbitrary.string
 import java.net.URL
 import java.time.LocalTime
 
-fun Arb.Companion.phpSessionId() = arbitrary {
+internal fun Arb.Companion.phpSessionId() = arbitrary {
     PhpSessionId(value = string().bind())
 }
 
@@ -37,7 +37,6 @@ fun Arb.Companion.imageUrl() = arbitrary {
     URL("${url().bind()}/${fileName}")
 }
 
-@Deprecated("use usc-client")
 fun Arb.Companion.dateTimeRange() = arbitrary {
     val from = localDateTime().bind()
     DateTimeRange(

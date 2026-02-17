@@ -4,7 +4,7 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.http.setCookie
 
 @JvmInline
-public value class PhpSessionId(val value: String) {
+internal value class PhpSessionId(val value: String) {
     override fun toString() = value
 }
 
