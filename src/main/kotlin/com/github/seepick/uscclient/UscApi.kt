@@ -11,7 +11,7 @@ import com.github.seepick.uscclient.checkin.CheckinsPage
 import com.github.seepick.uscclient.login.Credentials
 import com.github.seepick.uscclient.model.UscLang
 import com.github.seepick.uscclient.plan.Membership
-import com.github.seepick.uscclient.schedule.ScheduleRow
+import com.github.seepick.uscclient.schedule.BookedOrScheduled
 import com.github.seepick.uscclient.venue.VenueDetails
 import com.github.seepick.uscclient.venue.VenueInfo
 import com.github.seepick.uscclient.venue.VenuesFilter
@@ -24,7 +24,7 @@ public interface UscApi {
     suspend fun fetchActivityDetails(activityId: Int): ActivityDetails
     suspend fun fetchFreetrainings(filter: ActivitiesFilter): List<FreetrainingInfo>
     suspend fun fetchFreetrainingDetails(freetrainingId: Int): FreetrainingDetails
-    suspend fun fetchScheduleRows(): List<ScheduleRow>
+    suspend fun fetchScheduleds(): List<BookedOrScheduled>
     suspend fun fetchCheckinsPage(pageNr: Int, today: LocalDate): CheckinsPage
     suspend fun fetchMembership(): Membership
     suspend fun book(activityOrFreetrainingId: Int): BookingResult

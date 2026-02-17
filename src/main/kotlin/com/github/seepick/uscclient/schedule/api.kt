@@ -8,7 +8,7 @@ import io.ktor.client.request.cookie
 import io.ktor.client.statement.bodyAsText
 
 internal interface ScheduleApi {
-    suspend fun fetchScheduleRows(session: PhpSessionId): List<ScheduleRow>
+    suspend fun fetchScheduleds(session: PhpSessionId): List<BookedOrScheduled>
 }
 
 internal class ScheduleHttpApi(
@@ -16,7 +16,7 @@ internal class ScheduleHttpApi(
     private val responseStorage: ResponseStorage,
 ) : ScheduleApi {
 
-    override suspend fun fetchScheduleRows(session: PhpSessionId): List<ScheduleRow> {
+    override suspend fun fetchScheduleds(session: PhpSessionId): List<BookedOrScheduled> {
         val response = http.safeGet("/profile/schedule") {
             cookie("PHPSESSID", session.value)
         }

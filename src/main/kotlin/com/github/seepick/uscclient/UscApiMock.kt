@@ -12,7 +12,7 @@ import com.github.seepick.uscclient.model.City
 import com.github.seepick.uscclient.model.Country
 import com.github.seepick.uscclient.plan.Membership
 import com.github.seepick.uscclient.plan.Plan
-import com.github.seepick.uscclient.schedule.ScheduleRow
+import com.github.seepick.uscclient.schedule.BookedOrScheduled
 import com.github.seepick.uscclient.utils.DateTimeRange
 import com.github.seepick.uscclient.venue.VenueDetails
 import com.github.seepick.uscclient.venue.VenueInfo
@@ -88,7 +88,7 @@ class UscApiMock : UscApi {
         plan = Plan.UscPlan.Medium,
     )
 
-    override suspend fun fetchScheduleRows(): List<ScheduleRow> {
+    override suspend fun fetchScheduleds(): List<BookedOrScheduled> {
         log.debug { "Mock returning empty schedule list." }
         delay(500)
         return emptyList()

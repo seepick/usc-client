@@ -28,7 +28,7 @@ public class UscApiDeferred(
     override suspend fun fetchFreetrainingDetails(freetrainingId: Int) =
         delegate.fetchFreetrainingDetails(freetrainingId)
 
-    override suspend fun fetchScheduleRows() = delegate.fetchScheduleRows()
+    override suspend fun fetchScheduleds() = delegate.fetchScheduleds()
     override suspend fun fetchCheckinsPage(pageNr: Int, today: LocalDate) = delegate.fetchCheckinsPage(pageNr, today)
     override suspend fun fetchMembership() = delegate.fetchMembership()
     override suspend fun book(activityOrFreetrainingId: Int) = delegate.book(activityOrFreetrainingId)

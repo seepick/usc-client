@@ -66,8 +66,8 @@ internal class UscApiFacade(
     override suspend fun fetchFreetrainingDetails(freetrainingId: Int): FreetrainingDetails =
         activityApi.fetchFreetrainingDetails(phpSessionId, freetrainingId)
 
-    override suspend fun fetchScheduleRows() =
-        scheduleApi.fetchScheduleRows(phpSessionId)
+    override suspend fun fetchScheduleds() =
+        scheduleApi.fetchScheduleds(phpSessionId)
 
     override suspend fun fetchCheckinsPage(pageNr: Int, today: LocalDate) =
         checkinApi.fetchPage(phpSessionId, pageNr, today)

@@ -102,7 +102,7 @@ object ManualSystemTestApp {
     }
 
     private suspend fun testSchedule() {
-        val rows = api.fetchScheduleRows()
+        val rows = api.fetchScheduleds()
         println("Got ${rows.size} scheduled rows back.")
         rows.forEach { row ->
             println("- $row")

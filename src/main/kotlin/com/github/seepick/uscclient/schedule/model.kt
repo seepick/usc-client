@@ -1,12 +1,20 @@
 package com.github.seepick.uscclient.schedule
 
-// TODO redesign as sealed type
-public data class ScheduleRow(
-    val activityOrFreetrainingId: Int,
-    val venueSlug: String,
-    val entityType: ScheduleEntityType,
-)
+public sealed interface BookedOrScheduled {
+    val id: Int
+    val venueSlug: String
+}
 
-public enum class ScheduleEntityType {
-    Activity, Freetraining
+public data class BookedActivity(
+    val activityId: Int,
+    override val venueSlug: String,
+) : BookedOrScheduled {
+    override val id = activityId
+}
+
+public data class ScheduledFreetraining(
+    val freetrainingId: Int,
+    override val venueSlug: String,
+) : BookedOrScheduled {
+    override val id = freetrainingId
 }
