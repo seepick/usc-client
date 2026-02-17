@@ -7,12 +7,10 @@ import java.net.URL
 
 public data class UscConfig(
     val credentials: Credentials,
-    val lang: UscLang = UscLang.English,
-//    val logFileEnabled: Boolean = false,
-//    val storeResponses: Boolean = true,
     val responseLogFolder: File?, // api logs
-    val currentYear: Int,
-)
+    val currentYear: Int, // parsing necessity
+) {
+    val baseUrl = UscLang.singleSupported.baseUrl
+}
 
-public val UscLang.baseUrl: URL get() = URL("https://urbansportsclub.com/$urlCode/")
-public val UscConfig.baseUrl: URL get() = lang.baseUrl
+public val UscLang.baseUrl get() = URL("https://urbansportsclub.com/$urlCode/")

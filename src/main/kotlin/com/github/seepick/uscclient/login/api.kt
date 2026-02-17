@@ -20,6 +20,11 @@ internal interface LoginApi {
     suspend fun login(credentials: Credentials): LoginResult
 }
 
+internal sealed class LoginResult {
+    public data class Success(val phpSessionId: PhpSessionId) : LoginResult()
+    public data class Failure(val message: String) : LoginResult()
+}
+
 internal class LoginHttpApi(
     private val http: HttpClient,
 ) : LoginApi {

@@ -28,7 +28,6 @@ fun testFixt() {}
 fun Arb.Companion.uscConfig() = arbitrary {
     UscConfig(
         credentials = Arb.credentials().bind(),
-        lang = Arb.uscLang().bind(),
         responseLogFolder = null,
         currentYear = int(2000..2025).bind(),
     )

@@ -14,7 +14,7 @@ internal class UscConnectorImpl : UscConnector {
 
     override suspend fun connect(config: UscConfig): UscApi {
         log.info { "Connecting to ${config}..." }
-        val httpClient = buildHttpClient(baseUrl = config.lang.baseUrl)
+        val httpClient = buildHttpClient(baseUrl = config.baseUrl)
         when (val loginResult = LoginHttpApi(httpClient).login(config.credentials)) {
             is LoginResult.Failure -> throw UscLoginException(loginResult.message)
             is LoginResult.Success -> return UscApiFacade(

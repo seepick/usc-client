@@ -2,18 +2,21 @@ package com.github.seepick.uscclient
 
 import com.github.seepick.uscclient.activity.ActivitiesFilter
 import com.github.seepick.uscclient.venue.VenuesFilter
-import io.github.oshai.kotlinlogging.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import kotlinx.coroutines.runBlocking
 import java.time.LocalDate
 
 public class UscApiDeferred(
     private val configProvider: () -> UscConfig,
+    private val onConnected: (UscApi) -> Unit = {},
 ) : UscApi {
-    private val log = KotlinLogging.logger {}
+    private val log = logger {}
     private val delegate by lazy {
         runBlocking {
             log.info { "Establishing deferred connection." }
-            UscConnector().connect(configProvider())
+            UscConnector().connect(configProvider()).also { api ->
+                onConnected(api)
+            }
         }
     }
 
