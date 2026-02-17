@@ -14,7 +14,7 @@ import java.time.LocalTime
 class ActivitiesParserTest : StringSpec() {
 
     // TODO read from file
-    private val singleFreetrainingHtmlContent = """<div class="smm-class-snippet row"
+    private val singleFreetrainingHtmlContent = """<div class="smm-class-snippet  row"
    data-appointment-id="83845951"
    data-address-id="25091">
    <a href="#modal-class"

@@ -74,6 +74,7 @@ internal class LoginHttpApi(
         try {
             val jsonRoot = Json.parseToJsonElement(jsonSuccessOrHtmlFail)
             return if (jsonRoot.jsonObject["success"].toString() == "true") {
+                log.info { "Login successful. PHP session ID: [${response.phpSessionId.value}]" }
                 LoginResult.Success(phpSessionId = response.phpSessionId)
             } else {
                 log.warn { "Success != true; returned JSON after login:\n$jsonSuccessOrHtmlFail" }

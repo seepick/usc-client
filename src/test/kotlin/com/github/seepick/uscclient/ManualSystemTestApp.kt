@@ -23,7 +23,6 @@ object ManualSystemTestApp {
         runBlocking {
             log.info { "Manual check running..." }
 //            testFreetrainingDetails()
-            testCheckins()
 //            testVenues()
 //            testVenue()
 //            testActivity(92788662)
@@ -49,14 +48,6 @@ object ManualSystemTestApp {
         val freetrainingId = 83664090
         val result = api.fetchFreetrainingDetails(freetrainingId)
         println(result)
-    }
-
-    private suspend fun testCheckins() {
-        val response = api.fetchCheckinsPage(1, LocalDate.now())
-        println("received ${response.entries.size} checkins")
-        response.entries.forEach { entry ->
-            println(entry)
-        }
     }
 
     private suspend fun testVenue() {

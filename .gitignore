@@ -1,4 +1,4 @@
 build
 .gradle
 .idea
-.local-credentials.properties
+.local-usc-credentials.properties

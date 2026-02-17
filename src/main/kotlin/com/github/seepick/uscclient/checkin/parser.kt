@@ -1,7 +1,7 @@
 package com.github.seepick.uscclient.checkin
 
-import com.github.seepick.uscclient.utils.DateParser
 import com.github.seepick.uscclient.shared.JsoupUtil
+import com.github.seepick.uscclient.utils.DateParser
 import java.time.LocalDate
 
 internal object CheckinsParser {
@@ -19,7 +19,7 @@ internal object CheckinsParser {
                     }
                 }
 
-                "smm-class-snippet row" -> {
+                "smm-class-snippet  row" -> {
                     val id = sub.attr("data-appointment-id").toInt()
                     val time = sub.select("p.smm-class-snippet__class-time")
                     val venueSlug = sub.select("a.smm-studio-link").first()!!.attr("href").substringAfterLast("/")

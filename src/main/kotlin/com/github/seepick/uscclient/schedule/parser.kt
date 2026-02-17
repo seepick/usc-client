@@ -9,7 +9,7 @@ internal object ScheduleParser {
 
     fun parse(html: String): List<ScheduleRow> {
         val body = JsoupUtil.extractBody(html)
-        val divs = body.select("div.reservations div.timetable div[class=\"smm-class-snippet row\"]").toList()
+        val divs = body.select("div.reservations div.timetable div[class=\"smm-class-snippet  row\"]").toList()
 
         return divs.map { div ->
             ScheduleRow(
