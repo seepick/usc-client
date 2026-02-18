@@ -13,6 +13,7 @@ import com.github.seepick.uscclient.model.Country
 import com.github.seepick.uscclient.plan.Membership
 import com.github.seepick.uscclient.plan.Plan
 import com.github.seepick.uscclient.schedule.BookedOrScheduled
+import com.github.seepick.uscclient.shared.PageProgressListener
 import com.github.seepick.uscclient.utils.DateTimeRange
 import com.github.seepick.uscclient.venue.VenueDetails
 import com.github.seepick.uscclient.venue.VenueInfo
@@ -26,8 +27,9 @@ import java.time.LocalDateTime
 class UscApiMock : UscApi {
     private val log = logger {}
 
-    override suspend fun fetchVenues(filter: VenuesFilter): List<VenueInfo> {
+    override suspend fun fetchVenues(filter: VenuesFilter, listener: PageProgressListener): List<VenueInfo> {
         log.debug { "Mock returning empty venues list." }
+        listener.onPageProgress(1)
         delay(500)
         return emptyList()
     }

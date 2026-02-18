@@ -12,13 +12,14 @@ import com.github.seepick.uscclient.login.Credentials
 import com.github.seepick.uscclient.model.UscLang
 import com.github.seepick.uscclient.plan.Membership
 import com.github.seepick.uscclient.schedule.BookedOrScheduled
+import com.github.seepick.uscclient.shared.PageProgressListener
 import com.github.seepick.uscclient.venue.VenueDetails
 import com.github.seepick.uscclient.venue.VenueInfo
 import com.github.seepick.uscclient.venue.VenuesFilter
 import java.time.LocalDate
 
 public interface UscApi {
-    suspend fun fetchVenues(filter: VenuesFilter): List<VenueInfo>
+    suspend fun fetchVenues(filter: VenuesFilter, listener: PageProgressListener = {}): List<VenueInfo>
     suspend fun fetchVenueDetail(slug: String): VenueDetails
     suspend fun fetchActivities(filter: ActivitiesFilter): List<ActivityInfo>
     suspend fun fetchActivityDetails(activityId: Int): ActivityDetails

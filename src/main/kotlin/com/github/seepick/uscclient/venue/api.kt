@@ -2,6 +2,7 @@ package com.github.seepick.uscclient.venue
 
 import com.github.seepick.uscclient.UscException
 import com.github.seepick.uscclient.login.PhpSessionId
+import com.github.seepick.uscclient.shared.PageProgressListener
 import com.github.seepick.uscclient.shared.ResponseStorage
 import com.github.seepick.uscclient.shared.fetchPageable
 import com.github.seepick.uscclient.shared.safeGet
@@ -12,45 +13,55 @@ import io.ktor.client.request.cookie
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.bodyAsText
-import java.util.concurrent.atomic.AtomicInteger
 
 internal interface VenueApi {
-    suspend fun fetchPages(session: PhpSessionId, filter: VenuesFilter): List<VenuesDataJson>
+    suspend fun fetchPages(
+        session: PhpSessionId,
+        filter: VenuesFilter,
+        listener: PageProgressListener = {},
+    ): List<VenuesDataJson>
+
     suspend fun fetchDetails(session: PhpSessionId, slug: String): VenueDetails
 }
 
 internal class VenueHttpApi(
     private val http: HttpClient,
     private val responseStorage: ResponseStorage,
-// FIXME   private val apiListener: LscApiListener, ... see progress below
 ) : VenueApi {
 
     private val log = logger {}
-    private var pageCounter = AtomicInteger(-1)
 
-    override suspend fun fetchPages(session: PhpSessionId, filter: VenuesFilter): List<VenuesDataJson> {
-        pageCounter.set(0)
-        return fetchPageable(20) { fetchPage(session, filter, it) }
+    override suspend fun fetchPages(
+        session: PhpSessionId,
+        filter: VenuesFilter,
+        listener: PageProgressListener,
+    ): List<VenuesDataJson> {
+        return fetchPageable(20, listener) {
+            fetchPage(session, filter, it)
+        }
     }
 
     // GET https://urbansportsclub.com/nl/venues?city_id=1144&plan_type=3&page=2
     private suspend fun fetchPage(session: PhpSessionId, filter: VenuesFilter, page: Int): VenuesDataJson {
         log.debug { "Fetching venue page $page" }
-//        progress.onProgress("Venues", "Page ${pageCounter.incrementAndGet()}")
-        val response = http.safeGet("/venues") {
+        val response = executeRequest(session, filter, page)
+        responseStorage.store(response, "VenuesPage-$page")
+        val json = response.body<VenuesJson>()
+        if (!json.success) {
+            log.warn { "Unsuccessful response: $json" }
+            throw UscException("/venues?page=$page ($filter) endpoint returned failure in JSON (see logs)!")
+        }
+        return json.data
+    }
+
+    private suspend fun executeRequest(session: PhpSessionId, filter: VenuesFilter, page: Int) =
+        http.safeGet("/venues") {
             cookie("PHPSESSID", session.value)
             header("x-requested-with", "XMLHttpRequest") // IMPORTANT! to change the response to JSON!!!
             parameter("city_id", filter.city.id)
             parameter("plan_type", filter.plan.id)
             parameter("page", page)
         }
-        responseStorage.store(response, "VenuesPage-$page")
-        val json = response.body<VenuesJson>()
-        if (!json.success) {
-            throw UscException("Venues endpoint returned failure!")
-        }
-        return json.data
-    }
 
     override suspend fun fetchDetails(session: PhpSessionId, slug: String): VenueDetails {
         log.debug { "Fetching details for: [$slug]" }

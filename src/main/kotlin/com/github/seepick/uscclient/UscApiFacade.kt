@@ -16,6 +16,7 @@ import com.github.seepick.uscclient.plan.Membership
 import com.github.seepick.uscclient.plan.MembershipHttpApi
 import com.github.seepick.uscclient.schedule.ScheduleHttpApi
 import com.github.seepick.uscclient.shared.NoopResponseStorage
+import com.github.seepick.uscclient.shared.PageProgressListener
 import com.github.seepick.uscclient.shared.ResponseStorageImpl
 import com.github.seepick.uscclient.venue.VenueHttpApi
 import com.github.seepick.uscclient.venue.VenueParser
@@ -42,8 +43,8 @@ internal class UscApiFacade(
     val bookingApi = BookingHttpApi(httpClient, responseStorage)
     val membershipApi = MembershipHttpApi(httpClient, responseStorage)
 
-    override suspend fun fetchVenues(filter: VenuesFilter) =
-        venueApi.fetchPages(phpSessionId, filter).flatMap {
+    override suspend fun fetchVenues(filter: VenuesFilter, listener: PageProgressListener) =
+        venueApi.fetchPages(phpSessionId, filter, listener).flatMap {
             VenueParser.parseHtmlContent(it.content)
         }
 
