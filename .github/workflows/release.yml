@@ -13,24 +13,26 @@ jobs:
     name: Create new Release
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v6
-    - name: Setup Env
-      uses: ./.github/actions/setup-env
-    - name: Gradle Build
-      run: ./gradlew test build publish -Pversion=${{ inputs.version }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Create GIT Tag
-      uses: negz/create-tag@v1
-      with:
-        version: ${{ inputs.version }}
-        message: tag version ${{ inputs.version }}
-        token: ${{ secrets.GITHUB_TOKEN }}
-    - name: Create GitHub Release
-      uses: softprops/action-gh-release@v2
-      with:
-        tag_name: ${{ inputs.version }}
-        name: Release ${{ inputs.version }}
-        draft: false
-        prerelease: false
+      - name: Checkout Code
+        uses: actions/checkout@v6
+      - name: Setup Env
+        uses: ./.github/actions/setup-env
+      - name: Gradle Build
+        run: ./gradlew test build publish -Pversion=${{ inputs.version }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create GIT Tag
+        uses: negz/create-tag@v1
+        with:
+          version: ${{ inputs.version }}
+          message: tag version ${{ inputs.version }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.version }}
+          name: Release ${{ inputs.version }}
+          body: |
+            Get the JAR from https://jitpack.io/#seepick/usc-client/${{ inputs.version }}
+          draft: false
+          prerelease: false
