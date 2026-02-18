@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 import java.time.LocalTime
 
 // java's Duration is not sufficient
-data class TimeRange(
+public data class TimeRange(
     val start: LocalTime,
     val end: LocalTime,
 ) {
@@ -17,7 +17,7 @@ data class TimeRange(
 }
 
 // java's Period is not sufficient
-data class DateTimeRange(
+public data class DateTimeRange(
     val from: LocalDateTime,
     val to: LocalDateTime,
 ) : Comparable<DateTimeRange> {

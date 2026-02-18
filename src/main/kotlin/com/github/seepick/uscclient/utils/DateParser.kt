@@ -12,8 +12,6 @@ internal object DateParser {
 
     private val dayMonthFormatter = DateTimeFormatter.ofPattern("EEEE, d MMMM", Locale.ENGLISH)
     private val timeParser = DateTimeFormatter.ofPattern("H:mm", Locale.ENGLISH)
-    private val concatDateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd", Locale.ENGLISH)
-    private val machineDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH)
     private val parseEuropeDate = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH)
 
     /**
@@ -23,14 +21,6 @@ internal object DateParser {
         val dateTemporal = dayMonthFormatter.parse(dateString)
         return LocalDate.of(year, dateTemporal[ChronoField.MONTH_OF_YEAR], dateTemporal[ChronoField.DAY_OF_MONTH])
     }
-
-    /**
-     * @param dateString e.g. "20250124"
-     */
-    fun parseConcatDate(dateString: String): LocalDate = parseAnyDate(dateString, concatDateFormatter)
-
-    /** @param dateString e.g. "2025-01-12" */
-    fun parseMachineDate(dateString: String): LocalDate = parseAnyDate(dateString, machineDateFormatter)
 
     /** @param dateString e.g. "24/12/2025" */
     fun parseEuropeDate(dateString: String): LocalDate = parseAnyDate(dateString, parseEuropeDate)
@@ -81,39 +71,9 @@ internal object DateParser {
     fun parseTimeOrNull(time: String): LocalTime? =
         try {
             LocalTime.from(timeParser.parse(time))
-        } catch (e: DateTimeParseException) {
+        } catch (_: DateTimeParseException) {
             null
         }
-
-    // locale doesn't work when app is packaged?!
-    // private val dutchDateParser = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.forLanguageTag("nl-nl"))
-    private val dutchMonths: Map<String, Int> = mapOf(
-        "januari" to 1,
-        "februari" to 2,
-        "maart" to 3,
-        "april" to 4,
-        "mei" to 5,
-        "juni" to 6,
-        "juli" to 7,
-        "augustus" to 8,
-        "september" to 9,
-        "oktober" to 10,
-        "november" to 11,
-        "december" to 12,
-    )
-//    (1..12).associateBy {
-//        Month.of(it).getDisplayName(TextStyle.FULL_STANDALONE, Locale.forLanguageTag("nl"))
-//    }
-
-    /** @param string e.g. "14 januari 2025" */
-    fun parseDutchDate(string: String): LocalDate {
-        val parts = string.split(" ")
-        return LocalDate.of(
-            parts[2].toInt(),
-            dutchMonths[parts[1]] ?: error("Couldn't find dutch month '${parts[1]}'!"),
-            parts[0].toInt()
-        )
-    }
 }
 
 private fun Pair<Int, Int>.toLocalTime() = LocalTime.of(first, second)
