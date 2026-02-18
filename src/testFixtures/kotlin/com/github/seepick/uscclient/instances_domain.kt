@@ -23,8 +23,6 @@ import io.kotest.property.arbitrary.localDate
 import io.kotest.property.arbitrary.orNull
 import io.kotest.property.arbitrary.string
 
-fun testFixt() {}
-
 fun Arb.Companion.uscConfig() = arbitrary {
     UscConfig(
         credentials = Arb.credentials().bind(),
