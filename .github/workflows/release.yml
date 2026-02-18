@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Release version (2026.X.Y)'
+        description: 'Release version, e.g.: "2026.X.Y"'
         required: true
         type: string
 permissions: # keep this at the root level, despite any warnings about placement!
@@ -28,10 +28,6 @@ jobs:
           git add version.txt
           git commit -m "Update version to ${{ inputs.version }}"
           git push origin HEAD:main
-      - name: Gradle Publish
-        run: ./gradlew publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create GIT Tag
         uses: negz/create-tag@v1
         with:

@@ -16,6 +16,7 @@ version = if (isLocalRelease) {
 } else {
     File("version.txt").readText().trim()
 }
+logger.info("usc-client project version: $version")
 
 repositories {
     mavenCentral()
