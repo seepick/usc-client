@@ -1,5 +1,7 @@
 # Todo
 
+* JitPack version issue; it builds SNAPSHOT, see:
+    * https://jitpack.io/com/github/seepick/usc-client/2026.2.1/build.log
 * resolve all todos
 * !!! BUGFIX: scheduled sync broken
 * system tests (enable-able); only run locally (add bin/validate.sh file)

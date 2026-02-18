@@ -10,7 +10,12 @@ plugins {
 }
 
 group = "com.github.seepick"
-version = "2000.0.SNAPSHOT"
+val isLocalRelease = project.findProperty("localRelease") != null
+version = if (isLocalRelease) {
+    "2000.0.SNAPSHOT"
+} else {
+    File("version.txt").readText().trim()
+}
 
 repositories {
     mavenCentral()
@@ -62,7 +67,7 @@ publishing {
             from(components["java"])
             groupId = project.group.toString()
             artifactId = project.name
-            version = project.findProperty("version")?.toString() ?: error("version not specified!")
+            version = project.version.toString()
             suppressAllPomMetadataWarnings() // testFixturesApiElements
             pom {
                 name.set(project.name)
