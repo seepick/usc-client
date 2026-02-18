@@ -76,6 +76,11 @@ publishing {
                 url.set("https://github.com/seepick/usc-client")
             }
         }
+        create<MavenPublication>("testFixtures") {
+            from(components["java-test-fixtures"])
+            // make artifact id explicit so consumers can depend on it
+            artifactId = "${project.name}-test-fixtures"
+        }
     }
 }
 
