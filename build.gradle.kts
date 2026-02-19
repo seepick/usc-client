@@ -27,7 +27,7 @@ dependencies {
     val versionKtor = "3.4.0"
     listOf(
         "client-core",
-        "client-apache", // other JVM engines had some (socket) issues: java, cio (maybe jetty, okhttp too)
+        "client-apache5", // other JVM engines had some (socket) issues: java, cio (maybe jetty, okhttp too)
         "client-logging",
         "client-content-negotiation",
         "serialization-kotlinx-json",

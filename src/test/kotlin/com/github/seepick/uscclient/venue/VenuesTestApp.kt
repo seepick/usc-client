@@ -28,10 +28,9 @@ object VenuesTestApp {
 
     private suspend fun testVenues() {
         val venues = api.fetchVenues(VenuesFilter(city = Amsterdam, plan = Plan.OnefitPlan.Premium))
-//            .sortedBy { it.slug }
         println("Received ${venues.size} venues (without those missing from linkings)")
-        venues.forEach {
-            println("- $it")
+        venues.sortedBy { it.title }.forEach {
+            println("* ${it.title} [${it.slug}] (${it.plan.apiString})")
         }
     }
 }

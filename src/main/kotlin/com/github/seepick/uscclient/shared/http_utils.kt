@@ -3,7 +3,7 @@ package com.github.seepick.uscclient.shared
 import com.github.seepick.uscclient.UscException
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import io.ktor.client.HttpClient
-import io.ktor.client.engine.apache.Apache
+import io.ktor.client.engine.apache5.Apache5
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.HttpRequestBuilder
@@ -14,7 +14,7 @@ import io.ktor.client.statement.request
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
-import org.apache.http.ConnectionClosedException
+import org.apache.hc.core5.http.ConnectionClosedException
 import java.net.ConnectException
 import java.net.SocketException
 import java.net.URL
@@ -22,7 +22,7 @@ import kotlin.reflect.full.isSuperclassOf
 
 private val log = logger {}
 
-internal fun buildHttpClient(baseUrl: URL): HttpClient = HttpClient(Apache) {
+internal fun buildHttpClient(baseUrl: URL): HttpClient = HttpClient(Apache5) {
     log.info { "Building HTTP client with base URL: $baseUrl" }
     defaultRequest {
         url(baseUrl.toString())
