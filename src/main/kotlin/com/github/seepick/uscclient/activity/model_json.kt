@@ -1,7 +1,7 @@
 package com.github.seepick.uscclient.activity
 
-import com.github.seepick.uscclient.shared.StatsJson
 import com.github.seepick.uscclient.shared.Pageable
+import com.github.seepick.uscclient.shared.StatsJson
 import kotlinx.serialization.Serializable
 
 @Serializable

@@ -21,7 +21,7 @@ internal fun buildApiFacade(
     responseLogFolder: File? = File("build/test_utils-api_logs"),
 ): UscApiFacade {
     val httpClient = buildHttpClient(baseUrl = UscLang.English.baseUrl)
-    val phpSessionId = loadPhpSessionId() ?: phpSessionIdByLogin(httpClient)
+    val phpSessionId = loadLocalPhpSessionId() ?: loginAndGetPhpSessionId(httpClient)
     return UscApiFacade(
         phpSessionId = phpSessionId,
         httpClient = httpClient,
@@ -30,12 +30,13 @@ internal fun buildApiFacade(
     )
 }
 
-private fun loadPhpSessionId(): PhpSessionId? {
+private fun loadLocalPhpSessionId(): PhpSessionId? {
     val syspropSessionId = System.getProperty("phpSessionId")
     if (syspropSessionId != null) {
         log.info { "Using system property's session ID: $syspropSessionId" }
         return PhpSessionId(syspropSessionId)
     }
+
     log.debug { "Checking: ${localFile.canonicalPath}" }
     if (localFile.exists()) {
         val props = Properties().also {
@@ -49,7 +50,7 @@ private fun loadPhpSessionId(): PhpSessionId? {
     return null
 }
 
-private fun phpSessionIdByLogin(httpClient: HttpClient) = runBlocking {
+private fun loginAndGetPhpSessionId(httpClient: HttpClient) = runBlocking {
     LoginHttpApi(httpClient).login(loadCredentialsOrThrow())
         .shouldBeInstanceOf<LoginResult.Success>().phpSessionId
 }
@@ -61,6 +62,7 @@ private fun loadCredentialsOrThrow(): Credentials {
         log.info { "Using credentials from system property." }
         return Credentials(syspropUsername, syspropPassword)
     }
+
     if (localFile.exists()) {
         log.info { "Using credentials from local file ${localFile.absolutePath}" }
         val props = Properties().also {
