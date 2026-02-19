@@ -48,6 +48,7 @@ internal suspend fun HttpResponse.requireStatusOk(message: suspend () -> String 
     }
 }
 
+@Suppress("unused")
 public suspend fun HttpClient.safeGet(url: URL, block: HttpRequestBuilder.() -> Unit = {}): HttpResponse =
     safeGet(url.toString(), block)
 

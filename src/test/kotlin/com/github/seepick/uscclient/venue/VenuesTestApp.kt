@@ -3,18 +3,18 @@ package com.github.seepick.uscclient.venue
 import com.github.seepick.uscclient.buildApiFacade
 import com.github.seepick.uscclient.model.City.Companion.Amsterdam
 import com.github.seepick.uscclient.plan.Plan
-import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import kotlinx.coroutines.runBlocking
 
+@Suppress("unused")
 object VenuesTestApp {
 
-    private val log = logger {}
     private val api = buildApiFacade()
 
     @JvmStatic
     fun main(args: Array<String>) {
         runBlocking {
-            testVenues()
+//            testVenues()
+//            testVenue()
         }
     }
 
