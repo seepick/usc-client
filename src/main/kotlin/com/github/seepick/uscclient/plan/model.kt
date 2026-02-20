@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.github.seepick.uscclient.plan
 
 import com.github.seepick.uscclient.model.City
@@ -11,7 +13,7 @@ public data class Membership(
 
 public sealed interface Plan {
     companion object {
-        fun byInternalId(internalId: String): Plan =
+        public fun byInternalId(internalId: String): Plan =
             UscPlan.entries.singleOrNull { it.internalId == internalId }
                 ?: OnefitPlan.entries.singleOrNull { it.internalId == internalId }
                 ?: error("Invalid internal plan ID: [${internalId}]!")
@@ -21,13 +23,16 @@ public sealed interface Plan {
     val internalId: String
     val apiString: String // found in JSON
     val label: String
+    val emoji: String
     val usageInfo: UsageInfo
+    val fullLabel: String get() = "$emoji $label ($apiString)"
 
     public enum class UscPlan(
         override val id: Int,
         override val internalId: String,
         override val apiString: String,
         override val label: String,
+        override val emoji: String,
         override val usageInfo: UsageInfo,
     ) : Plan {
         Small(
@@ -35,6 +40,7 @@ public sealed interface Plan {
             internalId = "uscSmall",
             apiString = "S",
             label = "Essential",
+            emoji = "🥉",
             usageInfo = UsageInfo(
                 maxCheckinsInPeriod = 4,
                 maxOnlineCheckins = 4,
@@ -47,6 +53,7 @@ public sealed interface Plan {
             internalId = "uscMedium",
             apiString = "M",
             label = "Classic",
+            emoji = "🥈",
             usageInfo = UsageInfo(
                 maxCheckinsInPeriod = 10,
                 maxOnlineCheckins = 8,
@@ -59,6 +66,7 @@ public sealed interface Plan {
             internalId = "uscLarge",
             apiString = "L",
             label = "Premium",
+            emoji = "🥇",
             usageInfo = UsageInfo(
                 maxCheckinsInPeriod = 14,
                 maxOnlineCheckins = 8,
@@ -72,6 +80,7 @@ public sealed interface Plan {
             internalId = "uscExtraLarge",
             apiString = "XL",
             label = "Max",
+            emoji = "🏆",
             usageInfo = UsageInfo(
                 maxCheckinsInPeriod = 18,
                 maxOnlineCheckins = 8,
@@ -82,6 +91,7 @@ public sealed interface Plan {
 
         companion object {
             val default = Small
+            val emoji = Large.emoji
             fun byApiString(apiString: String) = entries.single { it.apiString == apiString }
             fun byId(id: Int) = entries.single { it.id == id }
         }
