@@ -100,7 +100,7 @@ public sealed interface Plan {
     }
 
     public enum class OnefitPlan(
-        private val uscPlan: UscPlan,
+        val uscPlan: UscPlan,
     ) : Plan by uscPlan {
         Premium(UscPlan.Large) {
             override val internalId = "onefitPremium"
