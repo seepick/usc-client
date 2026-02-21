@@ -4,6 +4,8 @@ import com.github.seepick.uscclient.login.Credentials
 import com.github.seepick.uscclient.login.LoginHttpApi
 import com.github.seepick.uscclient.login.LoginResult
 import com.github.seepick.uscclient.login.PhpSessionId
+import com.github.seepick.uscclient.login.loadLocal
+import com.github.seepick.uscclient.login.localCredsFile
 import com.github.seepick.uscclient.model.UscLang
 import com.github.seepick.uscclient.shared.buildHttpClient
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
@@ -15,7 +17,6 @@ import java.time.LocalDate
 import java.util.Properties
 
 private val log = logger {}
-private val localFile = File(".local-usc-credentials.properties")
 
 internal fun buildApiFacade(
     responseLogFolder: File? = File("build/test_utils-api_logs"),
@@ -37,13 +38,13 @@ private fun loadLocalPhpSessionId(): PhpSessionId? {
         return PhpSessionId(syspropSessionId)
     }
 
-    log.debug { "Checking: ${localFile.canonicalPath}" }
-    if (localFile.exists()) {
+    log.debug { "Checking: ${localCredsFile.canonicalPath}" }
+    if (localCredsFile.exists()) {
         val props = Properties().also {
-            it.load(localFile.reader().buffered())
+            it.load(localCredsFile.reader().buffered())
         }
         return props["phpSessionId"]?.toString()?.trim()?.ifEmpty { null }?.let {
-            log.info { "Using PHP session ID from local file ${localFile.absolutePath}" }
+            log.info { "Using PHP session ID from local file ${localCredsFile.absolutePath}" }
             PhpSessionId(it)
         }
     }
@@ -51,24 +52,6 @@ private fun loadLocalPhpSessionId(): PhpSessionId? {
 }
 
 private fun loginAndGetPhpSessionId(httpClient: HttpClient) = runBlocking {
-    LoginHttpApi(httpClient).login(loadCredentialsOrThrow())
+    LoginHttpApi(httpClient).login(Credentials.loadLocal())
         .shouldBeInstanceOf<LoginResult.Success>().phpSessionId
-}
-
-private fun loadCredentialsOrThrow(): Credentials {
-    val syspropUsername = System.getProperty("username")
-    val syspropPassword = System.getProperty("password")
-    if (syspropUsername != null && syspropPassword != null) {
-        log.info { "Using credentials from system property." }
-        return Credentials(syspropUsername, syspropPassword)
-    }
-
-    if (localFile.exists()) {
-        log.info { "Using credentials from local file ${localFile.absolutePath}" }
-        val props = Properties().also {
-            it.load(localFile.reader().buffered())
-        }
-        return Credentials(props.getProperty("username"), props.getProperty("password"))
-    }
-    error("No credentials provided via sys-props or in: ${localFile.canonicalPath}.")
 }

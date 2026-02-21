@@ -5,4 +5,6 @@ public data class Credentials(
     val password: String,
 ) {
     override fun toString() = "Credentials[username=$username, password=***]"
+
+    companion object // for extensions
 }
