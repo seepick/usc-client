@@ -1,7 +1,7 @@
 package com.github.seepick.uscclient.activity
 
-import com.github.seepick.uscclient.utils.DateParser
 import com.github.seepick.uscclient.shared.jsonSerializer
+import com.github.seepick.uscclient.utils.DateParser
 import kotlinx.serialization.Serializable
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
@@ -23,7 +23,7 @@ internal object ActivityDetailsParser {
         }
         val plan = div.selectPlanFromDetail()
         val teacher = div.select("span.teacher").parents().first()?.text()?.trim()
-        val description = div.select("span.class-description").text().trim()
+        val description = div.select("span.class-description").text().trim().ifEmpty { null }
         return if (buttonBook.hasAttr("data-book-success")) {
             val json = buttonBook.attr("data-book-success")
             val data = jsonSerializer.decodeFromString<ActivityBookDataJson>(json)

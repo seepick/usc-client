@@ -32,7 +32,7 @@ public data class ActivityDetails(
     val cancellationDateLimit: LocalDateTime?,
     val plan: Plan.UscPlan,
     val teacher: String?,
-    val description: String,
+    val description: String?,
 )
 
 public data class FreetrainingInfo(
