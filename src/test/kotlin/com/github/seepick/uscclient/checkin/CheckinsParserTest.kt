@@ -2,7 +2,7 @@ package com.github.seepick.uscclient.checkin
 
 import com.github.seepick.uscclient.invoke
 import com.github.seepick.uscclient.readTestResponse
-import com.github.seepick.uscclient.utils.TimeRange
+import com.github.seepick.uscclient.shared.TimeRange
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldBeSingleton

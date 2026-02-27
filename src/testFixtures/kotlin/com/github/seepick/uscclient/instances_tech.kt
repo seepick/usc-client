@@ -1,8 +1,8 @@
 package com.github.seepick.uscclient
 
 import com.github.seepick.uscclient.login.PhpSessionId
-import com.github.seepick.uscclient.utils.DateTimeRange
-import com.github.seepick.uscclient.utils.TimeRange
+import com.github.seepick.uscclient.shared.DateTimeRange
+import com.github.seepick.uscclient.shared.TimeRange
 import io.kotest.property.Arb
 import io.kotest.property.arbitrary.Codepoint
 import io.kotest.property.arbitrary.alphanumeric

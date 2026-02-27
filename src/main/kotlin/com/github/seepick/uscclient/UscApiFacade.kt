@@ -15,9 +15,12 @@ import com.github.seepick.uscclient.login.PhpSessionId
 import com.github.seepick.uscclient.plan.Membership
 import com.github.seepick.uscclient.plan.MembershipHttpApi
 import com.github.seepick.uscclient.schedule.ScheduleHttpApi
+import com.github.seepick.uscclient.shared.DateRange
 import com.github.seepick.uscclient.shared.NoopResponseStorage
 import com.github.seepick.uscclient.shared.PageProgressListener
 import com.github.seepick.uscclient.shared.ResponseStorageImpl
+import com.github.seepick.uscclient.thirdparty.DnysEvent
+import com.github.seepick.uscclient.thirdparty.DnysFetcher
 import com.github.seepick.uscclient.venue.VenueHttpApi
 import com.github.seepick.uscclient.venue.VenueParser
 import com.github.seepick.uscclient.venue.VenuesFilter
@@ -42,6 +45,7 @@ internal class UscApiFacade(
     val checkinApi = CheckinHttpApi(httpClient, responseStorage)
     val bookingApi = BookingHttpApi(httpClient, responseStorage)
     val membershipApi = MembershipHttpApi(httpClient, responseStorage)
+    val dnysFetcher = DnysFetcher(httpClient, responseStorage)
 
     override suspend fun fetchVenues(filter: VenuesFilter, listener: PageProgressListener) =
         venueApi.fetchPages(phpSessionId, filter, listener).flatMap {
@@ -73,12 +77,15 @@ internal class UscApiFacade(
     override suspend fun fetchCheckinsPage(pageNr: Int, today: LocalDate) =
         checkinApi.fetchPage(phpSessionId, pageNr, today)
 
+    override suspend fun fetchMembership(): Membership =
+        membershipApi.fetch(phpSessionId)
+
     override suspend fun book(activityOrFreetrainingId: Int): BookingResult =
         bookingApi.book(phpSessionId, activityOrFreetrainingId)
 
     override suspend fun cancel(activityOrFreetrainingId: Int): CancelResult =
         bookingApi.cancel(phpSessionId, activityOrFreetrainingId)
 
-    override suspend fun fetchMembership(): Membership =
-        membershipApi.fetch(phpSessionId)
+    override suspend fun fetchDnysEvents(range: DateRange): List<DnysEvent> =
+        dnysFetcher.fetchEvents(range)
 }

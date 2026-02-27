@@ -12,7 +12,9 @@ import com.github.seepick.uscclient.login.Credentials
 import com.github.seepick.uscclient.model.UscLang
 import com.github.seepick.uscclient.plan.Membership
 import com.github.seepick.uscclient.schedule.BookedOrScheduled
+import com.github.seepick.uscclient.shared.DateRange
 import com.github.seepick.uscclient.shared.PageProgressListener
+import com.github.seepick.uscclient.thirdparty.DnysEvent
 import com.github.seepick.uscclient.venue.VenueDetails
 import com.github.seepick.uscclient.venue.VenueInfo
 import com.github.seepick.uscclient.venue.VenuesFilter
@@ -30,6 +32,9 @@ public interface UscApi {
     suspend fun fetchMembership(): Membership
     suspend fun book(activityOrFreetrainingId: Int): BookingResult
     suspend fun cancel(activityOrFreetrainingId: Int): CancelResult
+
+    // third party venues
+    suspend fun fetchDnysEvents(range: DateRange): List<DnysEvent>
 
     companion object // extensions
 }

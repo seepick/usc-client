@@ -13,8 +13,10 @@ import com.github.seepick.uscclient.model.Country
 import com.github.seepick.uscclient.plan.Membership
 import com.github.seepick.uscclient.plan.Plan
 import com.github.seepick.uscclient.schedule.BookedOrScheduled
+import com.github.seepick.uscclient.shared.DateRange
+import com.github.seepick.uscclient.shared.DateTimeRange
 import com.github.seepick.uscclient.shared.PageProgressListener
-import com.github.seepick.uscclient.utils.DateTimeRange
+import com.github.seepick.uscclient.thirdparty.DnysEvent
 import com.github.seepick.uscclient.venue.VenueDetails
 import com.github.seepick.uscclient.venue.VenueInfo
 import com.github.seepick.uscclient.venue.VenuesFilter
@@ -122,8 +124,12 @@ class UscApiMock : UscApi {
     override suspend fun fetchMembership(): Membership {
         return Membership(
             plan = Plan.OnefitPlan.Premium,
-            country = Country.Companion.byLabel("Netherlands"),
-            city = City.Companion.Amsterdam,
+            country = Country.byLabel("Netherlands"),
+            city = City.Amsterdam,
         )
+    }
+
+    override suspend fun fetchDnysEvents(range: DateRange): List<DnysEvent> {
+        return emptyList()
     }
 }

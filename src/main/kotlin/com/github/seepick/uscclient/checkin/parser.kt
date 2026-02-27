@@ -1,7 +1,7 @@
 package com.github.seepick.uscclient.checkin
 
+import com.github.seepick.uscclient.shared.DateParser
 import com.github.seepick.uscclient.shared.JsoupUtil
-import com.github.seepick.uscclient.utils.DateParser
 import java.time.LocalDate
 
 internal object CheckinsParser {

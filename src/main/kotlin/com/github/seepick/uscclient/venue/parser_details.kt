@@ -1,8 +1,8 @@
 package com.github.seepick.uscclient.venue
 
-import com.github.seepick.uscclient.utils.unescape
 import com.github.seepick.uscclient.shared.JsoupUtil
 import com.github.seepick.uscclient.shared.jsonSerializer
+import com.github.seepick.uscclient.shared.unescape
 import java.net.URL
 
 internal object VenueDetailsParser {

@@ -1,6 +1,6 @@
 package com.github.seepick.uscclient.checkin
 
-import com.github.seepick.uscclient.utils.TimeRange
+import com.github.seepick.uscclient.shared.TimeRange
 import java.time.LocalDate
 
 public data class CheckinsPage(

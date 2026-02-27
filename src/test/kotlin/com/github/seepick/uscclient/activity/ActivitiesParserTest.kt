@@ -2,7 +2,7 @@ package com.github.seepick.uscclient.activity
 
 import com.github.seepick.uscclient.plan.Plan
 import com.github.seepick.uscclient.readTestResponse
-import com.github.seepick.uscclient.utils.DateTimeRange
+import com.github.seepick.uscclient.shared.DateTimeRange
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldBeSingleton
 import io.kotest.matchers.collections.shouldHaveSize

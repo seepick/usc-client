@@ -1,9 +1,9 @@
 package com.github.seepick.uscclient.activity
 
 import com.github.seepick.uscclient.plan.Plan
+import com.github.seepick.uscclient.shared.DateParser
+import com.github.seepick.uscclient.shared.DateTimeRange
 import com.github.seepick.uscclient.shared.jsonSerializer
-import com.github.seepick.uscclient.utils.DateParser
-import com.github.seepick.uscclient.utils.DateTimeRange
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element

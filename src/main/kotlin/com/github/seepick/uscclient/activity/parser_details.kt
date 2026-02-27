@@ -1,7 +1,7 @@
 package com.github.seepick.uscclient.activity
 
+import com.github.seepick.uscclient.shared.DateParser
 import com.github.seepick.uscclient.shared.jsonSerializer
-import com.github.seepick.uscclient.utils.DateParser
 import kotlinx.serialization.Serializable
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element

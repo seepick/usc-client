@@ -1,4 +1,4 @@
-package com.github.seepick.uscclient.utils
+package com.github.seepick.uscclient.shared
 
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -14,6 +14,20 @@ public data class TimeRange(
     }
 
     companion object // for extensions
+}
+
+public data class DateRange(
+    val from: LocalDate,
+    val to: LocalDate,
+) : Comparable<DateRange> {
+    init {
+        require(from <= to) { "From ($from) must be <= to ($to)" }
+    }
+
+    override fun compareTo(other: DateRange): Int {
+        val from = this.from.compareTo(other.from)
+        return if (from != 0) from else this.to.compareTo(other.to)
+    }
 }
 
 // java's Period is not sufficient

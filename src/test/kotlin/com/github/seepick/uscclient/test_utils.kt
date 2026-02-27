@@ -1,9 +1,9 @@
 package com.github.seepick.uscclient
 
 import com.github.seepick.uscclient.login.PhpSessionId
+import com.github.seepick.uscclient.shared.DateParser
+import com.github.seepick.uscclient.shared.TimeRange
 import com.github.seepick.uscclient.shared.jsonSerializer
-import com.github.seepick.uscclient.utils.DateParser
-import com.github.seepick.uscclient.utils.TimeRange
 import io.kotest.matchers.maps.shouldContain
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
@@ -40,7 +40,7 @@ internal inline fun <reified T> buildMockClient(expectedUrl: String, phpSessionI
     }
 
 inline fun <reified T> readTestResponse(fileName: String, folder: String = "/response/"): T {
-    val fileContent = readFromClasspath("$folder$fileName")
+    val fileContent = readFromClasspath("$folder${fileName.trimStart('/')}")
     return if (T::class == String::class) fileContent as T else jsonx.decodeFromString(fileContent)
 }
 

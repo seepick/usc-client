@@ -1,6 +1,5 @@
 package com.github.seepick.uscclient.shared
 
-import com.github.seepick.uscclient.utils.workParallel
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.math.max
 

@@ -1,4 +1,4 @@
-package com.github.seepick.uscclient.utils
+package com.github.seepick.uscclient.shared
 
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import kotlinx.coroutines.Dispatchers

@@ -1,12 +1,14 @@
 package com.github.seepick.uscclient
 
 import com.github.seepick.uscclient.activity.ActivitiesFilter
+import com.github.seepick.uscclient.shared.DateRange
 import com.github.seepick.uscclient.shared.PageProgressListener
 import com.github.seepick.uscclient.venue.VenuesFilter
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import kotlinx.coroutines.runBlocking
 import java.time.LocalDate
 
+@Suppress("unused")
 public class UscApiDeferred(
     private val configProvider: () -> UscConfig,
     private val onConnected: (UscApi) -> Unit = {},
@@ -46,4 +48,6 @@ public class UscApiDeferred(
     override suspend fun book(activityOrFreetrainingId: Int) = delegate.book(activityOrFreetrainingId)
 
     override suspend fun cancel(activityOrFreetrainingId: Int) = delegate.cancel(activityOrFreetrainingId)
+
+    override suspend fun fetchDnysEvents(range: DateRange) = delegate.fetchDnysEvents(range)
 }

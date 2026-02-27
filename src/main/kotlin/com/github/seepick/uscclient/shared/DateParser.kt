@@ -1,4 +1,4 @@
-package com.github.seepick.uscclient.utils
+package com.github.seepick.uscclient.shared
 
 import java.time.LocalDate
 import java.time.LocalDateTime
