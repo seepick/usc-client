@@ -97,5 +97,15 @@ class VenueDetailsParserTest : DescribeSpec() {
                 readH3().importantInfo shouldBe "movement important info"
             }
         }
+        describe("Parse image URLs from venue page") {
+            it("success") {
+                val response = readAndParse("venue_detail-carousel.html")
+                response.carouselUrls shouldBe listOf(
+                    URL("https://storage.test/0.png"),
+                    URL("https://storage.test/1.png"),
+                    URL("https://storage.test/2.png"),
+                )
+            }
+        }
     }
 }

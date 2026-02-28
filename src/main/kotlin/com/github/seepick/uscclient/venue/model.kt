@@ -31,8 +31,8 @@ public data class VenueDetails(
     val longitude: String,
     val originalImageUrl: URL?, // from JSON script
     // doesn't have a plan
-    // multiple pictures ... maybe in the future
-    // visit limits ... always the same
+    // visit limits ...?
+    val carouselUrls: List<URL>,
 )
 
 public data class VenuesFilter(

@@ -71,6 +71,7 @@ fun Arb.Companion.venueDetails() = arbitrary {
         addressLocality = string(minSize = 3, maxSize = 50).bind(),
         streetAddress = string(minSize = 3, maxSize = 50).bind(),
         originalImageUrl = url().orNull().bind(),
+        carouselUrls = list(url(), 0..5).bind(),
     )
 }
 

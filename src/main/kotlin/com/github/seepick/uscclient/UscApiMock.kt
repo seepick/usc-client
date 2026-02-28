@@ -53,6 +53,7 @@ class UscApiMock : UscApi {
             postalCode = "1001AA",
             streetAddress = "Main Street 42",
             addressLocality = "Amsterdam, Netherlands",
+            carouselUrls = emptyList(),
         )
     }
 

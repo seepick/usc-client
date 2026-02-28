@@ -74,6 +74,9 @@ internal object VenueDetailsParser {
             streetAddress = detail.address.streetAddress,
             addressLocality = detail.address.addressLocality,
             postalCode = detail.address.postalCode,
+            carouselUrls = body.select("div.studio-carousel-item").map {
+                URL(it.select("img").attr("data-src").trim())
+            },
         )
     }
 }
