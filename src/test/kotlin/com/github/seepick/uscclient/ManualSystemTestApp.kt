@@ -7,7 +7,6 @@ import com.github.seepick.uscclient.model.City.Companion.Amsterdam
 import com.github.seepick.uscclient.plan.Plan
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import kotlinx.coroutines.runBlocking
-import java.time.Duration
 import java.time.LocalDate
 
 @Suppress("unused")
@@ -23,7 +22,7 @@ object ManualSystemTestApp {
             log.info { "Manual check running..." }
 //            testFreetrainingDetails()
 //            testActivity(92788662)
-//            testActivities()
+            testActivities()
 //            testSchedule()
 //            testBook(84737975)
 //            testMembership()
@@ -59,23 +58,7 @@ object ManualSystemTestApp {
             ActivitiesParser.parseContent(page.content, today)
         }
         println("In total ${activities.size} activities.")
-//        activities.forEach { println("- $it") }
-        activities.map { activity ->
-            activity to api.fetchActivityDetails(activity.id)
-        }.groupBy {
-            it.first.venueSlug
-        }
-            .forEach { (venue, infoAndDetails) ->
-                println("Venue: $venue")
-                infoAndDetails.forEach { (info, detail) ->
-                    val diff: String = if (detail.cancellationDateLimit != null) {
-                        Duration.between(detail.cancellationDateLimit, info.dateTimeRange.from).toHours().toString()
-                    } else "?"
-                    println(
-                        " $diff hours ... ${info.name} [${info.dateTimeRange}] // ${detail.cancellationDateLimit}"
-                    )
-                }
-            }
+        activities.forEach { println("- $it") }
     }
 
     private suspend fun testActivity(activityId: Int) {

@@ -6,7 +6,7 @@ import kotlin.math.max
 internal interface Pageable {
     val showMore: Boolean
 
-    companion object {} // for extensions
+    companion object // for extensions
 }
 
 fun interface PageProgressListener {
