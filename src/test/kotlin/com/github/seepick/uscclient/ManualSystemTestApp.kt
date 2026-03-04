@@ -22,7 +22,7 @@ object ManualSystemTestApp {
             log.info { "Manual check running..." }
 //            testFreetrainingDetails()
 //            testActivity(92788662)
-            testActivities()
+//            testActivities()
 //            testSchedule()
 //            testBook(84737975)
 //            testMembership()

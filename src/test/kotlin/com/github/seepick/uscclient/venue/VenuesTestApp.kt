@@ -14,16 +14,14 @@ object VenuesTestApp {
     fun main(args: Array<String>) {
         runBlocking {
 //            testVenues()
-//            testVenue()
+            testVenue()
         }
     }
 
     private suspend fun testVenue() {
-        val slug = "amsterdam-noord"
+        val slug = "equal-yoga-rozengracht"
         val details = api.fetchVenueDetail(slug)
-        println("details.title=${details.title}")
-//        println("details.websiteUrl=${details.websiteUrl}")
-        println("details.linkedVenueSlugs=${details.linkedVenueSlugs}")
+        println(details)
     }
 
     private suspend fun testVenues() {

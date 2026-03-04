@@ -33,9 +33,17 @@ public data class VenueDetails(
     // doesn't have a plan
     // visit limits ...?
     val carouselUrls: List<URL>,
+    val visitLimits: VisitLimits,
 )
 
 public data class VenuesFilter(
     val city: City,
     val plan: Plan,
+)
+
+public data class VisitLimits(
+    val small: Int,
+    val medium: Int,
+    val large: Int,
+    val xlarge: Int,
 )

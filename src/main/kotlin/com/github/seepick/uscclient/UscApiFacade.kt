@@ -24,6 +24,7 @@ import com.github.seepick.uscclient.thirdparty.DnysFetcher
 import com.github.seepick.uscclient.venue.VenueHttpApi
 import com.github.seepick.uscclient.venue.VenueParser
 import com.github.seepick.uscclient.venue.VenuesFilter
+import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import io.ktor.client.HttpClient
 import java.io.File
 import java.time.LocalDate
@@ -34,6 +35,8 @@ internal class UscApiFacade(
     responseLogFolder: File?,
     currentYear: Int,
 ) : UscApi {
+
+    private val log = logger {}
 
     private val responseStorage =
         if (responseLogFolder != null) ResponseStorageImpl(responseLogFolder)
@@ -46,6 +49,10 @@ internal class UscApiFacade(
     val bookingApi = BookingHttpApi(httpClient, responseStorage)
     val membershipApi = MembershipHttpApi(httpClient, responseStorage)
     val dnysFetcher = DnysFetcher(httpClient, responseStorage)
+
+    init {
+        log.debug { "UscApiFacade initialized (responseLogFolder=$responseLogFolder)" }
+    }
 
     override suspend fun fetchVenues(filter: VenuesFilter, listener: PageProgressListener) =
         venueApi.fetchPages(phpSessionId, filter, listener).flatMap {

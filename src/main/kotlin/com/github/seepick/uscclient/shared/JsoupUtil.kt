@@ -13,10 +13,13 @@ internal object JsoupUtil {
 
     fun extractHeadAndBody(htmlString: String): Pair<Element, Element> {
         val html = extractHtml(htmlString)
-        return (html.childNodes().single { it.nodeName() == "head" } as Element) to
-                (html.childNodes().single { it.nodeName() == "body" } as Element)
+        return (html.childNodes().single { it.nodeName() == "head" } as Element) to (html.childNodes()
+            .single { it.nodeName() == "body" } as Element)
     }
 
-    private fun extractHtml(htmlString: String): Node =
-        Jsoup.parse(htmlString).childNodes().single { it.nodeName() == "html" }
+    private fun extractHtml(htmlString: String): Node {
+        val doc = Jsoup.parse(htmlString)
+        doc.outputSettings().prettyPrint(false) // to preserve whitespace (line breaks) in text nodes
+        return doc.childNodes().single { it.nodeName() == "html" }
+    }
 }

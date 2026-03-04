@@ -10,6 +10,7 @@ import com.github.seepick.uscclient.model.UscLang
 import com.github.seepick.uscclient.plan.Plan
 import com.github.seepick.uscclient.venue.VenueDetails
 import com.github.seepick.uscclient.venue.VenueInfo
+import com.github.seepick.uscclient.venue.VisitLimits
 import io.kotest.property.Arb
 import io.kotest.property.arbitrary.Codepoint
 import io.kotest.property.arbitrary.alphanumeric
@@ -72,9 +73,18 @@ fun Arb.Companion.venueDetails() = arbitrary {
         streetAddress = string(minSize = 3, maxSize = 50).bind(),
         originalImageUrl = url().orNull().bind(),
         carouselUrls = list(url(), 0..5).bind(),
+        visitLimits = visitLimits().bind(),
     )
 }
 
+fun Arb.Companion.visitLimits() = arbitrary {
+    VisitLimits(
+        small = int(1..10).bind(),
+        medium = int(1..10).bind(),
+        large = int(1..10).bind(),
+        xlarge = int(1..10).bind(),
+    )
+}
 
 fun Arb.Companion.freetrainingCheckinEntry() = arbitrary {
     FreetrainingCheckinEntry(

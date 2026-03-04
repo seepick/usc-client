@@ -8,10 +8,11 @@ import java.net.URL
 internal object VenueDetailsParser {
 
     private object EnglishLabels {
-        const val OTHER_LOCATIONS = "Other Locations:"
-        const val WEBSITE = "Website:"
-        const val IMPORTANT_INFO = "Important Info:"
-        const val OPENING_TIMES = "Opening Times:"
+        const val OTHER_LOCATIONS = "Other Locations"
+        const val WEBSITE = "Website"
+        const val IMPORTANT_INFO = "Important Info"
+        const val OPENING_TIMES = "Opening Times"
+        const val VISIT_LIMITS = "Visit Limits"
     }
 
     private val importantInfoDefaults = listOf(".", "-")
@@ -29,6 +30,7 @@ internal object VenueDetailsParser {
         var website: String? = null
         var openingTimes: String? = null
         var importantInfo: String? = null
+        var visitLimits: VisitLimits? = null
         val json = body.select("script[type=\"application/ld+json\"]").first()!!.dataNodes().first().wholeData
         val detail = jsonSerializer.decodeFromString<VenueDetailEmbedJson>(json)
         val slug = head.select("meta[property=\"og:url\"]").attr("content").substringAfterLast("/")
@@ -57,6 +59,11 @@ internal object VenueDetailsParser {
                         if (it == OPENING_TIMES_DEFAULT_VALUE_EN || it == OPENING_TIMES_DEFAULT_VALUE_NL) null else it
                     }
                 }
+
+                EnglishLabels.VISIT_LIMITS -> {
+                    visitLimits =
+                        parseVisitLimits(div.select("p span.pre-line").html())
+                }
             }
         }
         return VenueDetails(
@@ -77,8 +84,31 @@ internal object VenueDetailsParser {
             carouselUrls = body.select("div.studio-carousel-item").map {
                 URL(it.select("img").attr("data-src").trim())
             },
+            visitLimits = visitLimits ?: error("Visit limits not found!")
         )
     }
+}
+
+private fun parseVisitLimits(text: String): VisitLimits {
+//    S-members kunnen tot 2x per maand bij deze locatie inchecken
+//    M-members kunnen tot 4x per maand bij deze locatie inchecken
+//    L &amp; XL-members kunnen tot 6x per maand bij deze locatie inchecken
+    val lines = text.split("\n")
+    fun List<String>.findLimit(symbol: String): Int = mapNotNull { line ->
+        if (line.contains("$symbol-members ") || line.contains("$symbol ")) {
+            val idx = line.indexOf("x per maand")
+            line.substring(idx - 1, idx).toInt()
+        } else {
+            null
+        }
+    }.single()
+
+    return VisitLimits(
+        small = lines.findLimit("S"),
+        medium = lines.findLimit("M"),
+        large = lines.findLimit("L"),
+        xlarge = lines.findLimit("XL"),
+    )
 }
 
 private val venueInfoMisbeginnings = listOf(".let op!", ".let op:", "let op:", ".note:", "note:", ".", "/")

@@ -72,7 +72,7 @@ internal class VenueHttpApi(
         responseStorage.store(response, "VenueDetails-$slug")
         try {
             return VenueDetailsParser.parse(response.bodyAsText()).also {
-                log.debug { "Fetched details for venue '$slug': $it" }
+                log.trace { "Fetched details for venue '$slug': $it" }
             }
         } catch (e: Exception) {
             log.error { "Unable to parse response for venue: $venueUrl" }

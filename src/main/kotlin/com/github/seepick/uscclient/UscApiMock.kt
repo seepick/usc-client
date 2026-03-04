@@ -20,6 +20,7 @@ import com.github.seepick.uscclient.thirdparty.DnysEvent
 import com.github.seepick.uscclient.venue.VenueDetails
 import com.github.seepick.uscclient.venue.VenueInfo
 import com.github.seepick.uscclient.venue.VenuesFilter
+import com.github.seepick.uscclient.venue.VisitLimits
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import kotlinx.coroutines.delay
 import java.net.URL
@@ -54,6 +55,7 @@ class UscApiMock : UscApi {
             streetAddress = "Main Street 42",
             addressLocality = "Amsterdam, Netherlands",
             carouselUrls = emptyList(),
+            visitLimits = VisitLimits(small = 2, medium = 4, large = 6, xlarge = 6)
         )
     }
 
