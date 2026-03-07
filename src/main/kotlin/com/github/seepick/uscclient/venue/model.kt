@@ -54,7 +54,5 @@ public data class VisitLimits(
             Plan.UscPlan.ExtraLarge -> xlarge
         }
 
-    companion object {
-        public val default = VisitLimits(2, 4, 6, 6)
-    }
+    companion object // for extensions
 }
