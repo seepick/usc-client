@@ -47,7 +47,15 @@ public data class VisitLimits(
     val large: Int,
     val xlarge: Int,
 ) {
+    public fun forPlan(plan: Plan.UscPlan): Int =
+        when (plan) {
+            Plan.UscPlan.Small -> small
+            Plan.UscPlan.Medium -> medium
+            Plan.UscPlan.Large -> large
+            Plan.UscPlan.ExtraLarge -> xlarge
+        }
+
     companion object {
-        val default = VisitLimits(2, 4, 6, 6)
+        public val default = VisitLimits(2, 4, 6, 6)
     }
 }

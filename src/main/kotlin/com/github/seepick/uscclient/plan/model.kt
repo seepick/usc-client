@@ -26,6 +26,7 @@ public sealed interface Plan {
     val emoji: String
     val usageInfo: UsageInfo
     val fullLabel: String get() = "$emoji $label ($apiString)"
+    val uscPlan: UscPlan
 
     public enum class UscPlan(
         override val id: Int,
@@ -89,6 +90,8 @@ public sealed interface Plan {
             )
         );
 
+        override val uscPlan = this
+
         companion object {
             val default = Small
             val emoji = Large.emoji
@@ -100,7 +103,7 @@ public sealed interface Plan {
     }
 
     public enum class OnefitPlan(
-        val uscPlan: UscPlan,
+        override val uscPlan: UscPlan,
     ) : Plan by uscPlan {
         Premium(UscPlan.Large) {
             override val internalId = "onefitPremium"
