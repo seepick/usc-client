@@ -46,4 +46,8 @@ public data class VisitLimits(
     val medium: Int,
     val large: Int,
     val xlarge: Int,
-)
+) {
+    companion object {
+        val default = VisitLimits(2, 4, 6, 6)
+    }
+}
