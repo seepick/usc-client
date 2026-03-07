@@ -19,7 +19,7 @@ object VenuesTestApp {
     }
 
     private suspend fun testVenue() {
-        val slug = "equal-yoga-rozengracht"
+        val slug = "wereldconditie-light-vrijdag-1015"
         val details = api.fetchVenueDetail(slug)
         println(details)
     }

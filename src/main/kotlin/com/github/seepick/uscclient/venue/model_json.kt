@@ -1,7 +1,7 @@
 package com.github.seepick.uscclient.venue
 
-import com.github.seepick.uscclient.shared.StatsJson
 import com.github.seepick.uscclient.shared.Pageable
+import com.github.seepick.uscclient.shared.StatsJson
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -21,7 +21,10 @@ internal data class VenuesDataJson(
 
 @Serializable
 internal data class VenueDetailEmbedJson(
-    val telephone: String, val image: String, val address: VenueDetailEmbedAddress, val geo: VenueDetailEmbedGeo,
+    val telephone: String,
+    val image: String,
+    val address: VenueDetailEmbedAddress,
+    val geo: VenueDetailEmbedGeo,
 )
 
 @Serializable

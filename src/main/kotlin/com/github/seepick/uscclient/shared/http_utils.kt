@@ -1,5 +1,6 @@
 package com.github.seepick.uscclient.shared
 
+import com.github.seepick.uscclient.UscErrorReason
 import com.github.seepick.uscclient.UscException
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import io.ktor.client.HttpClient
@@ -39,12 +40,17 @@ internal fun buildHttpClient(baseUrl: URL): HttpClient = HttpClient(Apache5) {
 //            proceed(request)
 //        }
 //    })
+
+    followRedirects = false // do not automatically follow 301/302 redirects
     expectSuccess = false
 }
 
 internal suspend fun HttpResponse.requireStatusOk(message: suspend () -> String = { "" }) {
     if (status != HttpStatusCode.OK) {
-        throw UscException("Expected status 200 OK but was [$status] for: ${request.url}. ${message()}")
+        throw UscException(
+            "Expected status 200 OK but was [$status] for: ${request.url}. ${message()}",
+            UscErrorReason.InvalidStatusCode(status.value)
+        )
     }
 }
 

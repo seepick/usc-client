@@ -1,5 +1,6 @@
 package com.github.seepick.uscclient.login
 
+import com.github.seepick.uscclient.UscErrorReason
 import com.github.seepick.uscclient.UscException
 import com.github.seepick.uscclient.shared.requireStatusOk
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
@@ -14,7 +15,7 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonObject
 
-public class UscLoginException(message: String) : UscException(message)
+public class UscLoginException(message: String) : UscException(message, UscErrorReason.LoginFailed)
 
 internal interface LoginApi {
     suspend fun login(credentials: Credentials): LoginResult

@@ -1,5 +1,6 @@
 package com.github.seepick.uscclient.venue
 
+import com.github.seepick.uscclient.UscErrorReason
 import com.github.seepick.uscclient.UscException
 import com.github.seepick.uscclient.login.PhpSessionId
 import com.github.seepick.uscclient.shared.PageProgressListener
@@ -49,7 +50,10 @@ internal class VenueHttpApi(
         val json = response.body<VenuesJson>()
         if (!json.success) {
             log.warn { "Unsuccessful response: $json" }
-            throw UscException("/venues?page=$page ($filter) endpoint returned failure in JSON (see logs)!")
+            throw UscException(
+                "/venues?page=$page ($filter) endpoint returned failure in JSON (see logs)!",
+                UscErrorReason.JsonSuccessFalse
+            )
         }
         return json.data
     }
@@ -75,7 +79,7 @@ internal class VenueHttpApi(
                 log.trace { "Fetched details for venue '$slug': $it" }
             }
         } catch (e: Exception) {
-            log.error { "Unable to parse response for venue: $venueUrl" }
+            log.error { "Unable to parse response for venue: https://urbansportsclub.com/en$venueUrl" }
             throw e
         }
     }

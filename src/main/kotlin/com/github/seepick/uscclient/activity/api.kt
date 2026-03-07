@@ -1,5 +1,6 @@
 package com.github.seepick.uscclient.activity
 
+import com.github.seepick.uscclient.UscErrorReason
 import com.github.seepick.uscclient.UscException
 import com.github.seepick.uscclient.login.PhpSessionId
 import com.github.seepick.uscclient.model.City
@@ -94,7 +95,7 @@ internal class ActivityHttpApi(
         responseStorage.store(response, "ActivtiesPage-${params.page}")
         val json = response.body<ActivitiesJson>()
         if (!json.success) {
-            throw UscException("Activities endpoint returned failure!")
+            throw UscException("Activities endpoint returned failure!", UscErrorReason.JsonSuccessFalse)
         }
         return json.data
     }

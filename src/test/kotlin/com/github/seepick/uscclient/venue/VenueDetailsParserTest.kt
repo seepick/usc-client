@@ -42,8 +42,10 @@ class VenueDetailsParserTest : DescribeSpec() {
                     it.postalCode shouldBe "1001 AA"
                 }
             }
-            it("visit limits") {
-                val detail = readAndParse("venue_detail-visit_limits.html")
+        }
+        describe("visit limits") {
+            it("simple") {
+                val detail = readAndParse("venue_detail-visit_limits-simple.html")
                 detail.visitLimits shouldBe VisitLimits(
                     small = 2,
                     medium = 4,
