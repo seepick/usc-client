@@ -49,7 +49,7 @@ public data class DateTimeRange(
     private val fromDate = from.toLocalDate()
     private val fromTime = from.toLocalTime()
 
-    fun isStartMatching(date: LocalDate, matchFrom: LocalTime? = null, matchTo: LocalTime? = null): Boolean {
+    fun isFromMatching(date: LocalDate, matchFrom: LocalTime? = null, matchTo: LocalTime? = null): Boolean {
         val dateMatches = fromDate.isEqual(date)
         if (matchFrom != null && matchTo != null) return dateMatches && fromTime >= matchFrom && fromTime <= matchTo
         if (matchFrom != null) return dateMatches && fromTime >= matchFrom
