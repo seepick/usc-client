@@ -42,6 +42,11 @@ class VenueDetailsParserTest : DescribeSpec() {
                     it.postalCode shouldBe "1001 AA"
                 }
             }
+            it("opening times") {
+                val detail = readAndParse("venue_detail-opening_times.html")
+
+                detail.openingTimes shouldBe "This is my custom opening times."
+            }
         }
         describe("visit limits") {
             it("simple") {

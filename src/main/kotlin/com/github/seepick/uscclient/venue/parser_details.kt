@@ -36,7 +36,7 @@ internal object VenueDetailsParser {
         val detail = jsonSerializer.decodeFromString<VenueDetailEmbedJson>(json)
         val slug = head.select("meta[property=\"og:url\"]").attr("content").substringAfterLast("/")
         val disciplines = body.select("div.disciplines").text().split(",").map { it.trim() }
-        val description = body.select("p.description").text()
+        val description = body.select("p.description span").html()
         body.select("div.studio-info-section").forEach { div ->
             when (div.select("h2").single().text()) {
                 EnglishLabels.OTHER_LOCATIONS -> {
@@ -50,13 +50,13 @@ internal object VenueDetailsParser {
                 }
 
                 EnglishLabels.IMPORTANT_INFO -> {
-                    importantInfo = div.select("p span.pre-line").text().trim().let {
+                    importantInfo = div.select("p span.pre-line").html().trim().let {
                         if (importantInfoDefaults.contains(it)) null else it
                     }
                 }
 
                 EnglishLabels.OPENING_TIMES -> {
-                    openingTimes = div.select("p span.pre-line").text().trim().let {
+                    openingTimes = div.select("p span.pre-line").html().trim().let {
                         if (it == OPENING_TIMES_DEFAULT_VALUE_EN || it == OPENING_TIMES_DEFAULT_VALUE_NL) null else it
                     }
                 }
