@@ -56,3 +56,9 @@ public data class VisitLimits(
 
     companion object // for extensions
 }
+
+fun VisitLimits?.forPlanOrNull(plan: Plan?): Int? {
+    if (this == null) return null
+    if (plan == null) return null
+    return forPlan(plan.uscPlan)
+}

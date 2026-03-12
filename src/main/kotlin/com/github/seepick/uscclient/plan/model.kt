@@ -46,7 +46,6 @@ public sealed interface Plan {
                 maxCheckinsInPeriod = 4,
                 maxOnlineCheckins = 4,
                 maxPlusCheckins = 0,
-                maxCheckinsInMonthPerVenue = 2,
             )
         ),
         Medium(
@@ -59,7 +58,6 @@ public sealed interface Plan {
                 maxCheckinsInPeriod = 10,
                 maxOnlineCheckins = 8,
                 maxPlusCheckins = 0,
-                maxCheckinsInMonthPerVenue = 4,
             )
         ),
         Large(
@@ -72,7 +70,6 @@ public sealed interface Plan {
                 maxCheckinsInPeriod = 14,
                 maxOnlineCheckins = 8,
                 maxPlusCheckins = 4,
-                maxCheckinsInMonthPerVenue = 6,
                 // 2 per day
             )
         ),
@@ -86,7 +83,6 @@ public sealed interface Plan {
                 maxCheckinsInPeriod = 18,
                 maxOnlineCheckins = 8,
                 maxPlusCheckins = 8,
-                maxCheckinsInMonthPerVenue = 6,
             )
         );
 
@@ -121,7 +117,7 @@ public data class UsageInfo(
     val maxCheckinsInPeriod: Int, // max monthly, real-life
     val maxOnlineCheckins: Int, // max monthly, internet videostream
     val maxPlusCheckins: Int,
-    val maxCheckinsInMonthPerVenue: Int,
+    // NO val maxCheckinsInMonthPerVenue: Int ... this is venue-specific!
 ) {
     // "limits may differ per partner but average is around 6" - by USC support
     val maxReservationsPerVenue = 6 // valid for all plans
