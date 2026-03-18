@@ -14,7 +14,7 @@ object DnysFetcherTestApp {
         runBlocking {
             val today = LocalDate.now()
             val events = DnysFetcher(httpClient, NoopResponseStorage).fetchEvents(
-                DateRange(from = today, to = today)
+                DateRange(from = today, to = today.plusDays(13))
             )
             println("received ${events.size} events:")
             events.forEach {
