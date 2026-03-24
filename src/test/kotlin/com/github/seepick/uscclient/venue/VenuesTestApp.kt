@@ -3,6 +3,7 @@ package com.github.seepick.uscclient.venue
 import com.github.seepick.uscclient.buildApiFacade
 import com.github.seepick.uscclient.model.City.Companion.Amsterdam
 import com.github.seepick.uscclient.plan.Plan
+import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.runBlocking
 
 @Suppress("unused")
@@ -22,6 +23,10 @@ object VenuesTestApp {
         val slug = "de-nieuwe-yogaschool"
         val details = api.fetchVenueDetail(slug)
         println(details)
+        details.title shouldBe "De Nieuwe Yogaschool"
+        details.streetAddress shouldBe "Laurierstraat 109"
+        // when logged in, api returns ONLY limit for current plan :-(
+        details.visitLimits shouldBe VisitLimits(2, 4, 8, 8)
     }
 
     private suspend fun testVenues() {

@@ -29,9 +29,9 @@ public data class VenueDetails(
     val addressLocality: String, // from JSON script
     val latitude: String, // from JSON script
     val longitude: String,
+    val visitLimits: VisitLimits?,
     val originalImageUrl: URL?, // from JSON script
     val carouselUrls: List<URL>,
-    val visitLimits: VisitLimits?,
     // doesn't have a plan
 )
 
@@ -41,12 +41,12 @@ public data class VenuesFilter(
 )
 
 public data class VisitLimits(
-    val small: Int,
-    val medium: Int,
-    val large: Int,
-    val xlarge: Int,
+    val small: Int?,
+    val medium: Int?,
+    val large: Int?,
+    val xlarge: Int?,
 ) {
-    public fun forPlan(plan: Plan.UscPlan): Int =
+    public fun forPlan(plan: Plan.UscPlan): Int? =
         when (plan) {
             Plan.UscPlan.Small -> small
             Plan.UscPlan.Medium -> medium

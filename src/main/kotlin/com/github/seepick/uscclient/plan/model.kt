@@ -91,8 +91,12 @@ public sealed interface Plan {
         companion object {
             val default = Small
             val emoji = Large.emoji
-            fun byApiString(apiString: String) = entries.single { it.apiString == apiString }
-            fun byId(id: Int) = entries.single { it.id == id }
+            fun byApiString(searchApiString: String) = entries.singleOrNull { it.apiString == searchApiString }
+                ?: error("Unknown API string '$searchApiString'!")
+
+            fun byId(searchId: Int) = entries.singleOrNull { it.id == searchId } ?: error("Unknown ID '$searchId'!")
+            fun byLabel(searchLabel: String) =
+                entries.singleOrNull { it.label == searchLabel } ?: error("Unknown label '$searchLabel'!")
         }
 
         override fun toString() = "Plan.Usc.$name"

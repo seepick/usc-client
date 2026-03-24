@@ -52,10 +52,19 @@ class VenueDetailsParserTest : DescribeSpec() {
             it("simple") {
                 val detail = readAndParse("venue_detail-visit_limits-simple.html")
                 detail.visitLimits shouldBe VisitLimits(
+                    small = null,
+                    medium = null,
+                    large = 8,
+                    xlarge = null,
+                )
+            }
+            it("all") {
+                val detail = readAndParse("venue_detail-visit_limits-all.html")
+                detail.visitLimits shouldBe VisitLimits(
                     small = 2,
                     medium = 4,
-                    large = 6,
-                    xlarge = 6
+                    large = 8,
+                    xlarge = 9,
                 )
             }
         }

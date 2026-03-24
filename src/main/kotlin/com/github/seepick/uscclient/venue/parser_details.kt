@@ -1,9 +1,10 @@
 package com.github.seepick.uscclient.venue
 
+import com.github.seepick.uscclient.plan.Plan
 import com.github.seepick.uscclient.shared.JsoupUtil
 import com.github.seepick.uscclient.shared.jsonSerializer
 import com.github.seepick.uscclient.shared.unescape
-import io.github.oshai.kotlinlogging.KotlinLogging
+import org.jsoup.nodes.Element
 import java.net.URL
 
 internal object VenueDetailsParser {
@@ -62,7 +63,7 @@ internal object VenueDetailsParser {
                 }
 
                 EnglishLabels.VISIT_LIMITS -> {
-                    visitLimits = parseVisitLimits(div.select("p span.pre-line").html())
+                    visitLimits = parseVisitLimits(div)
                 }
             }
         }
@@ -89,61 +90,28 @@ internal object VenueDetailsParser {
     }
 }
 
-private val log = KotlinLogging.logger {}
-
-internal fun parseVisitLimits(text: String): VisitLimits {
-//    S-members kunnen tot 2x per maand bij deze locatie inchecken
-//    M-members kunnen tot 4x per maand bij deze locatie inchecken
-//    L &amp; XL-members kunnen tot 6x per maand bij deze locatie inchecken
-    // XL-members kunnen tot 1x per dag bij deze locatie inchecken.
-    val lines = text.split("\n").takeWhile { it.isNotBlank() && !it.startsWith("B2B") }
-    fun List<String>.findLimit(symbol: String): Int = mapNotNull { line ->
-        if (line.startsWith("$symbol-") ||
-            line.startsWith("$symbol,") ||
-            line.startsWith("$symbol ") ||
-            line.contains(" $symbol ") ||
-            line.contains(" $symbol-") ||
-            line.startsWith("Alle members")
-        ) {
-            parseVisitLimitLine(line)
-        } else {
-            null
-        }
-    }.let {
-        when (it.size) {
-            0 -> 0
-            1 -> it.single()
-            else -> {
-                log.warn { "Multiple visit limits found for symbol '$symbol' in lines: $lines" }
-                it.first()
-            }
+internal fun parseVisitLimits(div: Element): VisitLimits {
+    var small: Int? = null
+    var medium: Int? = null
+    var large: Int? = null
+    var xlarge: Int? = null
+    div.select("div.tab-panels div#panel-private-venue table tr").forEach { tr ->
+        val cellValues = tr.select("td").map { it.text().trim() }
+        val limit = cellValues[1].substringBefore("/").trim().toInt()
+        when (Plan.UscPlan.byLabel(cellValues[0])) {
+            Plan.UscPlan.Small -> small = limit
+            Plan.UscPlan.Medium -> medium = limit
+            Plan.UscPlan.Large -> large = limit
+            Plan.UscPlan.ExtraLarge -> xlarge = limit
         }
     }
-
     return VisitLimits(
-        small = lines.findLimit("S"),
-        medium = lines.findLimit("M"),
-        large = lines.findLimit("L"),
-        xlarge = lines.findLimit("XL"),
-    ).let {
-        if (it == VisitLimits(2, 4, 0, 8)) {
-            it.copy(large = 6) // cheat to fix mistake in provided data (2 times M instead of M&L)
-        } else it
-    }
+        small = small,
+        medium = medium,
+        large = large,
+        xlarge = xlarge,
+    )
 }
-
-private fun parseVisitLimitLine(line: String): Int {
-    val monthIndex = line.indexOf("x per maand")
-    if (monthIndex != -1) {
-        return line.substring(monthIndex - 1, monthIndex).toInt()
-    }
-    val dayIndex = line.indexOf("x per dag")
-    if (dayIndex != -1) {
-        return 30 // once per day equals roughly 30 per month ;)
-    }
-    error("Could not determine visitlimit period for line: '$line'")
-}
-
 
 private val venueInfoMisbeginnings = listOf(".let op!", ".let op:", "let op:", ".note:", "note:", ".", "/")
 fun cleanVenueInfo(input: String): String? {
