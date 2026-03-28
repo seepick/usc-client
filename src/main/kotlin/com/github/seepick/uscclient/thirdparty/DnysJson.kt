@@ -11,7 +11,7 @@ internal data class DnysJson(
 @Serializable
 internal data class DnysPayloadJson(
     val sessionName: String, // title
-    val startsAt: String, // |2026-02-27T10:30:00.000Z
+    val startsAt: String, // 2026-02-27T10:30:00.000Z
     val endsAt: String,
     val teacher: String,
     val inPerson: Boolean,

@@ -12,6 +12,7 @@ import io.ktor.client.request.parameter
 import io.ktor.client.statement.HttpResponse
 import java.time.LocalDateTime
 import java.time.LocalTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 internal enum class SessionType(val apiValue: String) {
@@ -76,14 +77,21 @@ internal class DnysFetcher(
 
     companion object {
         private val dateFormatter = DateTimeFormatter.ISO_DATE_TIME
-        fun transform(json: DnysPayloadJson) = DnysEvent(
-            title = json.sessionName.trim(),
-            teacher = json.teacher.replace("  ", " ").trim(),
-            dateTimeRange = DateTimeRange(
-                from = LocalDateTime.parse(json.startsAt, dateFormatter),
-                to = LocalDateTime.parse(json.endsAt, dateFormatter),
-            ),
-        )
+        private val utcZone = ZoneId.of("UTC")
+        private val amsterdamZone = ZoneId.of("Europe/Amsterdam")
+
+        fun transform(json: DnysPayloadJson) =
+            DnysEvent(
+                title = json.sessionName.trim(),
+                teacher = json.teacher.replace("  ", " ").trim(),
+                dateTimeRange = DateTimeRange(
+                    from = parseAndZoneDatetime(json.startsAt),
+                    to = parseAndZoneDatetime(json.endsAt),
+                ),
+            )
+
+        private fun parseAndZoneDatetime(string: String): LocalDateTime =
+            LocalDateTime.parse(string, dateFormatter).atZone(utcZone).withZoneSameInstant(amsterdamZone)
+                .toLocalDateTime()
     }
 }
-
