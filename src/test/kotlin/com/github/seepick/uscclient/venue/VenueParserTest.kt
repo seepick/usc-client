@@ -35,8 +35,7 @@ class VenueParserTest : StringSpec() {
         }
         "When fetch DE Then parse" {
             val result = read("venues.de.json")
-            println(result)
-            // TODO test
+            result.size shouldBe 32
         }
     }
 }
