@@ -49,7 +49,7 @@ class VenueDetailsParserTest : DescribeSpec() {
             }
         }
         describe("visit limits") {
-            it("simple") {
+            it("logged-in simple") {
                 val detail = readAndParse("venue_detail-visit_limits-simple.html")
                 detail.visitLimits shouldBe VisitLimits(
                     small = null,
@@ -58,13 +58,22 @@ class VenueDetailsParserTest : DescribeSpec() {
                     xlarge = null,
                 )
             }
-            it("all") {
+            it("logged-out all") {
                 val detail = readAndParse("venue_detail-visit_limits-all.html")
                 detail.visitLimits shouldBe VisitLimits(
                     small = 2,
                     medium = 4,
                     large = 8,
                     xlarge = 9,
+                )
+            }
+            it("logged-out not included") {
+                val detail = readAndParse("venue_detail-visit_limits-not_included.html")
+                detail.visitLimits shouldBe VisitLimits(
+                    small = 0,
+                    medium = 4,
+                    large = 6,
+                    xlarge = 8,
                 )
             }
         }

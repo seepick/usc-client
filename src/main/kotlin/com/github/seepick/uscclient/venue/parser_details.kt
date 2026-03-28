@@ -97,7 +97,8 @@ internal fun parseVisitLimits(div: Element): VisitLimits {
     var xlarge: Int? = null
     div.select("div.tab-panels div#panel-private-venue table tr").forEach { tr ->
         val cellValues = tr.select("td").map { it.text().trim() }
-        val limit = cellValues[1].substringBefore("/").trim().toInt()
+        val limit = if (cellValues[1] == "Not included") 0
+        else cellValues[1].substringBefore("/").trim().toInt()
         when (Plan.UscPlan.byLabel(cellValues[0])) {
             Plan.UscPlan.Small -> small = limit
             Plan.UscPlan.Medium -> medium = limit
