@@ -4,6 +4,15 @@ import com.github.seepick.uscclient.model.City
 import com.github.seepick.uscclient.plan.Plan
 import java.net.URL
 
+public interface VenueIds {
+    val EmsHealthStudio get() = 106
+    val HotFlowYogaJordaan get() = 178
+    val MassageSchoolItmThaiHandAmsterdam get() = 217
+    val MovementAmsterdam get() = 233
+    val MovementCity get() = 235
+    val RelaxLoungOvertoom get() = 277
+}
+
 public data class VenueInfo(
     val title: String,
     val slug: String, // e.g. to be used as "/en/venues/{slug}"
