@@ -65,7 +65,7 @@ public data class VisitLimits(
 
     companion object // for extensions
 }
-
+// TODO delete this and the one above
 fun VisitLimits?.forPlanOrNull(plan: Plan?): Int? {
     if (this == null) return null
     if (plan == null) return null
