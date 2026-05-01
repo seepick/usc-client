@@ -22,7 +22,7 @@ object ManualSystemTestApp {
             log.info { "Manual check running..." }
 //            testFreetrainingDetails()
 //            testActivity(92788662)
-//            testActivities()
+            testActivities()
 //            testSchedule()
 //            testBook(84737975)
 //            testMembership()
@@ -47,7 +47,7 @@ object ManualSystemTestApp {
     }
 
     private suspend fun testActivities() {
-        val today = LocalDate.now()
+        val today = LocalDate.now().plusDays(14)
         val pages = api.activityApi.fetchPages(
             session = api.phpSessionId,
             filter = ActivitiesFilter(city = Amsterdam, plan = Plan.OnefitPlan.Premium, date = today),
@@ -64,7 +64,6 @@ object ManualSystemTestApp {
     private suspend fun testActivity(activityId: Int) {
         val activity = api.fetchActivityDetails(activityId)
         println(activity)
-
     }
 
     private suspend fun testSchedule() {

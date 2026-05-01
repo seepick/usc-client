@@ -63,5 +63,10 @@ class ActivitiesParserTest : StringSpec() {
                 plan = Plan.UscPlan.Small,
             )
         }
+        "parse midnight date" {
+            val htmlString = readTestResponse<String>("activities.midnight.html")
+            val result = ActivitiesParser.parseContent(htmlString, LocalDate.of(2000, 1, 2))
+            println(result)
+        }
     }
 }

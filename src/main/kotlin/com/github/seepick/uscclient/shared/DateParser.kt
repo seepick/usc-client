@@ -46,7 +46,9 @@ internal object DateParser {
             }
         }.let { twoTimesList ->
             require(twoTimesList.size == 2) { "Times list expected to be 2 but was ${twoTimesList.size} for time string: [$timeString]" }
-            TimeRange(twoTimesList[0].toLocalTime(), twoTimesList[1].toLocalTime())
+            TimeRange(twoTimesList[0].toLocalTime(), twoTimesList[1].toLocalTime().let {
+                if (it == LocalTime.of(0, 0)) LocalTime.of(23, 59) else it
+            })
         }
 
     /**
