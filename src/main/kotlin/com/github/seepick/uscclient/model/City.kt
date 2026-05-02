@@ -4,6 +4,8 @@ public data class City(
     val id: Int,
     val label: String,
 ) {
+    override fun toString() = "City[$label/$id]"
+
     companion object {
         val all: List<City> by lazy { CitiesCountries.allCountries.flatMap { it.cities } }
         val Amsterdam by lazy { byLabel("Amsterdam") }
