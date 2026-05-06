@@ -39,10 +39,10 @@ object CitiesGeneratorApp {
             Country(
                 label = countryHtml.select("span.usc-city-dropdown__country-name").text().trim(),
                 cities =
-                    countryHtml.select("a.usc-city-dropdown__city-link").map { cityHtml ->
+                    countryHtml.select("button.usc-city-dropdown__city-link").map { cityButton ->
                         City(
-                            id = cityHtml.attr("data-id").toInt(),
-                            label = cityHtml.select("span.usc-city-dropdown__city-name").text().trim(),
+                            id = cityButton.attr("data-id").toInt(),
+                            label = cityButton.select("span.usc-city-dropdown__city-name").text().trim(),
                         )
                     }
             )
