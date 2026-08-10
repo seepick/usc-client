@@ -5,6 +5,7 @@ import com.github.seepick.uscclient.activity.ActivitiesParser
 import com.github.seepick.uscclient.activity.ServiceType
 import com.github.seepick.uscclient.model.City.Companion.Amsterdam
 import com.github.seepick.uscclient.plan.Plan
+import com.github.seepick.uscclient.venue.VenuesFilter
 import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import kotlinx.coroutines.runBlocking
 import java.time.LocalDate
@@ -22,11 +23,17 @@ object ManualSystemTestApp {
             log.info { "Manual check running..." }
 //            testFreetrainingDetails()
 //            testActivity(92788662)
-            testActivities()
+//            testActivities()
 //            testSchedule()
 //            testBook(84737975)
 //            testMembership()
+            testVenues()
         }
+    }
+
+    private suspend fun testVenues() {
+        val pages = api.fetchVenues(filter = VenuesFilter(city = Amsterdam, plan = Plan.OnefitPlan.Premium))
+        println("pages: $pages")
     }
 
     private suspend fun testMembership() {

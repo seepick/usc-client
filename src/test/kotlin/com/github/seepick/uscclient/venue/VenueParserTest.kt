@@ -37,5 +37,9 @@ class VenueParserTest : StringSpec() {
             val result = read("venues.de.json")
             result.size shouldBe 32
         }
+        "foo" {
+            val x = readTestResponse<VenuesJson>("venues.district_bug.json").data.content
+            println(x)
+        }
     }
 }

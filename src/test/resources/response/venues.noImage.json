@@ -13,41 +13,7 @@
         }
       ],
       "district": {
-        "district": [],
-        "areas": [
-          {
-            "name": "Amsterdam",
-            "attributes": {
-              "value": 8749,
-              "class": "area"
-            },
-            "districts": [
-              {
-                "name": "Zuidoost",
-                "attributes": {
-                  "value": 8771,
-                  "class": "area-district"
-                }
-              }
-            ]
-          },
-          {
-            "name": "Ouderkerk aan de Amstel",
-            "attributes": {
-              "value": 8750,
-              "class": "area"
-            },
-            "districts": [
-              {
-                "name": "Ouderkerk aan de Amstel",
-                "attributes": {
-                  "value": 8759,
-                  "class": "area-district"
-                }
-              }
-            ]
-          }
-        ]
+        "districts": []
       },
       "venue": [
         {

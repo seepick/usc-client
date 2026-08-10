@@ -54,7 +54,7 @@ private fun buildActivitiesJson(success: Boolean, showMore: Boolean) = Activitie
     success = success, data = ActivitiesDataJson(
         showMore = showMore, content = "HTML", stats = StatsJson(
             category = listOf(),
-            district = StatsDistrictJson(district = listOf(), areas = listOf()),
+            district = StatsDistrictJson(districts = listOf()),
             venue = listOf()
         ), emptySnippet = null, searchExecutedEvent = "{}", regionSelectorSelected = null
     )

@@ -22,8 +22,8 @@ internal data class StatsCategoryAttributesJson(
 
 @Serializable
 internal data class StatsDistrictJson(
-    val district: List<StatsDistrictDistrictJson>,
-    val areas: List<StatsDistrictAreaJson>,
+    val districts: List<StatsDistrictDistrictJson>,
+//  skip this as not used... val areas: List<StatsDistrictAreaJson>
 )
 
 @Serializable
@@ -35,25 +35,6 @@ internal data class StatsDistrictDistrictJson(
 @Serializable
 internal data class StatsDistrictAreaAtributesValueJson(
     val value: Int,
-)
-
-@Serializable
-internal data class StatsDistrictAreaJson(
-    val name: String,
-    val attributes: StatsDistrictAreaAtributesJson,
-    val districts: List<StatsDistrictAreaDistrictJson>,
-)
-
-@Serializable
-internal data class StatsDistrictAreaAtributesJson(
-    val value: Int,
-    val `class`: String,
-)
-
-@Serializable
-internal data class StatsDistrictAreaDistrictJson(
-    val name: String,
-    val attributes: StatsDistrictAreaAtributesJson,
 )
 
 @Serializable
