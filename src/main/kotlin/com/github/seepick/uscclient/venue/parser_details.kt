@@ -34,6 +34,7 @@ internal object VenueDetailsParser {
         var importantInfo: String? = null
         var visitLimits: VisitLimits? = null
         val json = body.select("script[type=\"application/ld+json\"]").first()!!.dataNodes().first().wholeData
+            .replace("\\&", "&") // fix invalid JSON data
         val detail = jsonSerializer.decodeFromString<VenueDetailEmbedJson>(json)
         val slug = head.select("meta[property=\"og:url\"]").attr("content").substringAfterLast("/")
         val disciplines = body.select("div.disciplines").text().split(",").map { it.trim() }

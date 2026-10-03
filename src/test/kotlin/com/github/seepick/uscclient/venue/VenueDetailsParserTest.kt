@@ -33,6 +33,10 @@ class VenueDetailsParserTest : DescribeSpec() {
             it("disciplines") {
                 read0().disciplines shouldBe listOf("Aerial", "Yoga")
             }
+            it("Invalid escape ampersand in description") {
+                val detail = readAndParse("venue_detail-illegal_escape.html")
+                detail.description shouldBe "This is in HTML p tag - \"push yourself\"."
+            }
             it("JSON embedded") {
                 read0().should {
                     it.latitude shouldBe "52.357123"
